@@ -48,17 +48,10 @@ TEMPLATES = [
 WSGI_APPLICATION = "omop_site.wsgi.application"
 ASGI_APPLICATION = "omop_site.asgi.application"
 
-# Database: configure via environment variables
-#   PGDATABASE, PGUSER, PGPASSWORD, PGHOST, PGPORT
+import dj_database_url
+# Database: configure via DATABASE_URL environment variable
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("PGDATABASE", "omop"),
-        "USER": os.environ.get("PGUSER", "postgres"),
-        "PASSWORD": os.environ.get("PGPASSWORD", ""),
-        "HOST": os.environ.get("PGHOST", "127.0.0.1"),
-        "PORT": os.environ.get("PGPORT", "5432"),
-    }
+    "default": dj_database_url.config(default="postgres://postgres:@127.0.0.1:5432/omop")
 }
 
 LANGUAGE_CODE = "en-us"
