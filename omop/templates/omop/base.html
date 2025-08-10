@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OMOP Browser</title>
+  <style>
+    body{font-family:system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; margin:2rem}
+    table{border-collapse:collapse;width:100%;}
+    th,td{border:1px solid #eee; padding:.5rem;}
+    th{background:#fafafa;text-align:left}
+    nav a{margin-right:1rem}
+    code{background:#f6f6f6;padding:2px 4px;border-radius:4px}
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/">Persons</a>
+    <a href="/condition">Conditions</a>
+    <a href="/measurement">Measurements</a>
+    <a href="/observation">Observations</a>
+    <a href="/drug">Drug Exposures</a>
+    <a href="/procedure">Procedures</a>
+    <a href="/episode">Episodes</a>
+    <a href="/episodeevent">Episode Events</a>
+    <a href="/location">Locations</a>
+    <a href="/admin/">Admin</a>
+  </nav>
+  <hr/>
+  {% block content %}{% endblock %}
+</body>
+</html>

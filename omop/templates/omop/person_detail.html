@@ -1,0 +1,10 @@
+{% extends 'omop/base.html' %}
+{% block content %}
+<h1>Person {{ object.person_id }}</h1>
+<ul>
+  <li>Gender concept: {{ object.gender_concept_id }}</li>
+  <li>Birth: {{ object.year_of_birth }}-{{ object.month_of_birth }}-{{ object.day_of_birth }}</li>
+  <li>Race: {{ object.race_concept_id }}</li>
+  <li>Ethnicity: {{ object.ethnicity_concept_id }}</li>
+</ul>
+{% endblock %}

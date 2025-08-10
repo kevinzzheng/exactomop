@@ -1,0 +1,10 @@
+{% extends 'omop/base.html' %}
+{% load omop_extras %}
+{% block content %}
+<h1>{{ view.model.__name__ }} {{ object.pk }}</h1>
+<ul>
+  {% for field in view.model._meta.fields %}
+    <li><b>{{ field.name }}:</b> {{ object|attr:field.name }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

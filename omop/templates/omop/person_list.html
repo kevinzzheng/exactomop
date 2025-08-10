@@ -1,0 +1,31 @@
+{% extends 'omop/base.html' %}
+{% block content %}
+<h1>Persons</h1>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Gender</th>
+      <th>Birth (Y-M-D)</th>
+      <th>Race</th>
+      <th>Ethnicity</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for obj in object_list %}
+    <tr>
+      <td><a href="{% url 'person-detail' obj.pk %}">{{ obj.person_id }}</a></td>
+      <td>{{ obj.gender_concept_id }}</td>
+      <td>{{ obj.year_of_birth }}-{{ obj.month_of_birth }}-{{ obj.day_of_birth }}</td>
+      <td>{{ obj.race_concept_id }}</td>
+      <td>{{ obj.ethnicity_concept_id }}</td>
+    </tr>
+  {% empty %}
+    <tr><td colspan="5">No persons yet.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if is_paginated %}
+  <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+{% endif %}
+{% endblock %}

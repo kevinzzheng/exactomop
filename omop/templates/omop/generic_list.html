@@ -1,0 +1,32 @@
+{% extends 'omop/base.html' %}
+{% load omop_extras %}
+{% block content %}
+<h1>{{ view.model.__name__ }}</h1>
+<table>
+  <thead>
+    <tr>
+      {% for field in view.model._meta.fields %}
+        <th>{{ field.name }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for obj in object_list %}
+    <tr>
+      {% for field in view.model._meta.fields %}
+        {% if forloop.first %}
+          <td><a href="{{ obj.pk }}/">{{ obj|attr:field.name }}</a></td>
+        {% else %}
+          <td>{{ obj|attr:field.name }}</td>
+        {% endif %}
+      {% endfor %}
+    </tr>
+  {% empty %}
+    <tr><td colspan="99">No records.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if is_paginated %}
+  <p>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</p>
+{% endif %}
+{% endblock %}
