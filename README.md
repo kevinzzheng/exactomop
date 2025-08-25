@@ -10,10 +10,10 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 
 # Run migrations & start
-python omop_site/manage.py makemigrations
-python omop_site/manage.py migrate
-python omop_site/manage.py createsuperuser
-python omop_site/manage.py runserver
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
 ```
 Visit http://127.0.0.1:8000/ for the browser and /admin/ for Django admin.
 
