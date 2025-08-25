@@ -1,6 +1,6 @@
 # Exact-OMOP
 
-Scripts to ppulate the EXACT clinical trial matching system with data from OMOP types
+Scripts to populate the EXACT clinical trial matching system with patients stored in an extended OMOP schema
 
 ## Quickstart Setup
 ```bash
