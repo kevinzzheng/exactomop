@@ -1,0 +1,36 @@
+{% extends "omop/base.html" %}
+
+{% block content %}
+<h1>OMOP Browser</h1>
+<p>Welcome to the OMOP Common Data Model browser. Explore healthcare data organized according to the OMOP CDM standard.</p>
+
+<div style="margin-top: 2rem;">
+    <h2>Quick Access</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 1rem;">
+        <div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+            <h3><a href="{% url 'person-list' %}">Patients</a></h3>
+            <p>Browse all person records in the database.</p>
+        </div>
+        <div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+            <h3><a href="/condition">Conditions</a></h3>
+            <p>View condition occurrences and diagnoses.</p>
+        </div>
+        <div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+            <h3><a href="/measurement">Measurements</a></h3>
+            <p>Explore laboratory results and vital signs.</p>
+        </div>
+        <div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+            <h3><a href="/observation">Observations</a></h3>
+            <p>Browse clinical observations and notes.</p>
+        </div>
+        <div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+            <h3><a href="/drug">Drug Exposures</a></h3>
+            <p>View medication prescriptions and administrations.</p>
+        </div>
+        <div style="border: 1px solid #ddd; padding: 1rem; border-radius: 8px;">
+            <h3><a href="/procedure">Procedures</a></h3>
+            <p>Browse medical procedures and interventions.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

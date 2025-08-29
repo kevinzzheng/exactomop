@@ -1,8 +1,12 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from .models import (
     Person, Location, ConditionOccurrence, Measurement, Observation,
     DrugExposure, ProcedureOccurrence, Episode, EpisodeEvent
 )
+
+class HomeView(TemplateView):
+    template_name = "omop/home.html"
+
 class PersonListView(ListView):
     model = Person
     paginate_by = 25

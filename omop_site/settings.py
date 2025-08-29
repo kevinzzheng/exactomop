@@ -1,5 +1,6 @@
 from pathlib import Path
 import os
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -48,11 +49,33 @@ TEMPLATES = [
 WSGI_APPLICATION = "omop_site.wsgi.application"
 ASGI_APPLICATION = "omop_site.asgi.application"
 
-import dj_database_url
 # Database: configure via DATABASE_URL environment variable
-DATABASES = {
-    "default": dj_database_url.config(default="postgres://postgres:@127.0.0.1:5432/omop")
-}
+if os.environ.get('DATABASE_URL'):
+    try:
+        DATABASES = {
+            'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+        }
+    except Exception as e:
+        # Fallback to manual parsing for Heroku URLs with special characters
+        import urllib.parse as urlparse
+        url = urlparse.urlparse(os.environ.get('DATABASE_URL'))
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': url.path[1:],
+                'USER': url.username,
+                'PASSWORD': url.password,
+                'HOST': url.hostname,
+                'PORT': url.port,
+            }
+        }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
