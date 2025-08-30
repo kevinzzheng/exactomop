@@ -4,11 +4,16 @@ from .models import (
     DrugExposure, ProcedureOccurrence, Episode, EpisodeEvent, Concept,
     ConceptRelationship, Vocabulary, MeasurementConcept, UnitConcept,
     Specimen, GenomicVariant, PatientInfo, ClinicalTrialParticipation,
-    VisitOccurrence, OncologyConcept, GenomicConcept, MolecularTest,
+    VisitOccurrence, OncologyConcept, MolecularTest,
     BiomarkerMeasurement, ImagingStudy, ImagingMeasurement, 
     ClinicalTrialBiomarker, ClinicalLabTest, CuratedBiomarkerVocabulary,
-    TreatmentLine, TreatmentRegimen, TreatmentLineComponent, TreatmentLineEligibility,
-    BehavioralVocabulary, SocialDeterminantsVocabulary, InfectiousDiseaseVocabulary
+    TreatmentLine, TreatmentRegimen, TreatmentLineComponent,
+    BehavioralVocabulary, SocialDeterminantsVocabulary, InfectiousDiseaseVocabulary,
+    # OMOP Oncology Extension models
+    TumorAssessment, TumorAssessmentMeasurement, CancerStagingMap,
+    OncologyVocabulary, StagingMeasurementConcept, ICDOTopographyConcept,
+    ICDOMorphologyConcept, Modifier, OncologyModifier, RadiationOccurrence,
+    StemCellTransplant, ClinicalTrial, BiospecimenCollection, OncologyEpisodeDetail
 )
 
 @admin.register(Person)
@@ -88,42 +93,33 @@ class OncologyConceptAdmin(admin.ModelAdmin):
     search_fields = ("concept__concept_name", "cancer_type")
     list_filter = ("oncology_category", "staging_system", "biomarker_type")
 
-@admin.register(GenomicConcept)
-class GenomicConceptAdmin(admin.ModelAdmin):
-    list_display = ("concept", "genomic_category", "gene_symbol", "clinical_actionability")
-    search_fields = ("concept__concept_name", "gene_symbol")
-    list_filter = ("genomic_category", "clinical_actionability")
-
 @admin.register(GenomicVariant)
 class GenomicVariantAdmin(admin.ModelAdmin):
     list_display = ("variant_id", "person", "gene_symbol", "variant_type", "clinical_significance", 
-                   "molecular_alteration", "biomarker_status", "eligibility_relevant")
+                   "molecular_alteration", "biomarker_status")
     search_fields = ("gene_symbol", "hgvs_notation", "clinvar_id", "cosmic_id")
     list_filter = ("variant_type", "clinical_significance", "molecular_alteration", "biomarker_status", 
-                  "eligibility_relevant", "testing_method")
+                  "testing_method")
 
 @admin.register(MolecularTest)
 class MolecularTestAdmin(admin.ModelAdmin):
     list_display = ("test_id", "person", "test_name", "test_type", "test_date", "overall_result", 
-                   "actionable_alterations_count", "trial_eligible")
+                   "actionable_alterations_count")
     search_fields = ("test_name", "laboratory")
-    list_filter = ("test_type", "overall_result", "trial_eligible")
+    list_filter = ("test_type", "overall_result")
 
 @admin.register(BiomarkerMeasurement)
 class BiomarkerMeasurementAdmin(admin.ModelAdmin):
     list_display = ("biomarker_id", "person", "biomarker_name", "biomarker_category", 
-                   "result_interpretation", "trial_eligibility_criterion", "actionable_biomarker")
+                   "result_interpretation", "measurement_date")
     search_fields = ("biomarker_name", "assay_name")
-    list_filter = ("biomarker_category", "result_interpretation", "trial_eligibility_criterion", 
-                  "actionable_biomarker")
+    list_filter = ("biomarker_category", "result_interpretation")
 
 @admin.register(CuratedBiomarkerVocabulary)
 class CuratedBiomarkerVocabularyAdmin(admin.ModelAdmin):
-    list_display = ("vocabulary_id", "biomarker_name", "biomarker_category", "evidence_level",
-                   "common_eligibility_criterion", "companion_diagnostic")
+    list_display = ("vocabulary_id", "biomarker_name", "biomarker_category", "evidence_level")
     search_fields = ("biomarker_name", "loinc_code", "snomed_code", "hgnc_gene_symbol")
-    list_filter = ("biomarker_category", "evidence_level", "common_eligibility_criterion", 
-                  "companion_diagnostic", "stratification_factor")
+    list_filter = ("biomarker_category", "evidence_level")
 
 @admin.register(ImagingStudy)
 class ImagingStudyAdmin(admin.ModelAdmin):
@@ -142,18 +138,16 @@ class ImagingMeasurementAdmin(admin.ModelAdmin):
 @admin.register(ClinicalTrialBiomarker)
 class ClinicalTrialBiomarkerAdmin(admin.ModelAdmin):
     list_display = ("biomarker_id", "person", "biomarker_type", "test_date", "categorical_result",
-                   "threshold_met", "companion_diagnostic")
+                   "test_method")
     search_fields = ("assay_name", "drug_target")
-    list_filter = ("biomarker_type", "test_method", "categorical_result", "threshold_met", 
-                  "companion_diagnostic", "trial_eligibility_biomarker")
+    list_filter = ("biomarker_type", "test_method", "categorical_result")
 
 @admin.register(ClinicalLabTest)
 class ClinicalLabTestAdmin(admin.ModelAdmin):
     list_display = ("lab_test_id", "person", "test_name", "test_date", "numeric_result", 
                    "result_unit", "abnormal_flag", "ctcae_grade")
     search_fields = ("test_name", "loinc_code")
-    list_filter = ("test_category", "organ_system", "abnormal_flag", "ctcae_grade", 
-                  "eligibility_test", "safety_monitoring", "baseline_test")
+    list_filter = ("test_category", "organ_system", "abnormal_flag", "ctcae_grade")
 
 @admin.register(TreatmentLine)
 class TreatmentLineAdmin(admin.ModelAdmin):
@@ -165,11 +159,10 @@ class TreatmentLineAdmin(admin.ModelAdmin):
 
 @admin.register(TreatmentRegimen)
 class TreatmentRegimenAdmin(admin.ModelAdmin):
-    list_display = ("regimen_id", "person", "regimen_name", "regimen_sequence", "regimen_start_date",
-                   "contains_platinum", "contains_immunotherapy", "best_response")
+    list_display = ("regimen_id", "person", "regimen_name", "line_number", "regimen_start_date",
+                   "regimen_type", "treatment_intent", "best_response")
     search_fields = ("regimen_name", "regimen_code")
-    list_filter = ("regimen_type", "contains_platinum", "contains_immunotherapy", 
-                  "contains_targeted_therapy", "best_response", "early_discontinuation")
+    list_filter = ("regimen_type", "treatment_intent", "best_response", "regimen_discontinued")
 
 @admin.register(TreatmentLineComponent)
 class TreatmentLineComponentAdmin(admin.ModelAdmin):
@@ -178,15 +171,6 @@ class TreatmentLineComponentAdmin(admin.ModelAdmin):
     search_fields = ("drug_classification",)
     list_filter = ("component_type", "component_role", "drug_classification", 
                   "is_platinum_agent", "is_immunotherapy", "is_targeted_therapy")
-
-@admin.register(TreatmentLineEligibility)
-class TreatmentLineEligibilityAdmin(admin.ModelAdmin):
-    list_display = ("eligibility_id", "person", "assessment_date", "total_lines_received",
-                   "meets_one_prior_platinum", "meets_immunotherapy_naive", "current_treatment_status")
-    search_fields = ("calculation_algorithm",)
-    list_filter = ("meets_one_prior_line", "meets_two_prior_lines", "meets_one_prior_platinum", 
-                  "meets_platinum_refractory", "meets_immunotherapy_naive", "current_treatment_status",
-                  "needs_manual_review")
 
 @admin.register(BehavioralVocabulary)
 class BehavioralVocabularyAdmin(admin.ModelAdmin):
@@ -198,11 +182,9 @@ class BehavioralVocabularyAdmin(admin.ModelAdmin):
 
 @admin.register(SocialDeterminantsVocabulary)
 class SocialDeterminantsVocabularyAdmin(admin.ModelAdmin):
-    list_display = ("vocabulary_id", "determinant_category", "determinant_name", "health_impact_level",
-                   "affects_eligibility", "affects_compliance", "affects_outcomes")
+    list_display = ("vocabulary_id", "determinant_category", "determinant_name", "health_impact_level")
     search_fields = ("determinant_name", "z_code", "snomed_code")
-    list_filter = ("determinant_category", "health_impact_level", "affects_eligibility", 
-                  "affects_compliance", "affects_outcomes")
+    list_filter = ("determinant_category", "health_impact_level")
 
 @admin.register(InfectiousDiseaseVocabulary)
 class InfectiousDiseaseVocabularyAdmin(admin.ModelAdmin):
@@ -211,3 +193,101 @@ class InfectiousDiseaseVocabularyAdmin(admin.ModelAdmin):
     search_fields = ("disease_name", "icd10_code", "snomed_code")
     list_filter = ("pathogen_type", "exclusion_criterion", "requires_monitoring", 
                   "drug_interaction_risk")
+
+@admin.register(TumorAssessment)
+class TumorAssessmentAdmin(admin.ModelAdmin):
+    list_display = ("tumor_assessment_id", "person", "assessment_date", "assessment_method", 
+                   "overall_response", "disease_status")
+    search_fields = ("overall_response", "assessment_method")
+    list_filter = ("assessment_method", "overall_response", "disease_status", "assessment_date")
+
+@admin.register(CancerStagingMap)
+class CancerStagingMapAdmin(admin.ModelAdmin):
+    list_display = ("staging_map_id", "source_staging_system", "source_stage_value", "target_staging_system", 
+                   "target_stage_value", "mapping_confidence")
+    search_fields = ("source_staging_system", "source_stage_value", "target_staging_system")
+    list_filter = ("source_staging_system", "target_staging_system", "mapping_confidence")
+
+@admin.register(OncologyVocabulary)
+class OncologyVocabularyAdmin(admin.ModelAdmin):
+    list_display = ("oncology_vocabulary_id", "vocabulary_id", "concept_code", "concept_name", 
+                   "oncology_domain", "valid_start_date")
+    search_fields = ("concept_name", "concept_code", "icdo_site_code", "ajcc_chapter")
+    list_filter = ("oncology_domain", "vocabulary_id")
+
+@admin.register(StagingMeasurementConcept)
+class StagingMeasurementConceptAdmin(admin.ModelAdmin):
+    list_display = ("staging_concept_id", "concept", "staging_system", "staging_component", 
+                   "staging_system_version", "assessment_method")
+    search_fields = ("concept__concept_name", "staging_system")
+    list_filter = ("staging_system", "staging_component", "assessment_method")
+
+@admin.register(ICDOTopographyConcept)
+class ICDOTopographyConceptAdmin(admin.ModelAdmin):
+    list_display = ("icdo_topography_id", "concept", "icdo_site_code", "icdo_site_name", 
+                   "major_site", "body_system", "laterality_applicable")
+    search_fields = ("concept__concept_name", "icdo_site_code", "icdo_site_name")
+    list_filter = ("major_site", "body_system", "laterality_applicable")
+
+@admin.register(ICDOMorphologyConcept)
+class ICDOMorphologyConceptAdmin(admin.ModelAdmin):
+    list_display = ("icdo_morphology_id", "concept", "icdo_morphology_code", "icdo_morphology_name", 
+                   "histologic_type", "behavior_code", "behavior_description")
+    search_fields = ("concept__concept_name", "icdo_morphology_code", "icdo_morphology_name")
+    list_filter = ("histologic_type", "behavior_code", "behavior_description")
+
+# Additional OMOP Oncology Extension Admin Configurations
+
+@admin.register(Modifier)
+class ModifierAdmin(admin.ModelAdmin):
+    list_display = ("modifier_id", "person", "modifier_concept", "modifier_of_event_id", "modifier_datetime")
+    search_fields = ("modifier_concept__concept_name",)
+    list_filter = ("modifier_datetime", "modifier_type_concept")
+
+@admin.register(OncologyModifier)
+class OncologyModifierAdmin(admin.ModelAdmin):
+    list_display = ("oncology_modifier_id", "person", "modifier_source_concept", "modifier_datetime", "cancer_modifier_type")
+    search_fields = ("modifier_source_concept__concept_name",)
+    list_filter = ("cancer_modifier_type", "staging_basis", "modifier_datetime")
+
+@admin.register(RadiationOccurrence)
+class RadiationOccurrenceAdmin(admin.ModelAdmin):
+    list_display = ("radiation_occurrence_id", "person", "radiation_concept", "radiation_occurrence_start_date", "treatment_intent", 
+                   "total_dose", "fractions_planned")
+    search_fields = ("radiation_concept__concept_name", "anatomical_site_concept__concept_name")
+    list_filter = ("treatment_intent", "radiation_technique", "radiation_occurrence_start_date")
+
+@admin.register(StemCellTransplant)
+class StemCellTransplantAdmin(admin.ModelAdmin):
+    list_display = ("stem_cell_transplant_id", "person", "transplant_concept", "transplant_date", "transplant_type", 
+                   "stem_cell_source", "donor_type")
+    search_fields = ("transplant_concept__concept_name",)
+    list_filter = ("transplant_type", "donor_type", "stem_cell_source", "transplant_date")
+
+@admin.register(TumorAssessmentMeasurement)
+class TumorAssessmentMeasurementAdmin(admin.ModelAdmin):
+    list_display = ("tumor_measurement_id", "tumor_assessment", "person", "lesion_id", "lesion_type", 
+                   "longest_diameter", "measurement_method")
+    search_fields = ("lesion_id", "anatomical_site_concept__concept_name")
+    list_filter = ("lesion_type", "lesion_response", "measurement_method")
+
+@admin.register(ClinicalTrial)
+class ClinicalTrialAdmin(admin.ModelAdmin):
+    list_display = ("clinical_trial_id", "nct_number", "trial_title", "trial_phase", "enrollment_date", 
+                   "trial_completion_date")
+    search_fields = ("nct_number", "trial_title", "trial_acronym")
+    list_filter = ("trial_phase", "trial_type", "enrollment_date")
+
+@admin.register(BiospecimenCollection)
+class BiospecimenCollectionAdmin(admin.ModelAdmin):
+    list_display = ("biospecimen_id", "person", "specimen_type", "collection_date", "collection_method", 
+                   "storage_temperature")
+    search_fields = ("biobank_id", "laboratory_id", "anatomical_site_concept__concept_name")
+    list_filter = ("specimen_type", "collection_method", "collection_date", "specimen_quality")
+
+@admin.register(OncologyEpisodeDetail)
+class OncologyEpisodeDetailAdmin(admin.ModelAdmin):
+    list_display = ("episode_detail_id", "episode", "person", "detail_date", "disease_status", 
+                   "days_from_diagnosis", "ecog_performance_status")
+    search_fields = ("disease_status", "progression_type")
+    list_filter = ("disease_status", "progression_type", "detail_date", "ecog_performance_status")

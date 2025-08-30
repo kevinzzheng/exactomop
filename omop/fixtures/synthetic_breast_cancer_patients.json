@@ -1,0 +1,2467 @@
+[
+  {
+    "model": "omop.concept",
+    "pk": 4112853,
+    "fields": {
+      "concept_name": "Malignant neoplasm of breast",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "254837009",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 35807188,
+    "fields": {
+      "concept_name": "TCH regimen",
+      "domain_id": "Regimen",
+      "vocabulary_id": "HemOnc",
+      "concept_class_id": "Regimen",
+      "standard_concept": "S",
+      "concept_code": "TCH",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 35807075,
+    "fields": {
+      "concept_name": "AC-T regimen",
+      "domain_id": "Regimen",
+      "vocabulary_id": "HemOnc",
+      "concept_class_id": "Regimen",
+      "standard_concept": "S",
+      "concept_code": "AC-T",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 35807189,
+    "fields": {
+      "concept_name": "TCHP regimen",
+      "domain_id": "Regimen",
+      "vocabulary_id": "HemOnc",
+      "concept_class_id": "Regimen",
+      "standard_concept": "S",
+      "concept_code": "TCHP",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 35807076,
+    "fields": {
+      "concept_name": "FEC-T regimen",
+      "domain_id": "Regimen",
+      "vocabulary_id": "HemOnc",
+      "concept_class_id": "Regimen",
+      "standard_concept": "S",
+      "concept_code": "FEC-T",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 35807077,
+    "fields": {
+      "concept_name": "Tamoxifen regimen",
+      "domain_id": "Regimen",
+      "vocabulary_id": "HemOnc",
+      "concept_class_id": "Regimen",
+      "standard_concept": "S",
+      "concept_code": "TAM",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 35807078,
+    "fields": {
+      "concept_name": "Anastrozole regimen",
+      "domain_id": "Regimen",
+      "vocabulary_id": "HemOnc",
+      "concept_class_id": "Regimen",
+      "standard_concept": "S",
+      "concept_code": "ANA",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 8532,
+    "fields": {
+      "concept_name": "Female",
+      "domain_id": "Gender",
+      "vocabulary_id": "Gender",
+      "concept_class_id": "Gender",
+      "standard_concept": "S",
+      "concept_code": "F",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 8527,
+    "fields": {
+      "concept_name": "White",
+      "domain_id": "Race",
+      "vocabulary_id": "Race",
+      "concept_class_id": "Race",
+      "standard_concept": "S",
+      "concept_code": "5",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 8516,
+    "fields": {
+      "concept_name": "Black or African American",
+      "domain_id": "Race",
+      "vocabulary_id": "Race",
+      "concept_class_id": "Race",
+      "standard_concept": "S",
+      "concept_code": "3",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 8515,
+    "fields": {
+      "concept_name": "Asian",
+      "domain_id": "Race",
+      "vocabulary_id": "Race",
+      "concept_class_id": "Race",
+      "standard_concept": "S",
+      "concept_code": "2",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 38003564,
+    "fields": {
+      "concept_name": "Not Hispanic or Latino",
+      "domain_id": "Ethnicity",
+      "vocabulary_id": "Ethnicity",
+      "concept_class_id": "Ethnicity",
+      "standard_concept": "S",
+      "concept_code": "38003564",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 38003563,
+    "fields": {
+      "concept_name": "Hispanic or Latino",
+      "domain_id": "Ethnicity",
+      "vocabulary_id": "Ethnicity",
+      "concept_class_id": "Ethnicity",
+      "standard_concept": "S",
+      "concept_code": "38003563",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 32020,
+    "fields": {
+      "concept_name": "EHR Chief Complaint",
+      "domain_id": "Type Concept",
+      "vocabulary_id": "Type Concept",
+      "concept_class_id": "Type Concept",
+      "standard_concept": "S",
+      "concept_code": "OMOP4822460",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 44818702,
+    "fields": {
+      "concept_name": "Lab result",
+      "domain_id": "Type Concept",
+      "vocabulary_id": "Type Concept",
+      "concept_class_id": "Type Concept",
+      "standard_concept": "S",
+      "concept_code": "OMOP4822462",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 4181412,
+    "fields": {
+      "concept_name": "Positive",
+      "domain_id": "Meas Value",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Qualifier Value",
+      "standard_concept": "S",
+      "concept_code": "10828004",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 9189,
+    "fields": {
+      "concept_name": "Negative",
+      "domain_id": "Meas Value",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Qualifier Value",
+      "standard_concept": "S",
+      "concept_code": "260385009",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 3000963,
+    "fields": {
+      "concept_name": "Estrogen receptor",
+      "domain_id": "Measurement",
+      "vocabulary_id": "LOINC",
+      "concept_class_id": "Lab Test",
+      "standard_concept": "S",
+      "concept_code": "16112-5",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 3006256,
+    "fields": {
+      "concept_name": "Progesterone receptor",
+      "domain_id": "Measurement",
+      "vocabulary_id": "LOINC",
+      "concept_class_id": "Lab Test",
+      "standard_concept": "S",
+      "concept_code": "16113-3",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 3013682,
+    "fields": {
+      "concept_name": "HER2/neu receptor",
+      "domain_id": "Measurement",
+      "vocabulary_id": "LOINC",
+      "concept_class_id": "Lab Test",
+      "standard_concept": "S",
+      "concept_code": "48676-1",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2001,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1978,
+      "month_of_birth": 11,
+      "day_of_birth": 13,
+      "race_concept_id": 8527,
+      "ethnicity_concept_id": 38003563,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2001"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3001,
+    "fields": {
+      "person_id": 2001,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-12-21",
+      "condition_start_datetime": "2023-12-21T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5001,
+    "fields": {
+      "person_id": 2001,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-02-08",
+      "measurement_datetime": "2023-02-08T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5002,
+    "fields": {
+      "person_id": 2001,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-02-08",
+      "measurement_datetime": "2023-02-08T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5003,
+    "fields": {
+      "person_id": 2001,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-02-08",
+      "measurement_datetime": "2023-02-08T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7001,
+    "fields": {
+      "person_id": 2001,
+      "line_number": 1,
+      "line_start_date": "2023-03-01",
+      "line_end_date": null,
+      "line_type": "SECOND_LINE",
+      "treatment_intent": "NEOADJUVANT",
+      "best_response": "CR",
+      "progression_date": "2023-12-18"
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8001,
+    "fields": {
+      "person_id": 2001,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-02-17",
+      "regimen_end_date": "2023-05-12",
+      "treatment_line_id": 7001,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "CURATIVE",
+      "treatment_setting": "OUTPATIENT",
+      "cycles_planned": 6,
+      "cycles_completed": 4,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-04-18",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2002,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1981,
+      "month_of_birth": 3,
+      "day_of_birth": 17,
+      "race_concept_id": 8527,
+      "ethnicity_concept_id": 38003564,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2002"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3002,
+    "fields": {
+      "person_id": 2002,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-01-11",
+      "condition_start_datetime": "2023-01-11T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5004,
+    "fields": {
+      "person_id": 2002,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-02-05",
+      "measurement_datetime": "2023-02-05T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5005,
+    "fields": {
+      "person_id": 2002,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-02-05",
+      "measurement_datetime": "2023-02-05T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5006,
+    "fields": {
+      "person_id": 2002,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-02-05",
+      "measurement_datetime": "2023-02-05T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7002,
+    "fields": {
+      "person_id": 2002,
+      "line_number": 1,
+      "line_start_date": "2023-02-19",
+      "line_end_date": null,
+      "line_type": "SECOND_LINE",
+      "treatment_intent": "PALLIATIVE",
+      "best_response": "PD",
+      "progression_date": "2023-08-31"
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8002,
+    "fields": {
+      "person_id": 2002,
+      "regimen_concept_id": 35807076,
+      "regimen_name": "FEC-T",
+      "regimen_code": "FEC-T",
+      "regimen_start_date": "2023-02-15",
+      "regimen_end_date": "2023-07-12",
+      "treatment_line_id": 7002,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "NEOADJUVANT",
+      "treatment_setting": "OUTPATIENT",
+      "cycles_planned": 7,
+      "cycles_completed": 7,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-04-16",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7003,
+    "fields": {
+      "person_id": 2002,
+      "line_number": 2,
+      "line_start_date": "2023-08-26",
+      "line_end_date": "2024-02-14",
+      "line_type": "THIRD_LINE",
+      "treatment_intent": "NEOADJUVANT",
+      "best_response": "SD",
+      "progression_date": "2024-02-14"
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8003,
+    "fields": {
+      "person_id": 2002,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-08-25",
+      "regimen_end_date": "2024-02-09",
+      "treatment_line_id": 7003,
+      "line_number": 2,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "NEOADJUVANT",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 9,
+      "cycles_completed": 8,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-10-24",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7004,
+    "fields": {
+      "person_id": 2002,
+      "line_number": 3,
+      "line_start_date": "2024-02-18",
+      "line_end_date": null,
+      "line_type": "THIRD_LINE",
+      "treatment_intent": "ADJUVANT",
+      "best_response": "SD",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8004,
+    "fields": {
+      "person_id": 2002,
+      "regimen_concept_id": 35807076,
+      "regimen_name": "FEC-T",
+      "regimen_code": "FEC-T",
+      "regimen_start_date": "2024-02-15",
+      "regimen_end_date": "2024-03-28",
+      "treatment_line_id": 7004,
+      "line_number": 3,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "NEOADJUVANT",
+      "treatment_setting": "INPATIENT",
+      "cycles_planned": 4,
+      "cycles_completed": 2,
+      "cycle_length_days": 21,
+      "best_response": "CR",
+      "response_assessment_date": "2024-04-15",
+      "progression_date": null,
+      "regimen_discontinued": true,
+      "discontinuation_reason": "PROGRESSION",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2003,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1988,
+      "month_of_birth": 6,
+      "day_of_birth": 19,
+      "race_concept_id": 8516,
+      "ethnicity_concept_id": 38003564,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2003"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3003,
+    "fields": {
+      "person_id": 2003,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-01-09",
+      "condition_start_datetime": "2023-01-09T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5007,
+    "fields": {
+      "person_id": 2003,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-01-27",
+      "measurement_datetime": "2023-01-27T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5008,
+    "fields": {
+      "person_id": 2003,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-01-27",
+      "measurement_datetime": "2023-01-27T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5009,
+    "fields": {
+      "person_id": 2003,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-01-27",
+      "measurement_datetime": "2023-01-27T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7005,
+    "fields": {
+      "person_id": 2003,
+      "line_number": 1,
+      "line_start_date": "2023-02-10",
+      "line_end_date": null,
+      "line_type": "FIRST_LINE",
+      "treatment_intent": "CURATIVE",
+      "best_response": "PR",
+      "progression_date": "2023-08-07"
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8005,
+    "fields": {
+      "person_id": 2003,
+      "regimen_concept_id": 35807189,
+      "regimen_name": "TCHP",
+      "regimen_code": "TCHP",
+      "regimen_start_date": "2023-02-02",
+      "regimen_end_date": "2023-05-18",
+      "treatment_line_id": 7005,
+      "line_number": 1,
+      "regimen_type": "COMBINATION",
+      "treatment_intent": "CURATIVE",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 6,
+      "cycles_completed": 5,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-04-03",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7006,
+    "fields": {
+      "person_id": 2003,
+      "line_number": 2,
+      "line_start_date": "2023-08-17",
+      "line_end_date": "2024-05-22",
+      "line_type": "SECOND_LINE",
+      "treatment_intent": "PALLIATIVE",
+      "best_response": "SD",
+      "progression_date": "2024-05-22"
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8006,
+    "fields": {
+      "person_id": 2003,
+      "regimen_concept_id": 35807076,
+      "regimen_name": "FEC-T",
+      "regimen_code": "FEC-T",
+      "regimen_start_date": "2023-08-21",
+      "regimen_end_date": "2024-01-15",
+      "treatment_line_id": 7006,
+      "line_number": 2,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "NEOADJUVANT",
+      "treatment_setting": "INPATIENT",
+      "cycles_planned": 7,
+      "cycles_completed": 7,
+      "cycle_length_days": 21,
+      "best_response": "PD",
+      "response_assessment_date": "2023-10-20",
+      "progression_date": "2024-02-14",
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7007,
+    "fields": {
+      "person_id": 2003,
+      "line_number": 3,
+      "line_start_date": "2024-01-27",
+      "line_end_date": "2024-10-27",
+      "line_type": "THIRD_LINE",
+      "treatment_intent": "ADJUVANT",
+      "best_response": "SD",
+      "progression_date": "2024-10-27"
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8007,
+    "fields": {
+      "person_id": 2003,
+      "regimen_concept_id": 35807076,
+      "regimen_name": "FEC-T",
+      "regimen_code": "FEC-T",
+      "regimen_start_date": "2024-02-20",
+      "regimen_end_date": "2024-05-14",
+      "treatment_line_id": 7007,
+      "line_number": 3,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "ADJUVANT",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 6,
+      "cycles_completed": 4,
+      "cycle_length_days": 21,
+      "best_response": "SD",
+      "response_assessment_date": "2024-04-20",
+      "progression_date": "2024-06-13",
+      "regimen_discontinued": true,
+      "discontinuation_reason": "TOXICITY",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2004,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1979,
+      "month_of_birth": 11,
+      "day_of_birth": 2,
+      "race_concept_id": 8516,
+      "ethnicity_concept_id": 38003564,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2004"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3004,
+    "fields": {
+      "person_id": 2004,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-07-10",
+      "condition_start_datetime": "2023-07-10T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5010,
+    "fields": {
+      "person_id": 2004,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-02-14",
+      "measurement_datetime": "2023-02-14T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5011,
+    "fields": {
+      "person_id": 2004,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-02-14",
+      "measurement_datetime": "2023-02-14T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5012,
+    "fields": {
+      "person_id": 2004,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-02-14",
+      "measurement_datetime": "2023-02-14T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7008,
+    "fields": {
+      "person_id": 2004,
+      "line_number": 1,
+      "line_start_date": "2023-02-07",
+      "line_end_date": "2023-11-08",
+      "line_type": "THIRD_LINE",
+      "treatment_intent": "NEOADJUVANT",
+      "best_response": "PR",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8008,
+    "fields": {
+      "person_id": 2004,
+      "regimen_concept_id": 35807076,
+      "regimen_name": "FEC-T",
+      "regimen_code": "FEC-T",
+      "regimen_start_date": "2023-02-22",
+      "regimen_end_date": "2023-06-28",
+      "treatment_line_id": 7008,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "PALLIATIVE",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 8,
+      "cycles_completed": 6,
+      "cycle_length_days": 21,
+      "best_response": "CR",
+      "response_assessment_date": "2023-04-23",
+      "progression_date": null,
+      "regimen_discontinued": true,
+      "discontinuation_reason": "PROGRESSION",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2005,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1946,
+      "month_of_birth": 5,
+      "day_of_birth": 4,
+      "race_concept_id": 8527,
+      "ethnicity_concept_id": 38003563,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2005"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3005,
+    "fields": {
+      "person_id": 2005,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-01-22",
+      "condition_start_datetime": "2023-01-22T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5013,
+    "fields": {
+      "person_id": 2005,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-01-31",
+      "measurement_datetime": "2023-01-31T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5014,
+    "fields": {
+      "person_id": 2005,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-01-31",
+      "measurement_datetime": "2023-01-31T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5015,
+    "fields": {
+      "person_id": 2005,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-01-31",
+      "measurement_datetime": "2023-01-31T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7009,
+    "fields": {
+      "person_id": 2005,
+      "line_number": 1,
+      "line_start_date": "2023-02-22",
+      "line_end_date": "2023-08-11",
+      "line_type": "SECOND_LINE",
+      "treatment_intent": "NEOADJUVANT",
+      "best_response": "PD",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8009,
+    "fields": {
+      "person_id": 2005,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-03-02",
+      "regimen_end_date": "2023-07-27",
+      "treatment_line_id": 7009,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "PALLIATIVE",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 9,
+      "cycles_completed": 7,
+      "cycle_length_days": 21,
+      "best_response": "CR",
+      "response_assessment_date": "2023-05-01",
+      "progression_date": null,
+      "regimen_discontinued": true,
+      "discontinuation_reason": "TOXICITY",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2006,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1975,
+      "month_of_birth": 4,
+      "day_of_birth": 4,
+      "race_concept_id": 8515,
+      "ethnicity_concept_id": 38003563,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2006"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3006,
+    "fields": {
+      "person_id": 2006,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-03-06",
+      "condition_start_datetime": "2023-03-06T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5016,
+    "fields": {
+      "person_id": 2006,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-01-21",
+      "measurement_datetime": "2023-01-21T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5017,
+    "fields": {
+      "person_id": 2006,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-01-21",
+      "measurement_datetime": "2023-01-21T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5018,
+    "fields": {
+      "person_id": 2006,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-01-21",
+      "measurement_datetime": "2023-01-21T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7010,
+    "fields": {
+      "person_id": 2006,
+      "line_number": 1,
+      "line_start_date": "2023-02-26",
+      "line_end_date": "2023-07-25",
+      "line_type": "FIRST_LINE",
+      "treatment_intent": "ADJUVANT",
+      "best_response": "PR",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8010,
+    "fields": {
+      "person_id": 2006,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-02-23",
+      "regimen_end_date": "2023-05-18",
+      "treatment_line_id": 7010,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "NEOADJUVANT",
+      "treatment_setting": "OUTPATIENT",
+      "cycles_planned": 6,
+      "cycles_completed": 4,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-04-24",
+      "progression_date": null,
+      "regimen_discontinued": true,
+      "discontinuation_reason": "PROGRESSION",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7011,
+    "fields": {
+      "person_id": 2006,
+      "line_number": 2,
+      "line_start_date": "2023-08-18",
+      "line_end_date": "2023-12-27",
+      "line_type": "THIRD_LINE",
+      "treatment_intent": "PALLIATIVE",
+      "best_response": "PR",
+      "progression_date": "2023-12-27"
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8011,
+    "fields": {
+      "person_id": 2006,
+      "regimen_concept_id": 35807076,
+      "regimen_name": "FEC-T",
+      "regimen_code": "FEC-T",
+      "regimen_start_date": "2023-08-10",
+      "regimen_end_date": "2023-12-14",
+      "treatment_line_id": 7011,
+      "line_number": 2,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "ADJUVANT",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 7,
+      "cycles_completed": 6,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-10-09",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2007,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1979,
+      "month_of_birth": 2,
+      "day_of_birth": 17,
+      "race_concept_id": 8515,
+      "ethnicity_concept_id": 38003563,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2007"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3007,
+    "fields": {
+      "person_id": 2007,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-12-29",
+      "condition_start_datetime": "2023-12-29T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5019,
+    "fields": {
+      "person_id": 2007,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-01-31",
+      "measurement_datetime": "2023-01-31T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5020,
+    "fields": {
+      "person_id": 2007,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-01-31",
+      "measurement_datetime": "2023-01-31T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5021,
+    "fields": {
+      "person_id": 2007,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-01-31",
+      "measurement_datetime": "2023-01-31T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7012,
+    "fields": {
+      "person_id": 2007,
+      "line_number": 1,
+      "line_start_date": "2023-02-09",
+      "line_end_date": "2023-09-18",
+      "line_type": "SECOND_LINE",
+      "treatment_intent": "CURATIVE",
+      "best_response": "SD",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8012,
+    "fields": {
+      "person_id": 2007,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-02-21",
+      "regimen_end_date": "2023-06-27",
+      "treatment_line_id": 7012,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "PALLIATIVE",
+      "treatment_setting": "OUTPATIENT",
+      "cycles_planned": 6,
+      "cycles_completed": 6,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-04-22",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2008,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1972,
+      "month_of_birth": 6,
+      "day_of_birth": 19,
+      "race_concept_id": 8515,
+      "ethnicity_concept_id": 38003564,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2008"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3008,
+    "fields": {
+      "person_id": 2008,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-12-02",
+      "condition_start_datetime": "2023-12-02T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5022,
+    "fields": {
+      "person_id": 2008,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-01-23",
+      "measurement_datetime": "2023-01-23T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5023,
+    "fields": {
+      "person_id": 2008,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-01-23",
+      "measurement_datetime": "2023-01-23T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5024,
+    "fields": {
+      "person_id": 2008,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-01-23",
+      "measurement_datetime": "2023-01-23T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7013,
+    "fields": {
+      "person_id": 2008,
+      "line_number": 1,
+      "line_start_date": "2023-02-28",
+      "line_end_date": "2023-07-08",
+      "line_type": "FIRST_LINE",
+      "treatment_intent": "CURATIVE",
+      "best_response": "PR",
+      "progression_date": "2023-07-08"
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8013,
+    "fields": {
+      "person_id": 2008,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-02-27",
+      "regimen_end_date": "2023-09-25",
+      "treatment_line_id": 7013,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "ADJUVANT",
+      "treatment_setting": "OUTPATIENT",
+      "cycles_planned": 10,
+      "cycles_completed": 10,
+      "cycle_length_days": 21,
+      "best_response": "CR",
+      "response_assessment_date": "2023-04-28",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2009,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1949,
+      "month_of_birth": 11,
+      "day_of_birth": 13,
+      "race_concept_id": 8516,
+      "ethnicity_concept_id": 38003564,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2009"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3009,
+    "fields": {
+      "person_id": 2009,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-02-08",
+      "condition_start_datetime": "2023-02-08T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5025,
+    "fields": {
+      "person_id": 2009,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-01-30",
+      "measurement_datetime": "2023-01-30T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5026,
+    "fields": {
+      "person_id": 2009,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-01-30",
+      "measurement_datetime": "2023-01-30T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5027,
+    "fields": {
+      "person_id": 2009,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-01-30",
+      "measurement_datetime": "2023-01-30T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7014,
+    "fields": {
+      "person_id": 2009,
+      "line_number": 1,
+      "line_start_date": "2023-03-03",
+      "line_end_date": "2023-09-08",
+      "line_type": "FIRST_LINE",
+      "treatment_intent": "CURATIVE",
+      "best_response": "PR",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8014,
+    "fields": {
+      "person_id": 2009,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-03-01",
+      "regimen_end_date": "2023-09-06",
+      "treatment_line_id": 7014,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "NEOADJUVANT",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 10,
+      "cycles_completed": 9,
+      "cycle_length_days": 21,
+      "best_response": "SD",
+      "response_assessment_date": "2023-04-30",
+      "progression_date": "2023-10-06",
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7015,
+    "fields": {
+      "person_id": 2009,
+      "line_number": 2,
+      "line_start_date": "2023-08-18",
+      "line_end_date": "2024-01-02",
+      "line_type": "THIRD_LINE",
+      "treatment_intent": "CURATIVE",
+      "best_response": "PD",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8015,
+    "fields": {
+      "person_id": 2009,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-08-23",
+      "regimen_end_date": "2023-12-06",
+      "treatment_line_id": 7015,
+      "line_number": 2,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "PALLIATIVE",
+      "treatment_setting": "INPATIENT",
+      "cycles_planned": 7,
+      "cycles_completed": 5,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-10-22",
+      "progression_date": null,
+      "regimen_discontinued": true,
+      "discontinuation_reason": "TOXICITY",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2010,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1965,
+      "month_of_birth": 10,
+      "day_of_birth": 6,
+      "race_concept_id": 8515,
+      "ethnicity_concept_id": 38003563,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2010"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3010,
+    "fields": {
+      "person_id": 2010,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-11-09",
+      "condition_start_datetime": "2023-11-09T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5028,
+    "fields": {
+      "person_id": 2010,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-02-09",
+      "measurement_datetime": "2023-02-09T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5029,
+    "fields": {
+      "person_id": 2010,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-02-09",
+      "measurement_datetime": "2023-02-09T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5030,
+    "fields": {
+      "person_id": 2010,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-02-09",
+      "measurement_datetime": "2023-02-09T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7016,
+    "fields": {
+      "person_id": 2010,
+      "line_number": 1,
+      "line_start_date": "2023-02-11",
+      "line_end_date": "2023-08-12",
+      "line_type": "FIRST_LINE",
+      "treatment_intent": "ADJUVANT",
+      "best_response": "SD",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8016,
+    "fields": {
+      "person_id": 2010,
+      "regimen_concept_id": 35807189,
+      "regimen_name": "TCHP",
+      "regimen_code": "TCHP",
+      "regimen_start_date": "2023-02-13",
+      "regimen_end_date": "2023-07-10",
+      "treatment_line_id": 7016,
+      "line_number": 1,
+      "regimen_type": "COMBINATION",
+      "treatment_intent": "CURATIVE",
+      "treatment_setting": "OUTPATIENT",
+      "cycles_planned": 8,
+      "cycles_completed": 7,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-04-14",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7017,
+    "fields": {
+      "person_id": 2010,
+      "line_number": 2,
+      "line_start_date": "2023-08-18",
+      "line_end_date": "2023-12-23",
+      "line_type": "FIRST_LINE",
+      "treatment_intent": "ADJUVANT",
+      "best_response": "SD",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8017,
+    "fields": {
+      "person_id": 2010,
+      "regimen_concept_id": 35807189,
+      "regimen_name": "TCHP",
+      "regimen_code": "TCHP",
+      "regimen_start_date": "2023-08-20",
+      "regimen_end_date": "2024-02-04",
+      "treatment_line_id": 7017,
+      "line_number": 2,
+      "regimen_type": "COMBINATION",
+      "treatment_intent": "PALLIATIVE",
+      "treatment_setting": "INPATIENT",
+      "cycles_planned": 8,
+      "cycles_completed": 8,
+      "cycle_length_days": 21,
+      "best_response": "SD",
+      "response_assessment_date": "2023-10-19",
+      "progression_date": "2024-03-05",
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2011,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1981,
+      "month_of_birth": 2,
+      "day_of_birth": 15,
+      "race_concept_id": 8527,
+      "ethnicity_concept_id": 38003563,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2011"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3011,
+    "fields": {
+      "person_id": 2011,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-07-31",
+      "condition_start_datetime": "2023-07-31T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5031,
+    "fields": {
+      "person_id": 2011,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-01-20",
+      "measurement_datetime": "2023-01-20T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5032,
+    "fields": {
+      "person_id": 2011,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-01-20",
+      "measurement_datetime": "2023-01-20T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5033,
+    "fields": {
+      "person_id": 2011,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-01-20",
+      "measurement_datetime": "2023-01-20T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7018,
+    "fields": {
+      "person_id": 2011,
+      "line_number": 1,
+      "line_start_date": "2023-02-08",
+      "line_end_date": "2023-11-07",
+      "line_type": "SECOND_LINE",
+      "treatment_intent": "PALLIATIVE",
+      "best_response": "PR",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8018,
+    "fields": {
+      "person_id": 2011,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-02-03",
+      "regimen_end_date": "2023-06-30",
+      "treatment_line_id": 7018,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "NEOADJUVANT",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 7,
+      "cycles_completed": 7,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-04-04",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2012,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1983,
+      "month_of_birth": 12,
+      "day_of_birth": 9,
+      "race_concept_id": 8515,
+      "ethnicity_concept_id": 38003563,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2012"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3012,
+    "fields": {
+      "person_id": 2012,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-11-10",
+      "condition_start_datetime": "2023-11-10T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5034,
+    "fields": {
+      "person_id": 2012,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-02-11",
+      "measurement_datetime": "2023-02-11T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5035,
+    "fields": {
+      "person_id": 2012,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-02-11",
+      "measurement_datetime": "2023-02-11T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5036,
+    "fields": {
+      "person_id": 2012,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-02-11",
+      "measurement_datetime": "2023-02-11T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7019,
+    "fields": {
+      "person_id": 2012,
+      "line_number": 1,
+      "line_start_date": "2023-02-07",
+      "line_end_date": "2023-10-04",
+      "line_type": "THIRD_LINE",
+      "treatment_intent": "CURATIVE",
+      "best_response": "CR",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8019,
+    "fields": {
+      "person_id": 2012,
+      "regimen_concept_id": 35807076,
+      "regimen_name": "FEC-T",
+      "regimen_code": "FEC-T",
+      "regimen_start_date": "2023-02-06",
+      "regimen_end_date": "2023-04-10",
+      "treatment_line_id": 7019,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "NEOADJUVANT",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 4,
+      "cycles_completed": 3,
+      "cycle_length_days": 21,
+      "best_response": "CR",
+      "response_assessment_date": "2023-04-07",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7020,
+    "fields": {
+      "person_id": 2012,
+      "line_number": 2,
+      "line_start_date": "2023-08-25",
+      "line_end_date": "2024-03-07",
+      "line_type": "SECOND_LINE",
+      "treatment_intent": "PALLIATIVE",
+      "best_response": "CR",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8020,
+    "fields": {
+      "person_id": 2012,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-08-19",
+      "regimen_end_date": "2023-12-23",
+      "treatment_line_id": 7020,
+      "line_number": 2,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "ADJUVANT",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 6,
+      "cycles_completed": 6,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-10-18",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2013,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1970,
+      "month_of_birth": 5,
+      "day_of_birth": 15,
+      "race_concept_id": 8516,
+      "ethnicity_concept_id": 38003563,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2013"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3013,
+    "fields": {
+      "person_id": 2013,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-10-14",
+      "condition_start_datetime": "2023-10-14T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5037,
+    "fields": {
+      "person_id": 2013,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-02-01",
+      "measurement_datetime": "2023-02-01T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5038,
+    "fields": {
+      "person_id": 2013,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-02-01",
+      "measurement_datetime": "2023-02-01T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5039,
+    "fields": {
+      "person_id": 2013,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-02-01",
+      "measurement_datetime": "2023-02-01T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7021,
+    "fields": {
+      "person_id": 2013,
+      "line_number": 1,
+      "line_start_date": "2023-02-13",
+      "line_end_date": "2023-08-18",
+      "line_type": "THIRD_LINE",
+      "treatment_intent": "PALLIATIVE",
+      "best_response": "PR",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8021,
+    "fields": {
+      "person_id": 2013,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-02-15",
+      "regimen_end_date": "2023-08-02",
+      "treatment_line_id": 7021,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "CURATIVE",
+      "treatment_setting": "INPATIENT",
+      "cycles_planned": 8,
+      "cycles_completed": 8,
+      "cycle_length_days": 21,
+      "best_response": "SD",
+      "response_assessment_date": "2023-04-16",
+      "progression_date": "2023-09-01",
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2014,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1980,
+      "month_of_birth": 8,
+      "day_of_birth": 12,
+      "race_concept_id": 8515,
+      "ethnicity_concept_id": 38003563,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2014"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3014,
+    "fields": {
+      "person_id": 2014,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-09-03",
+      "condition_start_datetime": "2023-09-03T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5040,
+    "fields": {
+      "person_id": 2014,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-02-01",
+      "measurement_datetime": "2023-02-01T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5041,
+    "fields": {
+      "person_id": 2014,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-02-01",
+      "measurement_datetime": "2023-02-01T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 4181412,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5042,
+    "fields": {
+      "person_id": 2014,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-02-01",
+      "measurement_datetime": "2023-02-01T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7022,
+    "fields": {
+      "person_id": 2014,
+      "line_number": 1,
+      "line_start_date": "2023-02-05",
+      "line_end_date": "2023-10-25",
+      "line_type": "SECOND_LINE",
+      "treatment_intent": "PALLIATIVE",
+      "best_response": "PR",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8022,
+    "fields": {
+      "person_id": 2014,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-02-06",
+      "regimen_end_date": "2023-06-12",
+      "treatment_line_id": 7022,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "PALLIATIVE",
+      "treatment_setting": "OUTPATIENT",
+      "cycles_planned": 6,
+      "cycles_completed": 6,
+      "cycle_length_days": 21,
+      "best_response": "SD",
+      "response_assessment_date": "2023-04-07",
+      "progression_date": "2023-07-12",
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7023,
+    "fields": {
+      "person_id": 2014,
+      "line_number": 2,
+      "line_start_date": "2023-08-06",
+      "line_end_date": null,
+      "line_type": "FIRST_LINE",
+      "treatment_intent": "NEOADJUVANT",
+      "best_response": "PD",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8023,
+    "fields": {
+      "person_id": 2014,
+      "regimen_concept_id": 35807076,
+      "regimen_name": "FEC-T",
+      "regimen_code": "FEC-T",
+      "regimen_start_date": "2023-08-20",
+      "regimen_end_date": "2024-01-14",
+      "treatment_line_id": 7023,
+      "line_number": 2,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "NEOADJUVANT",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 7,
+      "cycles_completed": 7,
+      "cycle_length_days": 21,
+      "best_response": "SD",
+      "response_assessment_date": "2023-10-19",
+      "progression_date": "2024-02-13",
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.person",
+    "pk": 2015,
+    "fields": {
+      "gender_concept_id": 8532,
+      "year_of_birth": 1941,
+      "month_of_birth": 9,
+      "day_of_birth": 28,
+      "race_concept_id": 8516,
+      "ethnicity_concept_id": 38003564,
+      "provider_id": null,
+      "care_site_id": null,
+      "person_source_value": "BC2015"
+    }
+  },
+  {
+    "model": "omop.conditionoccurrence",
+    "pk": 3015,
+    "fields": {
+      "person_id": 2015,
+      "condition_concept_id": 4112853,
+      "condition_start_date": "2023-11-11",
+      "condition_start_datetime": "2023-11-11T00:00:00Z",
+      "condition_end_date": null,
+      "condition_end_datetime": null,
+      "condition_type_concept_id": 32020,
+      "condition_source_value": "C50.9",
+      "condition_source_concept_id": 4112853
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5043,
+    "fields": {
+      "person_id": 2015,
+      "measurement_concept_id": 3000963,
+      "measurement_date": "2023-02-12",
+      "measurement_datetime": "2023-02-12T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "ER",
+      "measurement_source_concept_id": 3000963
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5044,
+    "fields": {
+      "person_id": 2015,
+      "measurement_concept_id": 3006256,
+      "measurement_date": "2023-02-12",
+      "measurement_datetime": "2023-02-12T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "PR",
+      "measurement_source_concept_id": 3006256
+    }
+  },
+  {
+    "model": "omop.measurement",
+    "pk": 5045,
+    "fields": {
+      "person_id": 2015,
+      "measurement_concept_id": 3013682,
+      "measurement_date": "2023-02-12",
+      "measurement_datetime": "2023-02-12T00:00:00Z",
+      "measurement_type_concept_id": 44818702,
+      "value_as_concept_id": 9189,
+      "unit_concept_id": null,
+      "measurement_source_value": "HER2",
+      "measurement_source_concept_id": 3013682
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7024,
+    "fields": {
+      "person_id": 2015,
+      "line_number": 1,
+      "line_start_date": "2023-02-09",
+      "line_end_date": "2023-10-28",
+      "line_type": "FIRST_LINE",
+      "treatment_intent": "ADJUVANT",
+      "best_response": "SD",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8024,
+    "fields": {
+      "person_id": 2015,
+      "regimen_concept_id": 35807076,
+      "regimen_name": "FEC-T",
+      "regimen_code": "FEC-T",
+      "regimen_start_date": "2023-02-21",
+      "regimen_end_date": "2023-04-04",
+      "treatment_line_id": 7024,
+      "line_number": 1,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "PALLIATIVE",
+      "treatment_setting": "INPATIENT",
+      "cycles_planned": 4,
+      "cycles_completed": 2,
+      "cycle_length_days": 21,
+      "best_response": "PR",
+      "response_assessment_date": "2023-04-22",
+      "progression_date": null,
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7025,
+    "fields": {
+      "person_id": 2015,
+      "line_number": 2,
+      "line_start_date": "2023-08-23",
+      "line_end_date": "2024-04-27",
+      "line_type": "SECOND_LINE",
+      "treatment_intent": "ADJUVANT",
+      "best_response": "PR",
+      "progression_date": null
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8025,
+    "fields": {
+      "person_id": 2015,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2023-08-11",
+      "regimen_end_date": "2024-01-05",
+      "treatment_line_id": 7025,
+      "line_number": 2,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "PALLIATIVE",
+      "treatment_setting": "INPATIENT",
+      "cycles_planned": 8,
+      "cycles_completed": 7,
+      "cycle_length_days": 21,
+      "best_response": "PD",
+      "response_assessment_date": "2023-10-10",
+      "progression_date": "2024-02-04",
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  },
+  {
+    "model": "omop.treatmentline",
+    "pk": 7026,
+    "fields": {
+      "person_id": 2015,
+      "line_number": 3,
+      "line_start_date": "2024-01-29",
+      "line_end_date": "2024-11-01",
+      "line_type": "SECOND_LINE",
+      "treatment_intent": "PALLIATIVE",
+      "best_response": "CR",
+      "progression_date": "2024-11-01"
+    }
+  },
+  {
+    "model": "omop.treatmentregimen",
+    "pk": 8026,
+    "fields": {
+      "person_id": 2015,
+      "regimen_concept_id": 35807075,
+      "regimen_name": "AC-T",
+      "regimen_code": "AC-T",
+      "regimen_start_date": "2024-02-21",
+      "regimen_end_date": "2024-08-07",
+      "treatment_line_id": 7026,
+      "line_number": 3,
+      "regimen_type": "CHEMOTHERAPY",
+      "treatment_intent": "ADJUVANT",
+      "treatment_setting": "AMBULATORY",
+      "cycles_planned": 10,
+      "cycles_completed": 8,
+      "cycle_length_days": 21,
+      "best_response": "SD",
+      "response_assessment_date": "2024-04-21",
+      "progression_date": "2024-09-06",
+      "regimen_discontinued": false,
+      "discontinuation_reason": "COMPLETED",
+      "clinical_trial_id": null
+    }
+  }
+]

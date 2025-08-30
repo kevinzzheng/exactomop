@@ -558,34 +558,95 @@ class Vocabulary(models.Model):
         return f"{self.vocabulary_id}: {self.vocabulary_name}"
 
 class Person(models.Model):
+    """
+    OMOP CDM v6.0 Person table - Enhanced to full OMOP standard
+    Contains records that uniquely identify each person or patient
+    """
     person_id = models.BigAutoField(primary_key=True)
-    gender_concept_id = models.IntegerField()
-    year_of_birth = models.IntegerField(null=True, blank=True)
-    month_of_birth = models.IntegerField(null=True, blank=True)
-    day_of_birth = models.IntegerField(null=True, blank=True)
-    race_concept_id = models.IntegerField(null=True, blank=True)
-    ethnicity_concept_id = models.IntegerField(null=True, blank=True)
-    location = models.ForeignKey(Location, null=True, blank=True, on_delete=models.SET_NULL)
     
-    # OMOP CDM extensions that complement PatientInfo
-    provider_id = models.IntegerField(null=True, blank=True, help_text="Primary care provider ID")
-    care_site_id = models.IntegerField(null=True, blank=True, help_text="Primary care site ID")
-    person_source_value = models.CharField(max_length=50, blank=True, help_text="Source identifier")
+    # Core demographics - required fields
+    gender_concept_id = models.IntegerField(help_text="Standard concept for biological sex at birth")
+    year_of_birth = models.IntegerField(help_text="Year of birth - required field")
     
- 
-    # Language and cultural information
-    primary_language_concept_id = models.IntegerField(null=True, blank=True, help_text="Primary language concept")
-    secondary_languages = models.TextField(blank=True, help_text="Additional languages (JSON array)")
-    language_skill_level = models.CharField(max_length=20, blank=True, help_text="Language proficiency level")
+    # Optional birth details
+    month_of_birth = models.IntegerField(null=True, blank=True, help_text="Month of birth if available")
+    day_of_birth = models.IntegerField(null=True, blank=True, help_text="Day of birth if available")
+    birth_datetime = models.DateTimeField(null=True, blank=True, 
+                                        help_text="Precise birth datetime - highly encouraged")
+    
+    # Death information (CDM v6.0 moved from separate Death table)
+    death_datetime = models.DateTimeField(null=True, blank=True,
+                                        help_text="Date and time of death")
+    
+    # Race and ethnicity
+    race_concept_id = models.IntegerField(null=True, blank=True, 
+                                        help_text="Standard concept for race")
+    ethnicity_concept_id = models.IntegerField(null=True, blank=True,
+                                             help_text="Standard concept for ethnicity (Hispanic/Not Hispanic)")
+    
+    # Location and care information
+    location_id = models.ForeignKey(Location, null=True, blank=True, on_delete=models.SET_NULL,
+                                   db_column='location_id', related_name='persons',
+                                   help_text="Most recent/current location")
+    provider_id = models.BigIntegerField(null=True, blank=True, 
+                                        help_text="Primary care provider ID")
+    care_site_id = models.BigIntegerField(null=True, blank=True, 
+                                         help_text="Primary care site ID")
+    
+    # Source values - for ETL reference and debugging
+    person_source_value = models.CharField(max_length=50, blank=True, 
+                                         help_text="Source identifier for person")
+    gender_source_value = models.CharField(max_length=50, blank=True,
+                                         help_text="Source value for gender")
+    gender_source_concept_id = models.IntegerField(default=0,
+                                                  help_text="Source concept ID for gender")
+    race_source_value = models.CharField(max_length=50, blank=True,
+                                       help_text="Source value for race")
+    race_source_concept_id = models.IntegerField(default=0,
+                                                help_text="Source concept ID for race")
+    ethnicity_source_value = models.CharField(max_length=50, blank=True,
+                                             help_text="Source value for ethnicity")
+    ethnicity_source_concept_id = models.IntegerField(default=0,
+                                                     help_text="Source concept ID for ethnicity")
+    
+    # Language and cultural information (custom extensions)
+    primary_language_concept_id = models.IntegerField(null=True, blank=True, 
+                                                     help_text="Primary language concept")
+    secondary_languages = models.TextField(blank=True, 
+                                         help_text="Additional languages (JSON array)")
+    language_skill_level = models.CharField(max_length=20, blank=True, 
+                                           help_text="Language proficiency level")
     
     class Meta:
         db_table = "person"
         indexes = [
             models.Index(fields=["gender_concept_id"]),
+            models.Index(fields=["year_of_birth"]),
+            models.Index(fields=["race_concept_id"]),
+            models.Index(fields=["ethnicity_concept_id"]),
+            models.Index(fields=["death_datetime"]),
+            models.Index(fields=["provider_id"]),
+            models.Index(fields=["care_site_id"]),
             models.Index(fields=["primary_language_concept_id"]),
         ]
+    
     def __str__(self):
         return f"Person {self.person_id}"
+    
+    @property
+    def age(self):
+        """Calculate current age or age at death"""
+        from datetime import date
+        current_year = date.today().year
+        death_year = self.death_datetime.year if self.death_datetime else None
+        reference_year = death_year or current_year
+        return reference_year - self.year_of_birth if self.year_of_birth else None
+    
+    @property
+    def is_deceased(self):
+        """Check if person is deceased"""
+        return self.death_datetime is not None
+
 
 class ConditionOccurrence(models.Model):
     condition_occurrence_id = models.BigAutoField(primary_key=True)
@@ -831,6 +892,137 @@ class Measurement(models.Model):
     previous_value = models.FloatField(null=True, blank=True, help_text="Previous measurement value")
     percent_change = models.FloatField(null=True, blank=True, help_text="Percent change from previous")
     
+    # =============================================
+    # OMOP ONCOLOGY EXTENSION FOR BIOMARKER MEASUREMENTS
+    # =============================================
+    
+    # Biomarker expression levels (for oncology biomarkers)
+    expression_level = models.CharField(
+        max_length=20,
+        choices=[
+            ('NEGATIVE', 'Negative (0%)'),
+            ('LOW', 'Low (1-10%)'),
+            ('MODERATE', 'Moderate (11-50%)'),
+            ('HIGH', 'High (>50%)'),
+            ('OVEREXPRESSED', 'Overexpressed'),
+        ],
+        blank=True,
+        help_text="Biomarker expression level classification"
+    )
+    
+    # Immunohistochemistry scoring
+    ihc_score = models.CharField(
+        max_length=10,
+        choices=[
+            ('0', 'Score 0'),
+            ('1+', 'Score 1+'),
+            ('2+', 'Score 2+'),
+            ('3+', 'Score 3+'),
+        ],
+        blank=True,
+        help_text="IHC intensity score"
+    )
+    
+    # Percentage of positive cells
+    percent_positive_cells = models.FloatField(null=True, blank=True, help_text="Percentage of positive cells")
+    
+    # H-score (histologic score)
+    h_score = models.FloatField(null=True, blank=True, help_text="H-score (0-300)")
+    
+    # Allred score components
+    allred_intensity = models.IntegerField(null=True, blank=True, help_text="Allred intensity score (0-3)")
+    allred_proportion = models.IntegerField(null=True, blank=True, help_text="Allred proportion score (0-5)")
+    allred_total = models.IntegerField(null=True, blank=True, help_text="Total Allred score (0-8)")
+    
+    # FISH results (for HER2, etc.)
+    fish_ratio = models.FloatField(null=True, blank=True, help_text="FISH signal ratio")
+    fish_signal_count = models.FloatField(null=True, blank=True, help_text="Average signal count per nucleus")
+    fish_interpretation = models.CharField(
+        max_length=20,
+        choices=[
+            ('AMPLIFIED', 'Amplified'),
+            ('NOT_AMPLIFIED', 'Not Amplified'),
+            ('EQUIVOCAL', 'Equivocal'),
+        ],
+        blank=True,
+        help_text="FISH interpretation"
+    )
+    
+    # Genomic biomarkers
+    mutation_status = models.CharField(
+        max_length=20,
+        choices=[
+            ('WILD_TYPE', 'Wild Type'),
+            ('MUTATED', 'Mutated'),
+            ('UNKNOWN', 'Unknown'),
+            ('NOT_TESTED', 'Not Tested'),
+        ],
+        blank=True,
+        help_text="Mutation status"
+    )
+    
+    # Tumor mutational burden
+    tmb_score = models.FloatField(null=True, blank=True, help_text="Tumor mutational burden (mutations/Mb)")
+    tmb_status = models.CharField(
+        max_length=20,
+        choices=[
+            ('TMB_HIGH', 'TMB-High'),
+            ('TMB_LOW', 'TMB-Low'),
+            ('TMB_INTERMEDIATE', 'TMB-Intermediate'),
+        ],
+        blank=True,
+        help_text="TMB status classification"
+    )
+    
+    # Microsatellite instability
+    msi_status = models.CharField(
+        max_length=15,
+        choices=[
+            ('MSI_HIGH', 'MSI-High'),
+            ('MSI_LOW', 'MSI-Low'),
+            ('MSS', 'Microsatellite Stable'),
+        ],
+        blank=True,
+        help_text="Microsatellite instability status"
+    )
+    
+    # PD-L1 specific scoring
+    pdl1_combined_positive_score = models.FloatField(null=True, blank=True, help_text="PD-L1 Combined Positive Score")
+    pdl1_tumor_proportion_score = models.FloatField(null=True, blank=True, help_text="PD-L1 Tumor Proportion Score")
+    pdl1_immune_cell_score = models.FloatField(null=True, blank=True, help_text="PD-L1 Immune Cell Score")
+    
+    # Homologous recombination deficiency
+    hrd_score = models.FloatField(null=True, blank=True, help_text="Homologous recombination deficiency score")
+    hrd_status = models.CharField(
+        max_length=15,
+        choices=[
+            ('HRD_POSITIVE', 'HRD Positive'),
+            ('HRD_NEGATIVE', 'HRD Negative'),
+            ('INCONCLUSIVE', 'Inconclusive'),
+        ],
+        blank=True,
+        help_text="HRD status"
+    )
+    
+    # Tumor infiltrating lymphocytes
+    til_percentage = models.FloatField(null=True, blank=True, help_text="Tumor infiltrating lymphocytes percentage")
+    til_density = models.CharField(
+        max_length=15,
+        choices=[
+            ('ABSENT', 'Absent (0%)'),
+            ('LOW', 'Low (1-10%)'),
+            ('INTERMEDIATE', 'Intermediate (11-50%)'),
+            ('HIGH', 'High (>50%)'),
+        ],
+        blank=True,
+        help_text="TIL density classification"
+    )
+    
+    # ctDNA and liquid biopsy
+    ctdna_detected = models.BooleanField(null=True, blank=True, help_text="Whether ctDNA was detected")
+    ctdna_allele_frequency = models.FloatField(null=True, blank=True, help_text="ctDNA variant allele frequency")
+    ctdna_copy_number = models.FloatField(null=True, blank=True, help_text="ctDNA copy number")
+    
     class Meta:
         db_table = "measurement"
         indexes = [
@@ -844,6 +1036,13 @@ class Measurement(models.Model):
             models.Index(fields=["loinc_code"]),
             models.Index(fields=["biomarker_type"]),
             models.Index(fields=["panic_value_flag"]),
+            # Oncology biomarker indexes
+            models.Index(fields=["expression_level"]),
+            models.Index(fields=["ihc_score"]),
+            models.Index(fields=["mutation_status"]),
+            models.Index(fields=["tmb_status"]),
+            models.Index(fields=["msi_status"]),
+            models.Index(fields=["hrd_status"]),
         ]
     def __str__(self):
         return f"Measurement {self.measurement_id}"
@@ -1546,7 +1745,6 @@ class Observation(models.Model):
             models.Index(fields=["consent_capability"]),
             models.Index(fields=["mental_health_status"]),
             models.Index(fields=["geographic_risk_category"]),
-            models.Index(fields=["eligible_for_trials"]),
             models.Index(fields=["risk_assessment_date"]),
         ]
     def __str__(self):
@@ -1710,6 +1908,101 @@ class ProcedureOccurrence(models.Model):
     complications = models.TextField(blank=True, help_text="Complications during procedure")
     anesthesia_type = models.CharField(max_length=50, blank=True, help_text="Type of anesthesia used")
     
+    # =============================================
+    # OMOP ONCOLOGY EXTENSION FOR SURGICAL PROCEDURES
+    # =============================================
+    
+    # Surgical oncology fields
+    surgical_approach = models.CharField(
+        max_length=30,
+        choices=[
+            ('OPEN', 'Open Surgery'),
+            ('LAPAROSCOPIC', 'Laparoscopic'),
+            ('ROBOTIC', 'Robotic-assisted'),
+            ('THORACOSCOPIC', 'Thoracoscopic'),
+            ('ENDOSCOPIC', 'Endoscopic'),
+        ],
+        blank=True,
+        help_text="Surgical approach used"
+    )
+    
+    # Resection details
+    resection_type = models.CharField(
+        max_length=50,
+        choices=[
+            ('COMPLETE', 'Complete Resection'),
+            ('PARTIAL', 'Partial Resection'),
+            ('BIOPSY_ONLY', 'Biopsy Only'),
+            ('DEBULKING', 'Tumor Debulking'),
+            ('PALLIATIVE', 'Palliative Resection'),
+        ],
+        blank=True,
+        help_text="Type of tumor resection"
+    )
+    
+    # Margins and completeness
+    margin_status = models.CharField(
+        max_length=20,
+        choices=[
+            ('NEGATIVE', 'Negative Margins (R0)'),
+            ('MICROSCOPIC', 'Microscopic Positive (R1)'),
+            ('MACROSCOPIC', 'Macroscopic Positive (R2)'),
+            ('UNKNOWN', 'Unknown'),
+        ],
+        blank=True,
+        help_text="Surgical margin status"
+    )
+    
+    # Lymph node assessment
+    lymph_nodes_examined = models.IntegerField(null=True, blank=True, help_text="Number of lymph nodes examined")
+    lymph_nodes_positive = models.IntegerField(null=True, blank=True, help_text="Number of positive lymph nodes")
+    sentinel_node_examined = models.BooleanField(null=True, blank=True, help_text="Whether sentinel nodes were examined")
+    sentinel_node_positive = models.BooleanField(null=True, blank=True, help_text="Whether sentinel nodes were positive")
+    
+    # Surgical intent
+    surgical_intent = models.CharField(
+        max_length=30,
+        choices=[
+            ('CURATIVE', 'Curative Intent'),
+            ('PALLIATIVE', 'Palliative Intent'),
+            ('DIAGNOSTIC', 'Diagnostic'),
+            ('STAGING', 'Staging'),
+            ('PROPHYLACTIC', 'Prophylactic'),
+        ],
+        blank=True,
+        help_text="Intent of surgical procedure"
+    )
+    
+    # Tumor characteristics at surgery
+    tumor_size_pathologic = models.FloatField(null=True, blank=True, help_text="Pathologic tumor size (cm)")
+    multifocal_tumor = models.BooleanField(null=True, blank=True, help_text="Whether tumor was multifocal")
+    tumor_grade_pathologic = models.CharField(
+        max_length=10,
+        choices=TumorGradeChoices.choices,
+        blank=True,
+        help_text="Pathologic tumor grade"
+    )
+    
+    # Surgical quality metrics
+    operative_time_minutes = models.IntegerField(null=True, blank=True, help_text="Duration of surgery in minutes")
+    blood_loss_ml = models.IntegerField(null=True, blank=True, help_text="Estimated blood loss in mL")
+    conversion_to_open = models.BooleanField(null=True, blank=True, help_text="Whether minimally invasive approach was converted to open")
+    
+    # Reconstruction details
+    reconstruction_performed = models.BooleanField(null=True, blank=True, help_text="Whether reconstruction was performed")
+    reconstruction_type = models.CharField(max_length=100, blank=True, help_text="Type of reconstruction")
+    implant_used = models.BooleanField(null=True, blank=True, help_text="Whether implant was used")
+    
+    # Perioperative outcomes
+    length_of_stay_days = models.IntegerField(null=True, blank=True, help_text="Length of hospital stay in days")
+    icu_stay_required = models.BooleanField(null=True, blank=True, help_text="Whether ICU stay was required")
+    readmission_30day = models.BooleanField(null=True, blank=True, help_text="Whether readmission occurred within 30 days")
+    
+    # Pathology integration
+    pathology_report_id = models.CharField(max_length=50, blank=True, help_text="Associated pathology report ID")
+    frozen_section_performed = models.BooleanField(null=True, blank=True, help_text="Whether frozen section was performed")
+    intraoperative_consultation = models.BooleanField(null=True, blank=True, help_text="Whether intraoperative pathology consultation occurred")
+    
     class Meta:
         db_table = "procedure_occurrence"
         indexes = [
@@ -1718,6 +2011,10 @@ class ProcedureOccurrence(models.Model):
             models.Index(fields=["procedure_datetime"]),
             models.Index(fields=["transplant_type"]),
             models.Index(fields=["imaging_modality"]),
+            models.Index(fields=["surgical_approach"]),
+            models.Index(fields=["resection_type"]),
+            models.Index(fields=["margin_status"]),
+            models.Index(fields=["surgical_intent"]),
         ]
     def __str__(self):
         return f"Procedure {self.procedure_occurrence_id}"
@@ -2348,7 +2645,6 @@ class MolecularTest(models.Model):
             models.Index(fields=["test_date"]),
             models.Index(fields=["test_type"]),
             models.Index(fields=["overall_result"]),
-            models.Index(fields=["trial_eligible"]),
         ]
     
     def __str__(self):
@@ -2442,80 +2738,6 @@ class TreatmentLine(models.Model):
     def __str__(self):
         return f"Treatment Line {self.line_number} for Person {self.person.person_id}"
 
-class TreatmentRegimen(models.Model):
-    """
-    Detailed regimen tracking within treatment lines
-    Links individual drug exposures and procedures into cohesive treatment episodes
-    """
-    regimen_id = models.BigAutoField(primary_key=True)
-    treatment_line = models.ForeignKey(TreatmentLine, on_delete=models.CASCADE, 
-                                     related_name='regimens')
-    person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='treatment_regimens')
-    
-    # Regimen identification
-    regimen_name = models.CharField(max_length=200, help_text="Standard regimen name")
-    regimen_code = models.CharField(max_length=50, blank=True, help_text="Standard regimen code")
-    regimen_sequence = models.IntegerField(help_text="Sequence within treatment line")
-    
-    # Temporal boundaries
-    regimen_start_date = models.DateField(help_text="Start date of regimen")
-    regimen_end_date = models.DateField(null=True, blank=True, help_text="End date of regimen")
-    
-    # Regimen characteristics
-    regimen_type = models.CharField(max_length=20, choices=RegimenTypeChoices.choices,
-                                   help_text="Type of regimen")
-    number_of_cycles_planned = models.IntegerField(null=True, blank=True,
-                                                  help_text="Planned number of cycles")
-    number_of_cycles_completed = models.IntegerField(null=True, blank=True,
-                                                    help_text="Completed number of cycles")
-    
-    # Drug classifications within regimen
-    contains_platinum = models.BooleanField(default=False, help_text="Contains platinum agent")
-    contains_immunotherapy = models.BooleanField(default=False, help_text="Contains immunotherapy")
-    contains_targeted_therapy = models.BooleanField(default=False, help_text="Contains targeted therapy")
-    contains_chemotherapy = models.BooleanField(default=False, help_text="Contains chemotherapy")
-    contains_hormone_therapy = models.BooleanField(default=False, help_text="Contains hormone therapy")
-    
-    # Outcomes and response
-    best_response = models.CharField(max_length=20, choices=TreatmentResponseChoices.choices,
-                                   blank=True, help_text="Best response to regimen")
-    toxicity_grade_max = models.IntegerField(null=True, blank=True, choices=[
-        (1, 'Grade 1 - Mild'),
-        (2, 'Grade 2 - Moderate'), 
-        (3, 'Grade 3 - Severe'),
-        (4, 'Grade 4 - Life-threatening'),
-        (5, 'Grade 5 - Death'),
-    ], help_text="Maximum toxicity grade")
-    
-    # Regimen modifications
-    dose_reductions = models.IntegerField(default=0, help_text="Number of dose reductions")
-    treatment_delays = models.IntegerField(default=0, help_text="Number of treatment delays")
-    early_discontinuation = models.BooleanField(default=False, help_text="Discontinued early")
-    discontinuation_reason = models.CharField(max_length=200, blank=True,
-                                            help_text="Reason for discontinuation")
-    
-    # Clinical context
-    performance_status_start = models.CharField(max_length=20, 
-                                              choices=PerformanceStatusChoices.choices,
-                                              blank=True, help_text="Performance status at start")
-    comorbidity_score = models.FloatField(null=True, blank=True, help_text="Comorbidity score")
-    
-    class Meta:
-        db_table = "treatment_regimen"
-        indexes = [
-            models.Index(fields=["treatment_line"]),
-            models.Index(fields=["person"]),
-            models.Index(fields=["regimen_start_date"]),
-            models.Index(fields=["regimen_sequence"]),
-            models.Index(fields=["contains_platinum"]),
-            models.Index(fields=["contains_immunotherapy"]),
-            models.Index(fields=["best_response"]),
-        ]
-        unique_together = [['treatment_line', 'regimen_sequence']]
-    
-    def __str__(self):
-        return f"{self.regimen_name} (Sequence {self.regimen_sequence})"
-
 class TreatmentLineComponent(models.Model):
     """
     Links individual drug exposures and procedures to treatment lines and regimens
@@ -2524,7 +2746,7 @@ class TreatmentLineComponent(models.Model):
     component_id = models.BigAutoField(primary_key=True)
     treatment_line = models.ForeignKey(TreatmentLine, on_delete=models.CASCADE,
                                      related_name='components')
-    treatment_regimen = models.ForeignKey(TreatmentRegimen, null=True, blank=True,
+    treatment_regimen = models.ForeignKey('TreatmentRegimen', null=True, blank=True,
                                         on_delete=models.CASCADE, related_name='components')
     person = models.ForeignKey(Person, on_delete=models.CASCADE, 
                               related_name='treatment_components')
@@ -3024,3 +3246,1148 @@ class PatientInfo(models.Model):
 
     def __str__(self):
         return f"PatientInfo for Person {self.person.person_id} (age={self.patient_age}, gender={self.gender})"
+
+
+# ===========================================
+# OMOP ONCOLOGY EXTENSION TABLES
+# ===========================================
+
+class Modifier(models.Model):
+    """
+    OMOP Oncology Extension: Modifier table for capturing modifiers of oncology events
+    """
+    modifier_id = models.BigAutoField(primary_key=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    modifier_concept = models.ForeignKey(Concept, on_delete=models.PROTECT, related_name='modifiers',
+                                        help_text="Concept representing the modifier")
+    modifier_of_event_id = models.BigIntegerField(help_text="ID of the event being modified")
+    modifier_of_field_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                                 related_name='modifier_fields',
+                                                 help_text="Concept representing the field being modified")
+    modifier_value_as_concept = models.ForeignKey(Concept, null=True, blank=True, on_delete=models.PROTECT,
+                                                 related_name='modifier_values',
+                                                 help_text="Concept value of the modifier")
+    modifier_value_as_number = models.FloatField(null=True, blank=True, help_text="Numeric value of the modifier")
+    modifier_value_as_string = models.CharField(max_length=255, blank=True, help_text="String value of the modifier")
+    modifier_type_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                             related_name='modifier_types',
+                                             help_text="Type of modifier")
+    modifier_datetime = models.DateTimeField(null=True, blank=True, help_text="Datetime of modifier")
+    provider_id = models.IntegerField(null=True, blank=True, help_text="Provider who recorded modifier")
+    visit_occurrence_id = models.IntegerField(null=True, blank=True, help_text="Visit when modifier was recorded")
+    modifier_source_value = models.CharField(max_length=50, blank=True, help_text="Source value for modifier")
+
+    class Meta:
+        db_table = "modifier"
+        indexes = [
+            models.Index(fields=["person"]),
+            models.Index(fields=["modifier_concept"]),
+            models.Index(fields=["modifier_of_event_id", "modifier_of_field_concept"]),
+        ]
+
+    def __str__(self):
+        return f"Modifier {self.modifier_id} for Person {self.person.person_id}"
+
+
+class OncologyModifier(models.Model):
+    """
+    OMOP Oncology Extension: Oncology-specific modifiers for detailed cancer information
+    """
+    oncology_modifier_id = models.BigAutoField(primary_key=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    modifier_source_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                               related_name='oncology_modifier_sources',
+                                               help_text="Source concept for oncology modifier")
+    modifier_datetime = models.DateTimeField(null=True, blank=True)
+    
+    # Cancer-specific modifier fields
+    cancer_modifier_type = models.CharField(
+        max_length=50,
+        choices=[
+            ('STAGING', 'Cancer Staging'),
+            ('BIOMARKER', 'Biomarker Result'),
+            ('GENETICS', 'Genetic Finding'),
+            ('MORPHOLOGY', 'Tumor Morphology'),
+            ('TOPOGRAPHY', 'Tumor Location'),
+            ('RESPONSE', 'Treatment Response'),
+            ('PROGRESSION', 'Disease Progression'),
+        ],
+        help_text="Type of oncology modifier"
+    )
+    
+    # Staging modifiers
+    staging_basis = models.CharField(
+        max_length=20,
+        choices=[
+            ('CLINICAL', 'Clinical'),
+            ('PATHOLOGIC', 'Pathologic'),
+            ('POST_THERAPY', 'Post-therapy'),
+            ('AUTOPSY', 'Autopsy'),
+        ],
+        blank=True,
+        help_text="Basis for staging assessment"
+    )
+    
+    # Biomarker modifiers
+    biomarker_test_method = models.CharField(max_length=100, blank=True,
+                                           help_text="Method used for biomarker testing")
+    biomarker_result_interpretation = models.CharField(max_length=50, blank=True,
+                                                      help_text="Clinical interpretation of biomarker result")
+    
+    # Response assessment modifiers
+    response_criteria = models.CharField(max_length=50, blank=True,
+                                       help_text="Response criteria used (RECIST, WHO, etc.)")
+    response_assessment_method = models.CharField(max_length=100, blank=True,
+                                                help_text="Method used for response assessment")
+    
+    class Meta:
+        db_table = "oncology_modifier"
+        indexes = [
+            models.Index(fields=["person"]),
+            models.Index(fields=["cancer_modifier_type"]),
+            models.Index(fields=["staging_basis"]),
+        ]
+
+    def __str__(self):
+        return f"Oncology Modifier {self.oncology_modifier_id} ({self.cancer_modifier_type})"
+
+
+class RadiationOccurrence(models.Model):
+    """
+    OMOP Oncology Extension: Radiation therapy occurrences
+    """
+    radiation_occurrence_id = models.BigAutoField(primary_key=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    radiation_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                        related_name='radiation_occurrences',
+                                        help_text="Concept for radiation therapy type")
+    radiation_occurrence_start_date = models.DateField()
+    radiation_occurrence_end_date = models.DateField(null=True, blank=True)
+    radiation_type_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                             related_name='radiation_types',
+                                             help_text="Type of radiation therapy")
+    
+    # Radiation technique and delivery
+    radiation_technique = models.CharField(
+        max_length=50,
+        choices=[
+            ('EXTERNAL_BEAM', 'External Beam Radiation'),
+            ('BRACHYTHERAPY', 'Brachytherapy'),
+            ('RADIOACTIVE_IMPLANT', 'Radioactive Implant'),
+            ('STEREOTACTIC', 'Stereotactic Radiosurgery'),
+            ('PROTON_THERAPY', 'Proton Therapy'),
+            ('ELECTRON_THERAPY', 'Electron Therapy'),
+        ],
+        help_text="Radiation delivery technique"
+    )
+    
+    # Anatomical site
+    anatomical_site_concept = models.ForeignKey(Concept, null=True, blank=True, on_delete=models.PROTECT,
+                                               related_name='radiation_sites',
+                                               help_text="Anatomical site treated")
+    
+    # Radiation dose information
+    total_dose = models.FloatField(null=True, blank=True, help_text="Total radiation dose")
+    dose_unit_concept = models.ForeignKey(Concept, null=True, blank=True, on_delete=models.PROTECT,
+                                        related_name='radiation_dose_units',
+                                        help_text="Unit for radiation dose")
+    fractions_delivered = models.IntegerField(null=True, blank=True, help_text="Number of fractions delivered")
+    fractions_planned = models.IntegerField(null=True, blank=True, help_text="Number of fractions planned")
+    dose_per_fraction = models.FloatField(null=True, blank=True, help_text="Dose per fraction")
+    
+    # Treatment intent and setting
+    treatment_intent = models.CharField(
+        max_length=30,
+        choices=[
+            ('CURATIVE', 'Curative'),
+            ('PALLIATIVE', 'Palliative'),
+            ('ADJUVANT', 'Adjuvant'),
+            ('NEOADJUVANT', 'Neoadjuvant'),
+            ('PROPHYLACTIC', 'Prophylactic'),
+        ],
+        blank=True,
+        help_text="Intent of radiation treatment"
+    )
+    
+    # Quality and completion
+    treatment_completed = models.BooleanField(null=True, blank=True, help_text="Whether treatment was completed as planned")
+    stop_reason = models.CharField(max_length=100, blank=True, help_text="Reason treatment was stopped if incomplete")
+    
+    # Clinical context
+    provider_id = models.IntegerField(null=True, blank=True, help_text="Radiation oncologist")
+    visit_occurrence_id = models.IntegerField(null=True, blank=True, help_text="Visit when treatment occurred")
+    radiation_source_value = models.CharField(max_length=50, blank=True, help_text="Source value")
+    
+    class Meta:
+        db_table = "radiation_occurrence"
+        indexes = [
+            models.Index(fields=["person"]),
+            models.Index(fields=["radiation_concept"]),
+            models.Index(fields=["radiation_occurrence_start_date"]),
+            models.Index(fields=["anatomical_site_concept"]),
+            models.Index(fields=["treatment_intent"]),
+        ]
+
+    def __str__(self):
+        return f"Radiation {self.radiation_occurrence_id} for Person {self.person.person_id}"
+
+
+class StemCellTransplant(models.Model):
+    """
+    OMOP Oncology Extension: Stem cell transplant procedures
+    """
+    stem_cell_transplant_id = models.BigAutoField(primary_key=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    transplant_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                         related_name='stem_cell_transplants',
+                                         help_text="Concept for transplant type")
+    transplant_date = models.DateField()
+    transplant_type_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                              related_name='transplant_types',
+                                              help_text="Type of stem cell transplant")
+    
+    # Transplant characteristics
+    transplant_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('AUTOLOGOUS', 'Autologous'),
+            ('ALLOGENEIC', 'Allogeneic'),
+            ('SYNGENEIC', 'Syngeneic'),
+        ],
+        help_text="Source of stem cells"
+    )
+    
+    stem_cell_source = models.CharField(
+        max_length=30,
+        choices=[
+            ('BONE_MARROW', 'Bone Marrow'),
+            ('PERIPHERAL_BLOOD', 'Peripheral Blood'),
+            ('CORD_BLOOD', 'Umbilical Cord Blood'),
+        ],
+        blank=True,
+        help_text="Source of stem cells"
+    )
+    
+    # Donor information (for allogeneic transplants)
+    donor_type = models.CharField(
+        max_length=30,
+        choices=[
+            ('RELATED', 'Related Donor'),
+            ('UNRELATED', 'Unrelated Donor'),
+            ('HAPLOIDENTICAL', 'Haploidentical'),
+        ],
+        blank=True,
+        help_text="Type of donor relationship"
+    )
+    
+    hla_match_grade = models.CharField(
+        max_length=20,
+        choices=[
+            ('FULL_MATCH', 'Full Match (8/8)'),
+            ('PARTIAL_MATCH', 'Partial Match'),
+            ('MISMATCH', 'Mismatch'),
+        ],
+        blank=True,
+        help_text="HLA matching grade"
+    )
+    
+    # Conditioning regimen
+    conditioning_regimen = models.CharField(
+        max_length=30,
+        choices=[
+            ('MYELOABLATIVE', 'Myeloablative'),
+            ('REDUCED_INTENSITY', 'Reduced Intensity'),
+            ('NON_MYELOABLATIVE', 'Non-myeloablative'),
+        ],
+        blank=True,
+        help_text="Conditioning regimen intensity"
+    )
+    
+    # Cell counts
+    cd34_cell_dose = models.FloatField(null=True, blank=True, help_text="CD34+ cell dose (x10^6/kg)")
+    total_nucleated_cell_dose = models.FloatField(null=True, blank=True, help_text="TNC dose (x10^8/kg)")
+    
+    # Outcomes
+    engraftment_date = models.DateField(null=True, blank=True, help_text="Date of neutrophil engraftment")
+    platelet_engraftment_date = models.DateField(null=True, blank=True, help_text="Date of platelet engraftment")
+    graft_failure = models.BooleanField(null=True, blank=True, help_text="Whether graft failure occurred")
+    
+    # Complications
+    acute_gvhd_grade = models.CharField(
+        max_length=10,
+        choices=[
+            ('NONE', 'No GVHD'),
+            ('GRADE_I', 'Grade I'),
+            ('GRADE_II', 'Grade II'),
+            ('GRADE_III', 'Grade III'),
+            ('GRADE_IV', 'Grade IV'),
+        ],
+        blank=True,
+        help_text="Acute GVHD grade"
+    )
+    
+    chronic_gvhd_severity = models.CharField(
+        max_length=20,
+        choices=[
+            ('NONE', 'No chronic GVHD'),
+            ('MILD', 'Mild'),
+            ('MODERATE', 'Moderate'),
+            ('SEVERE', 'Severe'),
+        ],
+        blank=True,
+        help_text="Chronic GVHD severity"
+    )
+    
+    # Clinical context
+    provider_id = models.IntegerField(null=True, blank=True, help_text="Transplant physician")
+    visit_occurrence_id = models.IntegerField(null=True, blank=True, help_text="Transplant visit")
+    transplant_source_value = models.CharField(max_length=50, blank=True, help_text="Source value")
+    
+    class Meta:
+        db_table = "stem_cell_transplant"
+        indexes = [
+            models.Index(fields=["person"]),
+            models.Index(fields=["transplant_date"]),
+            models.Index(fields=["transplant_type"]),
+            models.Index(fields=["stem_cell_source"]),
+        ]
+
+    def __str__(self):
+        return f"SCT {self.stem_cell_transplant_id} ({self.transplant_type}) for Person {self.person.person_id}"
+
+
+class TumorAssessment(models.Model):
+    """
+    OMOP Oncology Extension: Tumor assessment and response evaluation
+    """
+    tumor_assessment_id = models.BigAutoField(primary_key=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    assessment_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                         related_name='tumor_assessments',
+                                         help_text="Concept for assessment type")
+    assessment_date = models.DateField()
+    assessment_type_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                              related_name='assessment_types',
+                                              help_text="Type of tumor assessment")
+    
+    # Assessment method and criteria
+    assessment_method = models.CharField(
+        max_length=30,
+        choices=[
+            ('RECIST_1_1', 'RECIST 1.1'),
+            ('WHO', 'WHO Criteria'),
+            ('RANO', 'RANO Criteria'),
+            ('IMMUNE_RECIST', 'iRECIST'),
+            ('CHESON', 'Cheson Criteria'),
+            ('CLINICAL', 'Clinical Assessment'),
+        ],
+        help_text="Assessment criteria used"
+    )
+    
+    # Overall response
+    overall_response = models.CharField(
+        max_length=20,
+        choices=TumorResponseChoices.choices,
+        blank=True,
+        help_text="Overall tumor response"
+    )
+    
+    # Disease status
+    disease_status = models.CharField(
+        max_length=20,
+        choices=[
+            ('MEASURABLE', 'Measurable Disease'),
+            ('NON_MEASURABLE', 'Non-measurable Disease'),
+            ('NO_EVIDENCE', 'No Evidence of Disease'),
+            ('UNKNOWN', 'Unknown'),
+        ],
+        blank=True,
+        help_text="Disease status at assessment"
+    )
+    
+    # Target lesions
+    sum_target_lesions = models.FloatField(null=True, blank=True, help_text="Sum of target lesion measurements")
+    target_lesion_count = models.IntegerField(null=True, blank=True, help_text="Number of target lesions")
+    new_lesions_present = models.BooleanField(null=True, blank=True, help_text="Whether new lesions are present")
+    
+    # Non-target lesions
+    non_target_response = models.CharField(
+        max_length=20,
+        choices=[
+            ('COMPLETE', 'Complete Response'),
+            ('INCOMPLETE', 'Incomplete Response'),
+            ('STABLE', 'Stable Disease'),
+            ('PROGRESSIVE', 'Progressive Disease'),
+            ('NOT_EVALUATED', 'Not Evaluated'),
+        ],
+        blank=True,
+        help_text="Non-target lesion response"
+    )
+    
+    # Time to assessment
+    time_from_treatment_start = models.IntegerField(null=True, blank=True, help_text="Days from treatment start")
+    time_from_last_assessment = models.IntegerField(null=True, blank=True, help_text="Days from previous assessment")
+    
+    # Assessment quality
+    assessment_quality = models.CharField(
+        max_length=20,
+        choices=[
+            ('ADEQUATE', 'Adequate'),
+            ('SUBOPTIMAL', 'Suboptimal'),
+            ('INADEQUATE', 'Inadequate'),
+        ],
+        blank=True,
+        help_text="Quality of assessment"
+    )
+    
+    # Clinical context
+    provider_id = models.IntegerField(null=True, blank=True, help_text="Assessing physician")
+    visit_occurrence_id = models.IntegerField(null=True, blank=True, help_text="Assessment visit")
+    assessment_source_value = models.CharField(max_length=50, blank=True, help_text="Source value")
+    
+    class Meta:
+        db_table = "tumor_assessment"
+        indexes = [
+            models.Index(fields=["person"]),
+            models.Index(fields=["assessment_date"]),
+            models.Index(fields=["overall_response"]),
+            models.Index(fields=["assessment_method"]),
+        ]
+
+    def __str__(self):
+        return f"Tumor Assessment {self.tumor_assessment_id} for Person {self.person.person_id}"
+
+
+class TumorAssessmentMeasurement(models.Model):
+    """
+    OMOP Oncology Extension: Individual lesion measurements within tumor assessments
+    """
+    tumor_measurement_id = models.BigAutoField(primary_key=True)
+    tumor_assessment = models.ForeignKey(TumorAssessment, on_delete=models.CASCADE,
+                                       related_name='measurements')
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    measurement_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                          related_name='tumor_measurements',
+                                          help_text="Concept for measurement type")
+    
+    # Lesion identification
+    lesion_id = models.CharField(max_length=50, help_text="Unique lesion identifier")
+    lesion_type = models.CharField(
+        max_length=20,
+        choices=[
+            ('TARGET', 'Target Lesion'),
+            ('NON_TARGET', 'Non-target Lesion'),
+            ('NEW', 'New Lesion'),
+        ],
+        help_text="Type of lesion"
+    )
+    
+    # Anatomical location
+    anatomical_site_concept = models.ForeignKey(Concept, null=True, blank=True, on_delete=models.PROTECT,
+                                               related_name='lesion_sites',
+                                               help_text="Anatomical site of lesion")
+    laterality = models.CharField(
+        max_length=10,
+        choices=TumorLateralityChoices.choices,
+        blank=True,
+        help_text="Laterality of lesion"
+    )
+    
+    # Measurements
+    longest_diameter = models.FloatField(null=True, blank=True, help_text="Longest diameter (mm)")
+    perpendicular_diameter = models.FloatField(null=True, blank=True, help_text="Perpendicular diameter (mm)")
+    area = models.FloatField(null=True, blank=True, help_text="Lesion area (mm²)")
+    volume = models.FloatField(null=True, blank=True, help_text="Lesion volume (mm³)")
+    
+    # Assessment details
+    measurement_method = models.CharField(max_length=50, blank=True, help_text="Measurement method/imaging")
+    lesion_response = models.CharField(
+        max_length=20,
+        choices=[
+            ('COMPLETE', 'Complete Response'),
+            ('PARTIAL', 'Partial Response'),
+            ('STABLE', 'Stable Disease'),
+            ('PROGRESSIVE', 'Progressive Disease'),
+            ('NEW', 'New Lesion'),
+        ],
+        blank=True,
+        help_text="Individual lesion response"
+    )
+    
+    # Change from baseline
+    percent_change = models.FloatField(null=True, blank=True, help_text="Percent change from baseline")
+    absolute_change = models.FloatField(null=True, blank=True, help_text="Absolute change from baseline (mm)")
+    
+    # Quality indicators
+    measurement_quality = models.CharField(
+        max_length=20,
+        choices=[
+            ('MEASURABLE', 'Clearly Measurable'),
+            ('EVALUABLE', 'Evaluable'),
+            ('NOT_EVALUABLE', 'Not Evaluable'),
+        ],
+        blank=True,
+        help_text="Quality of measurement"
+    )
+    
+    class Meta:
+        db_table = "tumor_assessment_measurement"
+        indexes = [
+            models.Index(fields=["tumor_assessment"]),
+            models.Index(fields=["person"]),
+            models.Index(fields=["lesion_id"]),
+            models.Index(fields=["lesion_type"]),
+        ]
+
+    def __str__(self):
+        return f"Lesion {self.lesion_id} measurement for Assessment {self.tumor_assessment.tumor_assessment_id}"
+
+
+class CancerStagingMap(models.Model):
+    """
+    OMOP Oncology Extension: Mapping between different staging systems
+    """
+    staging_map_id = models.BigAutoField(primary_key=True)
+    source_staging_system = models.CharField(max_length=50, help_text="Source staging system")
+    source_stage_value = models.CharField(max_length=50, help_text="Stage value in source system")
+    target_staging_system = models.CharField(max_length=50, help_text="Target staging system")
+    target_stage_value = models.CharField(max_length=50, help_text="Equivalent stage value in target system")
+    
+    # Cancer type specificity
+    cancer_type_concept = models.ForeignKey(Concept, null=True, blank=True, on_delete=models.PROTECT,
+                                          related_name='staging_maps',
+                                          help_text="Cancer type for staging mapping")
+    
+    # Mapping metadata
+    mapping_confidence = models.CharField(
+        max_length=20,
+        choices=[
+            ('EXACT', 'Exact Match'),
+            ('APPROXIMATE', 'Approximate'),
+            ('POSSIBLE', 'Possible Match'),
+        ],
+        default='EXACT',
+        help_text="Confidence in staging mapping"
+    )
+    
+    mapping_source = models.CharField(max_length=100, blank=True, 
+                                    help_text="Source of staging mapping")
+    effective_start_date = models.DateField(null=True, blank=True, 
+                                          help_text="Start date for mapping validity")
+    effective_end_date = models.DateField(null=True, blank=True, 
+                                        help_text="End date for mapping validity")
+    
+    class Meta:
+        db_table = "cancer_staging_map"
+        indexes = [
+            models.Index(fields=["source_staging_system", "source_stage_value"]),
+            models.Index(fields=["target_staging_system", "target_stage_value"]),
+            models.Index(fields=["cancer_type_concept"]),
+        ]
+        unique_together = [
+            ["source_staging_system", "source_stage_value", "target_staging_system", "cancer_type_concept"]
+        ]
+
+    def __str__(self):
+        return f"Staging Map: {self.source_staging_system} {self.source_stage_value} -> {self.target_staging_system} {self.target_stage_value}"
+
+
+class OncologyVocabulary(models.Model):
+    """
+    OMOP Oncology Extension: Oncology-specific vocabulary and concept mappings
+    """
+    oncology_vocabulary_id = models.BigAutoField(primary_key=True)
+    vocabulary_id = models.CharField(max_length=50, help_text="Vocabulary identifier")
+    concept_code = models.CharField(max_length=50, help_text="Concept code in vocabulary")
+    concept_name = models.CharField(max_length=255, help_text="Concept name")
+    
+    # Oncology categorization
+    oncology_domain = models.CharField(
+        max_length=50,
+        choices=[
+            ('TOPOGRAPHY', 'Tumor Topography'),
+            ('MORPHOLOGY', 'Tumor Morphology'),
+            ('STAGING', 'Cancer Staging'),
+            ('BIOMARKER', 'Biomarker'),
+            ('TREATMENT', 'Cancer Treatment'),
+            ('RESPONSE', 'Treatment Response'),
+            ('GENETICS', 'Genetic Marker'),
+        ],
+        help_text="Oncology domain classification"
+    )
+    
+    # ICD-O specific fields
+    icdo_site_code = models.CharField(max_length=10, blank=True, help_text="ICD-O topography code")
+    icdo_morphology_code = models.CharField(max_length=10, blank=True, help_text="ICD-O morphology code")
+    icdo_behavior_code = models.CharField(max_length=1, blank=True, help_text="ICD-O behavior code")
+    
+    # AJCC/UICC staging
+    ajcc_chapter = models.CharField(max_length=50, blank=True, help_text="AJCC chapter/cancer site")
+    uicc_edition = models.CharField(max_length=20, blank=True, help_text="UICC TNM edition")
+    
+    # Validity and versioning
+    valid_start_date = models.DateField(help_text="Start date for concept validity")
+    valid_end_date = models.DateField(default='2099-12-31', help_text="End date for concept validity")
+    invalid_reason = models.CharField(max_length=1, blank=True, help_text="Reason for invalidity")
+    
+    class Meta:
+        db_table = "oncology_vocabulary"
+        indexes = [
+            models.Index(fields=["vocabulary_id", "concept_code"]),
+            models.Index(fields=["oncology_domain"]),
+            models.Index(fields=["icdo_site_code"]),
+            models.Index(fields=["icdo_morphology_code"]),
+        ]
+        unique_together = [["vocabulary_id", "concept_code"]]
+
+    def __str__(self):
+        return f"{self.vocabulary_id}: {self.concept_code} - {self.concept_name}"
+
+
+class StagingMeasurementConcept(models.Model):
+    """
+    OMOP Oncology Extension: Concepts for staging measurements and assessments
+    """
+    staging_concept_id = models.BigAutoField(primary_key=True)
+    concept = models.OneToOneField(Concept, on_delete=models.CASCADE, related_name='staging_details')
+    
+    # Staging system details
+    staging_system = models.CharField(max_length=50, help_text="Staging system (AJCC, UICC, etc.)")
+    staging_system_version = models.CharField(max_length=20, help_text="Version of staging system")
+    
+    # Staging component
+    staging_component = models.CharField(
+        max_length=20,
+        choices=[
+            ('T', 'Primary Tumor (T)'),
+            ('N', 'Regional Nodes (N)'),
+            ('M', 'Distant Metastasis (M)'),
+            ('OVERALL', 'Overall Stage'),
+            ('GRADE', 'Histologic Grade'),
+        ],
+        help_text="Component of staging"
+    )
+    
+    # Cancer type applicability
+    applicable_cancer_types = models.ManyToManyField(
+        Concept,
+        related_name='applicable_staging_concepts',
+        help_text="Cancer types where this staging concept applies"
+    )
+    
+    # Assessment method
+    assessment_method = models.CharField(
+        max_length=30,
+        choices=[
+            ('CLINICAL', 'Clinical Assessment'),
+            ('PATHOLOGIC', 'Pathologic Assessment'),
+            ('IMAGING', 'Imaging Assessment'),
+            ('AUTOPSY', 'Autopsy Assessment'),
+        ],
+        help_text="Method of staging assessment"
+    )
+    
+    class Meta:
+        db_table = "staging_measurement_concept"
+        indexes = [
+            models.Index(fields=["staging_system", "staging_component"]),
+            models.Index(fields=["staging_system_version"]),
+        ]
+
+    def __str__(self):
+        return f"{self.staging_system} {self.staging_component}: {self.concept.concept_name}"
+
+
+class ICDOTopographyConcept(models.Model):
+    """
+    OMOP Oncology Extension: ICD-O topography (anatomical site) concepts
+    """
+    icdo_topography_id = models.BigAutoField(primary_key=True)
+    concept = models.OneToOneField(Concept, on_delete=models.CASCADE, related_name='icdo_topography')
+    
+    # ICD-O topography details
+    icdo_site_code = models.CharField(max_length=10, unique=True, help_text="ICD-O topography code (C##.#)")
+    icdo_site_name = models.CharField(max_length=255, help_text="ICD-O topography name")
+    
+    # Anatomical hierarchy
+    major_site = models.CharField(max_length=100, help_text="Major anatomical site category")
+    site_group = models.CharField(max_length=100, blank=True, help_text="Site group classification")
+    
+    # Body system
+    body_system = models.CharField(
+        max_length=50,
+        choices=[
+            ('RESPIRATORY', 'Respiratory System'),
+            ('DIGESTIVE', 'Digestive System'),
+            ('GENITOURINARY', 'Genitourinary System'),
+            ('HEMATOPOIETIC', 'Hematopoietic System'),
+            ('ENDOCRINE', 'Endocrine System'),
+            ('NERVOUS', 'Nervous System'),
+            ('MUSCULOSKELETAL', 'Musculoskeletal System'),
+            ('SKIN', 'Skin'),
+            ('BREAST', 'Breast'),
+            ('REPRODUCTIVE', 'Reproductive System'),
+            ('OTHER', 'Other/Multiple'),
+        ],
+        blank=True,
+        help_text="Body system classification"
+    )
+    
+    # Laterality applicability
+    laterality_applicable = models.BooleanField(default=False,
+                                              help_text="Whether laterality applies to this site")
+    
+    class Meta:
+        db_table = "icdo_topography_concept"
+        indexes = [
+            models.Index(fields=["icdo_site_code"]),
+            models.Index(fields=["major_site"]),
+            models.Index(fields=["body_system"]),
+        ]
+
+    def __str__(self):
+        return f"{self.icdo_site_code}: {self.icdo_site_name}"
+
+
+class ICDOMorphologyConcept(models.Model):
+    """
+    OMOP Oncology Extension: ICD-O morphology (histology/behavior) concepts
+    """
+    icdo_morphology_id = models.BigAutoField(primary_key=True)
+    concept = models.OneToOneField(Concept, on_delete=models.CASCADE, related_name='icdo_morphology')
+    
+    # ICD-O morphology details
+    icdo_morphology_code = models.CharField(max_length=10, unique=True, help_text="ICD-O morphology code (####/#)")
+    icdo_morphology_name = models.CharField(max_length=255, help_text="ICD-O morphology name")
+    
+    # Histologic type
+    histologic_type = models.CharField(max_length=100, help_text="Histologic type category")
+    histologic_subtype = models.CharField(max_length=100, blank=True, help_text="Histologic subtype")
+    
+    # Behavior classification
+    behavior_code = models.CharField(
+        max_length=1,
+        choices=[
+            ('0', 'Benign'),
+            ('1', 'Uncertain/Borderline'),
+            ('2', 'In Situ'),
+            ('3', 'Malignant'),
+        ],
+        help_text="ICD-O behavior code"
+    )
+    
+    behavior_description = models.CharField(
+        max_length=50,
+        choices=[
+            ('BENIGN', 'Benign'),
+            ('UNCERTAIN', 'Uncertain/Borderline'),
+            ('IN_SITU', 'In Situ'),
+            ('MALIGNANT', 'Malignant'),
+        ],
+        help_text="Behavior description"
+    )
+    
+    # Tumor characteristics
+    grade_applicable = models.BooleanField(default=True,
+                                         help_text="Whether grading applies to this morphology")
+    staging_applicable = models.BooleanField(default=True,
+                                           help_text="Whether staging applies to this morphology")
+    
+    # Classification groups
+    who_classification = models.CharField(max_length=100, blank=True,
+                                        help_text="WHO tumor classification")
+    major_category = models.CharField(max_length=100, help_text="Major morphology category")
+    
+    class Meta:
+        db_table = "icdo_morphology_concept"
+        indexes = [
+            models.Index(fields=["icdo_morphology_code"]),
+            models.Index(fields=["behavior_code"]),
+            models.Index(fields=["major_category"]),
+            models.Index(fields=["histologic_type"]),
+        ]
+
+    def __str__(self):
+        return f"{self.icdo_morphology_code}: {self.icdo_morphology_name} ({self.behavior_description})"
+
+
+# ===========================================
+# ADDITIONAL OMOP ONCOLOGY EXTENSION MODELS
+# ===========================================
+
+class TreatmentRegimen(models.Model):
+    """
+    OMOP Oncology Extension: Treatment regimen tracking for multi-drug protocols
+    """
+    regimen_id = models.BigAutoField(primary_key=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    regimen_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+                                      related_name='treatment_regimens',
+                                      help_text="Concept for regimen type")
+    
+    # Regimen identification
+    regimen_name = models.CharField(max_length=200, help_text="Standard regimen name (e.g., FOLFOX, R-CHOP)")
+    regimen_code = models.CharField(max_length=50, help_text="Standard regimen code")
+    
+    # Timing
+    regimen_start_date = models.DateField(help_text="Start date of regimen")
+    regimen_end_date = models.DateField(null=True, blank=True, help_text="End date of regimen")
+    
+    # Treatment line context
+    treatment_line = models.ForeignKey('TreatmentLine', null=True, blank=True, on_delete=models.SET_NULL,
+                                     related_name='regimens', help_text="Associated treatment line")
+    line_number = models.IntegerField(help_text="Line of therapy number")
+    
+    # Regimen characteristics
+    regimen_type = models.CharField(
+        max_length=30,
+        choices=[
+            ('CHEMOTHERAPY', 'Chemotherapy'),
+            ('IMMUNOTHERAPY', 'Immunotherapy'),
+            ('TARGETED_THERAPY', 'Targeted Therapy'),
+            ('HORMONE_THERAPY', 'Hormone Therapy'),
+            ('COMBINATION', 'Combination Therapy'),
+            ('MAINTENANCE', 'Maintenance Therapy'),
+        ],
+        help_text="Type of treatment regimen"
+    )
+    
+    # Intent and setting
+    treatment_intent = models.CharField(
+        max_length=30,
+        choices=[
+            ('CURATIVE', 'Curative'),
+            ('PALLIATIVE', 'Palliative'),
+            ('ADJUVANT', 'Adjuvant'),
+            ('NEOADJUVANT', 'Neoadjuvant'),
+            ('MAINTENANCE', 'Maintenance'),
+        ],
+        help_text="Intent of treatment"
+    )
+    
+    treatment_setting = models.CharField(
+        max_length=20,
+        choices=[
+            ('INPATIENT', 'Inpatient'),
+            ('OUTPATIENT', 'Outpatient'),
+            ('AMBULATORY', 'Ambulatory'),
+        ],
+        help_text="Treatment setting"
+    )
+    
+    # Cycle information
+    cycles_planned = models.IntegerField(help_text="Number of planned cycles")
+    cycles_completed = models.IntegerField(null=True, blank=True, help_text="Number of completed cycles")
+    cycle_length_days = models.IntegerField(help_text="Length of each cycle in days")
+    
+    # Outcomes and response
+    best_response = models.CharField(
+        max_length=20,
+        choices=TumorResponseChoices.choices,
+        help_text="Best overall response to regimen"
+    )
+    
+    response_assessment_date = models.DateField(null=True, blank=True, help_text="Date of response assessment")
+    progression_date = models.DateField(null=True, blank=True, help_text="Date of disease progression")
+    
+    # Discontinuation
+    regimen_discontinued = models.BooleanField(default=False, help_text="Whether regimen was discontinued early")
+    discontinuation_reason = models.CharField(
+        max_length=50,
+        choices=[
+            ('COMPLETED', 'Completed as Planned'),
+            ('PROGRESSION', 'Disease Progression'),
+            ('TOXICITY', 'Unacceptable Toxicity'),
+            ('PATIENT_CHOICE', 'Patient Choice'),
+            ('DEATH', 'Death'),
+            ('OTHER', 'Other Reason'),
+        ],
+        blank=True,
+        help_text="Reason for discontinuation"
+    )
+    
+    # Clinical trial context
+    clinical_trial = models.ForeignKey('ClinicalTrial', null=True, blank=True, on_delete=models.SET_NULL,
+                                     related_name='regimens', help_text="Associated clinical trial")
+    
+    class Meta:
+        db_table = "treatment_regimen"
+        indexes = [
+            models.Index(fields=["person"]),
+            models.Index(fields=["regimen_start_date"]),
+            models.Index(fields=["line_number"]),
+            models.Index(fields=["regimen_type"]),
+            models.Index(fields=["treatment_intent"]),
+        ]
+
+    def __str__(self):
+        return f"Regimen {self.regimen_name} (Line {self.line_number}) for Person {self.person.person_id}"
+
+
+class ClinicalTrial(models.Model):
+    """
+    OMOP Oncology Extension: Clinical trial participation tracking
+    """
+    clinical_trial_id = models.BigAutoField(primary_key=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    
+    # Trial identification
+    nct_number = models.CharField(max_length=20, blank=True, help_text="ClinicalTrials.gov NCT number")
+    trial_title = models.CharField(max_length=500, help_text="Official trial title")
+    trial_acronym = models.CharField(max_length=100, blank=True, help_text="Trial acronym/short name")
+    
+    # Participation details
+    enrollment_date = models.DateField(help_text="Date of trial enrollment")
+    randomization_date = models.DateField(null=True, blank=True, help_text="Date of randomization")
+    trial_completion_date = models.DateField(null=True, blank=True, help_text="Date of trial completion")
+    
+    # Trial characteristics
+    trial_phase = models.CharField(
+        max_length=10,
+        choices=[
+            ('PHASE_0', 'Phase 0'),
+            ('PHASE_I', 'Phase I'),
+            ('PHASE_II', 'Phase II'),
+            ('PHASE_III', 'Phase III'),
+            ('PHASE_IV', 'Phase IV'),
+            ('PILOT', 'Pilot Study'),
+        ],
+        help_text="Clinical trial phase"
+    )
+    
+    trial_type = models.CharField(
+        max_length=30,
+        choices=[
+            ('INTERVENTIONAL', 'Interventional'),
+            ('OBSERVATIONAL', 'Observational'),
+            ('EXPANDED_ACCESS', 'Expanded Access'),
+        ],
+        help_text="Type of clinical trial"
+    )
+    
+    # Randomization and blinding
+    randomized = models.BooleanField(null=True, blank=True, help_text="Whether trial is randomized")
+    blinded = models.BooleanField(null=True, blank=True, help_text="Whether trial is blinded")
+    placebo_controlled = models.BooleanField(null=True, blank=True, help_text="Whether trial is placebo-controlled")
+    
+    # Treatment arm
+    treatment_arm = models.CharField(max_length=100, blank=True, help_text="Treatment arm assignment")
+    treatment_arm_code = models.CharField(max_length=20, blank=True, help_text="Treatment arm code")
+    control_arm = models.BooleanField(null=True, blank=True, help_text="Whether patient is in control arm")
+    
+    # Study drug information
+    investigational_drug = models.CharField(max_length=200, blank=True, help_text="Investigational drug name")
+    drug_mechanism = models.CharField(max_length=200, blank=True, help_text="Drug mechanism of action")
+    
+    # Endpoints and outcomes
+    primary_endpoint = models.TextField(blank=True, help_text="Primary study endpoint")
+    patient_outcome = models.CharField(
+        max_length=30,
+        choices=[
+            ('COMPLETED', 'Completed Trial'),
+            ('WITHDRAWN', 'Withdrawn'),
+            ('DISCONTINUED', 'Discontinued Treatment'),
+            ('LOST_TO_FOLLOWUP', 'Lost to Follow-up'),
+            ('DEATH', 'Death'),
+        ],
+        blank=True,
+        help_text="Patient outcome in trial"
+    )
+    
+    # Adverse events
+    serious_adverse_events = models.BooleanField(null=True, blank=True, help_text="Whether serious AEs occurred")
+    grade_3_4_toxicity = models.BooleanField(null=True, blank=True, help_text="Whether grade 3-4 toxicity occurred")
+    
+    # Sponsor and site information
+    sponsor = models.CharField(max_length=200, blank=True, help_text="Trial sponsor")
+    study_site = models.CharField(max_length=200, blank=True, help_text="Study site")
+    principal_investigator = models.CharField(max_length=200, blank=True, help_text="Principal investigator")
+    
+    class Meta:
+        db_table = "clinical_trial"
+        indexes = [
+            models.Index(fields=["person"]),
+            models.Index(fields=["nct_number"]),
+            models.Index(fields=["enrollment_date"]),
+            models.Index(fields=["trial_phase"]),
+            models.Index(fields=["trial_type"]),
+        ]
+
+    def __str__(self):
+        return f"Trial {self.trial_acronym or self.nct_number} for Person {self.person.person_id}"
+
+
+class BiospecimenCollection(models.Model):
+    """
+    OMOP Oncology Extension: Biospecimen collection for research and molecular analysis
+    """
+    biospecimen_id = models.BigAutoField(primary_key=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    
+    # Collection details
+    collection_date = models.DateField(help_text="Date of biospecimen collection")
+    collection_method = models.CharField(
+        max_length=50,
+        choices=[
+            ('SURGICAL_RESECTION', 'Surgical Resection'),
+            ('CORE_BIOPSY', 'Core Needle Biopsy'),
+            ('FINE_NEEDLE_ASPIRATION', 'Fine Needle Aspiration'),
+            ('LIQUID_BIOPSY', 'Liquid Biopsy'),
+            ('BONE_MARROW_BIOPSY', 'Bone Marrow Biopsy'),
+            ('PLEURAL_FLUID', 'Pleural Fluid'),
+            ('ASCITES', 'Ascitic Fluid'),
+            ('CSF', 'Cerebrospinal Fluid'),
+        ],
+        help_text="Method of biospecimen collection"
+    )
+    
+    # Specimen characteristics
+    specimen_type = models.CharField(
+        max_length=50,
+        choices=[
+            ('FRESH_TISSUE', 'Fresh Tissue'),
+            ('FROZEN_TISSUE', 'Frozen Tissue'),
+            ('FFPE_TISSUE', 'FFPE Tissue'),
+            ('BLOOD', 'Blood'),
+            ('PLASMA', 'Plasma'),
+            ('SERUM', 'Serum'),
+            ('BUFFY_COAT', 'Buffy Coat'),
+            ('URINE', 'Urine'),
+            ('OTHER_FLUID', 'Other Body Fluid'),
+        ],
+        help_text="Type of biospecimen"
+    )
+    
+    # Anatomical site
+    anatomical_site_concept = models.ForeignKey(Concept, null=True, blank=True, on_delete=models.PROTECT,
+                                               related_name='biospecimen_sites',
+                                               help_text="Anatomical site of collection")
+    laterality = models.CharField(
+        max_length=10,
+        choices=TumorLateralityChoices.choices,
+        blank=True,
+        help_text="Laterality of collection site"
+    )
+    
+    # Quality metrics
+    tumor_content = models.FloatField(null=True, blank=True, help_text="Tumor content percentage")
+    necrosis_percentage = models.FloatField(null=True, blank=True, help_text="Necrosis percentage")
+    specimen_quality = models.CharField(
+        max_length=20,
+        choices=[
+            ('EXCELLENT', 'Excellent'),
+            ('GOOD', 'Good'),
+            ('FAIR', 'Fair'),
+            ('POOR', 'Poor'),
+            ('INADEQUATE', 'Inadequate'),
+        ],
+        blank=True,
+        help_text="Overall specimen quality"
+    )
+    
+    # Processing and storage
+    processing_time_hours = models.FloatField(null=True, blank=True, help_text="Time from collection to processing (hours)")
+    storage_temperature = models.CharField(max_length=20, blank=True, help_text="Storage temperature")
+    fixation_type = models.CharField(max_length=50, blank=True, help_text="Fixation type for tissue")
+    fixation_time_hours = models.FloatField(null=True, blank=True, help_text="Fixation time in hours")
+    
+    # Research applications
+    genomic_testing = models.BooleanField(null=True, blank=True, help_text="Used for genomic testing")
+    proteomics_testing = models.BooleanField(null=True, blank=True, help_text="Used for proteomics testing")
+    immunohistochemistry = models.BooleanField(null=True, blank=True, help_text="Used for IHC")
+    research_study = models.ForeignKey(ClinicalTrial, null=True, blank=True, on_delete=models.SET_NULL,
+                                     related_name='biospecimens', help_text="Associated research study")
+    
+    # External identifiers
+    biobank_id = models.CharField(max_length=100, blank=True, help_text="Biobank specimen ID")
+    laboratory_id = models.CharField(max_length=100, blank=True, help_text="Laboratory specimen ID")
+    
+    class Meta:
+        db_table = "biospecimen_collection"
+        indexes = [
+            models.Index(fields=["person"]),
+            models.Index(fields=["collection_date"]),
+            models.Index(fields=["specimen_type"]),
+            models.Index(fields=["collection_method"]),
+            models.Index(fields=["biobank_id"]),
+        ]
+
+    def __str__(self):
+        return f"Biospecimen {self.biospecimen_id} ({self.specimen_type}) for Person {self.person.person_id}"
+
+
+class OncologyEpisodeDetail(models.Model):
+    """
+    OMOP Oncology Extension: Detailed cancer episode tracking with progression metrics
+    """
+    episode_detail_id = models.BigAutoField(primary_key=True)
+    episode = models.ForeignKey('Episode', on_delete=models.CASCADE, related_name='oncology_details')
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    
+    # Episode timing
+    detail_date = models.DateField(help_text="Date of this episode detail")
+    days_from_diagnosis = models.IntegerField(null=True, blank=True, help_text="Days from initial cancer diagnosis")
+    days_from_treatment_start = models.IntegerField(null=True, blank=True, help_text="Days from current treatment start")
+    
+    # Disease status
+    disease_status = models.CharField(
+        max_length=30,
+        choices=[
+            ('NEWLY_DIAGNOSED', 'Newly Diagnosed'),
+            ('STABLE_DISEASE', 'Stable Disease'),
+            ('RESPONDING', 'Responding to Treatment'),
+            ('PROGRESSIVE', 'Progressive Disease'),
+            ('RECURRENT', 'Recurrent Disease'),
+            ('REMISSION', 'In Remission'),
+            ('REFRACTORY', 'Refractory Disease'),
+        ],
+        help_text="Current disease status"
+    )
+    
+    # Progression details
+    progression_type = models.CharField(
+        max_length=30,
+        choices=[
+            ('LOCAL', 'Local Progression'),
+            ('REGIONAL', 'Regional Progression'),
+            ('DISTANT', 'Distant Metastases'),
+            ('NEW_PRIMARY', 'New Primary'),
+            ('BIOCHEMICAL', 'Biochemical Progression'),
+        ],
+        blank=True,
+        help_text="Type of disease progression"
+    )
+    
+    # Metastatic sites
+    new_metastatic_sites = models.JSONField(default=list, blank=True, help_text="New metastatic sites as JSON list")
+    total_metastatic_sites = models.IntegerField(null=True, blank=True, help_text="Total number of metastatic sites")
+    
+    # Performance status
+    ecog_performance_status = models.IntegerField(
+        null=True, blank=True,
+        choices=[(i, f"ECOG {i}") for i in range(5)],
+        help_text="ECOG Performance Status (0-4)"
+    )
+    karnofsky_score = models.IntegerField(null=True, blank=True, help_text="Karnofsky Performance Score")
+    
+    # Survival metrics
+    overall_survival_days = models.IntegerField(null=True, blank=True, help_text="Overall survival in days")
+    progression_free_survival_days = models.IntegerField(null=True, blank=True, help_text="Progression-free survival in days")
+    time_to_progression_days = models.IntegerField(null=True, blank=True, help_text="Time to progression in days")
+    
+    # Treatment context
+    treatment_line_at_assessment = models.IntegerField(null=True, blank=True, help_text="Treatment line at time of assessment")
+    on_treatment = models.BooleanField(null=True, blank=True, help_text="Whether patient is currently on treatment")
+    
+    class Meta:
+        db_table = "oncology_episode_detail"
+        indexes = [
+            models.Index(fields=["episode"]),
+            models.Index(fields=["person"]),
+            models.Index(fields=["detail_date"]),
+            models.Index(fields=["disease_status"]),
+            models.Index(fields=["progression_type"]),
+        ]
+
+    def __str__(self):
+        return f"Episode Detail {self.episode_detail_id} - {self.disease_status}"
