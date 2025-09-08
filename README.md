@@ -890,6 +890,8 @@ for trial in eligible_trials:
     print(f"Biomarker match: {eligibility.biomarker_match}")
     print(f"Prior therapy eligible: {eligibility.prior_therapy_eligible}")
 ```
+
+```
 exactomop/
 ├── omop/                           # Core OMOP models and extensions
 │   ├── models.py                   # Extended OMOP data models
