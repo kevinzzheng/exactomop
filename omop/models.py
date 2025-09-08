@@ -566,7 +566,7 @@ class Person(models.Model):
     
     # Core demographics - required fields
     gender_concept_id = models.IntegerField(help_text="Standard concept for biological sex at birth")
-    year_of_birth = models.IntegerField(help_text="Year of birth - required field")
+    year_of_birth = models.IntegerField(null=True, blank=True, help_text="Year of birth - required field")
     
     # Optional birth details
     month_of_birth = models.IntegerField(null=True, blank=True, help_text="Month of birth if available")
@@ -2663,7 +2663,7 @@ class TreatmentLine(models.Model):
                                            help_text="Primary condition being treated")
     
     # Treatment line identification
-    line_number = models.IntegerField(help_text="Treatment line number (1, 2, 3, etc.)")
+    line_number = models.IntegerField(null=True, blank=True, help_text="Treatment line number (1, 2, 3, etc.)")
     line_sequence = models.CharField(max_length=10, choices=TherapyLineChoices.choices,
                                    help_text="Standardized line designation")
     
@@ -4021,7 +4021,7 @@ class TreatmentRegimen(models.Model):
     """
     regimen_id = models.BigAutoField(primary_key=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    regimen_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+    regimen_concept = models.ForeignKey(Concept, on_delete=models.PROTECT, blank=True, null=True,
                                       related_name='treatment_regimens',
                                       help_text="Concept for regimen type")
     
@@ -4036,7 +4036,7 @@ class TreatmentRegimen(models.Model):
     # Treatment line context
     treatment_line = models.ForeignKey('TreatmentLine', null=True, blank=True, on_delete=models.SET_NULL,
                                      related_name='regimens', help_text="Associated treatment line")
-    line_number = models.IntegerField(help_text="Line of therapy number")
+    line_number = models.IntegerField(null=True, blank=True, help_text="Line of therapy number")
     
     # Regimen characteristics
     regimen_type = models.CharField(
@@ -4054,7 +4054,7 @@ class TreatmentRegimen(models.Model):
     
     # Intent and setting
     treatment_intent = models.CharField(
-        max_length=30,
+        max_length=30, blank=True, null=True,
         choices=[
             ('CURATIVE', 'Curative'),
             ('PALLIATIVE', 'Palliative'),
@@ -4066,7 +4066,7 @@ class TreatmentRegimen(models.Model):
     )
     
     treatment_setting = models.CharField(
-        max_length=20,
+        max_length=20, blank=True, null=True,
         choices=[
             ('INPATIENT', 'Inpatient'),
             ('OUTPATIENT', 'Outpatient'),
@@ -4076,9 +4076,9 @@ class TreatmentRegimen(models.Model):
     )
     
     # Cycle information
-    cycles_planned = models.IntegerField(help_text="Number of planned cycles")
+    cycles_planned = models.IntegerField(null=True, blank=True, help_text="Number of planned cycles")
     cycles_completed = models.IntegerField(null=True, blank=True, help_text="Number of completed cycles")
-    cycle_length_days = models.IntegerField(help_text="Length of each cycle in days")
+    cycle_length_days = models.IntegerField(null=True, blank=True, help_text="Length of each cycle in days")
     
     # Outcomes and response
     best_response = models.CharField(
