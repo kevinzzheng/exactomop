@@ -207,16 +207,9 @@ class Command(BaseCommand):
             person_id=1001,
             biomarker_name='Ki-67',
             biomarker_category='PROLIFERATION',
-            result_value='25',
-            result_unit='percent',
-            interpretation='MODERATE',
             measurement_date='2023-02-01',
-            test_method='IMMUNOHISTOCHEMISTRY',
             laboratory='Johns Hopkins Pathology',
-            specimen_type='TISSUE',
-            clinical_significance='Proliferation index',
-            reference_range='<20% low, 20-30% moderate, >30% high',
-            quality_score=0.94
+            specimen_type='TISSUE'
         )
         self.stdout.write(f'Created Ki-67 biomarker for patient 1001')
         
@@ -225,16 +218,9 @@ class Command(BaseCommand):
             person_id=1002,
             biomarker_name='PD-L1',
             biomarker_category='IMMUNE_CHECKPOINT',
-            result_value='45',
-            result_unit='CPS',
-            interpretation='POSITIVE',
             measurement_date='2023-06-15',
-            test_method='IMMUNOHISTOCHEMISTRY',
             laboratory='Johns Hopkins Pathology',
-            specimen_type='TISSUE',
-            clinical_significance='Predicts response to immunotherapy',
-            reference_range='CPS ≥1 positive',
-            quality_score=0.97
+            specimen_type='TISSUE'
         )
         self.stdout.write(f'Created PD-L1 biomarker for patient 1002')
 
@@ -282,13 +268,11 @@ class Command(BaseCommand):
         observation = Observation.objects.create(
             person_id=1001,
             observation_concept_id=4275495,  # Tobacco smoking status
-            observation_date='2023-01-15',
             observation_datetime='2023-01-15T09:30:00Z',
             observation_type_concept_id=44814721,  # Patient reported
             value_as_concept_id=4222695,  # Never smoker
             observation_source_value='Never smoker',
             behavioral_category='TOBACCO_USE',
-            social_determinant_category='BEHAVIORAL_RISK',
             assessment_method='Patient interview',
             clinical_significance='No tobacco-related contraindications'
         )
@@ -298,13 +282,11 @@ class Command(BaseCommand):
         observation = Observation.objects.create(
             person_id=1002,
             observation_concept_id=4053609,  # Insurance status
-            observation_date='2023-06-10',
             observation_datetime='2023-06-10T11:15:00Z',
             observation_type_concept_id=44814721,  # Patient reported
             value_as_string='Private insurance',
             observation_source_value='Private insurance',
             behavioral_category='SOCIOECONOMIC',
-            social_determinant_category='FINANCIAL_RESOURCE',
             assessment_method='Registration form',
             clinical_significance='Good insurance coverage for treatment'
         )

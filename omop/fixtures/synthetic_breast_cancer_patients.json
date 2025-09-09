@@ -321,9 +321,7 @@
       "person_id": 2001,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-12-21",
-      "condition_start_datetime": "2023-12-21T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -335,7 +333,6 @@
     "fields": {
       "person_id": 2001,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-02-08",
       "measurement_datetime": "2023-02-08T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -350,7 +347,6 @@
     "fields": {
       "person_id": 2001,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-02-08",
       "measurement_datetime": "2023-02-08T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -365,7 +361,6 @@
     "fields": {
       "person_id": 2001,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-02-08",
       "measurement_datetime": "2023-02-08T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -382,10 +377,7 @@
       "line_number": 1,
       "line_start_date": "2023-03-01",
       "line_end_date": null,
-      "line_type": "SECOND_LINE",
-      "treatment_intent": "NEOADJUVANT",
-      "best_response": "CR",
-      "progression_date": "2023-12-18"
+      "treatment_intent": "NEOADJUVANT"
     }
   },
   {
@@ -436,9 +428,7 @@
       "person_id": 2002,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-01-11",
-      "condition_start_datetime": "2023-01-11T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -450,7 +440,6 @@
     "fields": {
       "person_id": 2002,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-02-05",
       "measurement_datetime": "2023-02-05T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -465,7 +454,6 @@
     "fields": {
       "person_id": 2002,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-02-05",
       "measurement_datetime": "2023-02-05T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -480,7 +468,6 @@
     "fields": {
       "person_id": 2002,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-02-05",
       "measurement_datetime": "2023-02-05T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -497,10 +484,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-19",
       "line_end_date": null,
-      "line_type": "SECOND_LINE",
-      "treatment_intent": "PALLIATIVE",
-      "best_response": "PD",
-      "progression_date": "2023-08-31"
+      "treatment_intent": "PALLIATIVE"
     }
   },
   {
@@ -537,10 +521,7 @@
       "line_number": 2,
       "line_start_date": "2023-08-26",
       "line_end_date": "2024-02-14",
-      "line_type": "THIRD_LINE",
-      "treatment_intent": "NEOADJUVANT",
-      "best_response": "SD",
-      "progression_date": "2024-02-14"
+      "treatment_intent": "NEOADJUVANT"
     }
   },
   {
@@ -577,10 +558,7 @@
       "line_number": 3,
       "line_start_date": "2024-02-18",
       "line_end_date": null,
-      "line_type": "THIRD_LINE",
-      "treatment_intent": "ADJUVANT",
-      "best_response": "SD",
-      "progression_date": null
+      "treatment_intent": "ADJUVANT"
     }
   },
   {
@@ -631,9 +609,7 @@
       "person_id": 2003,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-01-09",
-      "condition_start_datetime": "2023-01-09T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -645,7 +621,6 @@
     "fields": {
       "person_id": 2003,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-01-27",
       "measurement_datetime": "2023-01-27T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -660,7 +635,6 @@
     "fields": {
       "person_id": 2003,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-01-27",
       "measurement_datetime": "2023-01-27T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -675,7 +649,6 @@
     "fields": {
       "person_id": 2003,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-01-27",
       "measurement_datetime": "2023-01-27T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -692,10 +665,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-10",
       "line_end_date": null,
-      "line_type": "FIRST_LINE",
-      "treatment_intent": "CURATIVE",
-      "best_response": "PR",
-      "progression_date": "2023-08-07"
+      "treatment_intent": "CURATIVE"
     }
   },
   {
@@ -732,10 +702,7 @@
       "line_number": 2,
       "line_start_date": "2023-08-17",
       "line_end_date": "2024-05-22",
-      "line_type": "SECOND_LINE",
-      "treatment_intent": "PALLIATIVE",
-      "best_response": "SD",
-      "progression_date": "2024-05-22"
+      "treatment_intent": "PALLIATIVE"
     }
   },
   {
@@ -772,10 +739,7 @@
       "line_number": 3,
       "line_start_date": "2024-01-27",
       "line_end_date": "2024-10-27",
-      "line_type": "THIRD_LINE",
-      "treatment_intent": "ADJUVANT",
-      "best_response": "SD",
-      "progression_date": "2024-10-27"
+      "treatment_intent": "ADJUVANT"
     }
   },
   {
@@ -826,9 +790,7 @@
       "person_id": 2004,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-07-10",
-      "condition_start_datetime": "2023-07-10T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -840,7 +802,6 @@
     "fields": {
       "person_id": 2004,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-02-14",
       "measurement_datetime": "2023-02-14T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -855,7 +816,6 @@
     "fields": {
       "person_id": 2004,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-02-14",
       "measurement_datetime": "2023-02-14T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -870,7 +830,6 @@
     "fields": {
       "person_id": 2004,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-02-14",
       "measurement_datetime": "2023-02-14T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -887,10 +846,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-07",
       "line_end_date": "2023-11-08",
-      "line_type": "THIRD_LINE",
-      "treatment_intent": "NEOADJUVANT",
-      "best_response": "PR",
-      "progression_date": null
+      "treatment_intent": "NEOADJUVANT"
     }
   },
   {
@@ -941,9 +897,7 @@
       "person_id": 2005,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-01-22",
-      "condition_start_datetime": "2023-01-22T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -955,7 +909,6 @@
     "fields": {
       "person_id": 2005,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-01-31",
       "measurement_datetime": "2023-01-31T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -970,7 +923,6 @@
     "fields": {
       "person_id": 2005,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-01-31",
       "measurement_datetime": "2023-01-31T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -985,7 +937,6 @@
     "fields": {
       "person_id": 2005,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-01-31",
       "measurement_datetime": "2023-01-31T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1002,10 +953,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-22",
       "line_end_date": "2023-08-11",
-      "line_type": "SECOND_LINE",
-      "treatment_intent": "NEOADJUVANT",
-      "best_response": "PD",
-      "progression_date": null
+      "treatment_intent": "NEOADJUVANT"
     }
   },
   {
@@ -1056,9 +1004,7 @@
       "person_id": 2006,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-03-06",
-      "condition_start_datetime": "2023-03-06T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -1070,7 +1016,6 @@
     "fields": {
       "person_id": 2006,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-01-21",
       "measurement_datetime": "2023-01-21T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1085,7 +1030,6 @@
     "fields": {
       "person_id": 2006,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-01-21",
       "measurement_datetime": "2023-01-21T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1100,7 +1044,6 @@
     "fields": {
       "person_id": 2006,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-01-21",
       "measurement_datetime": "2023-01-21T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1117,10 +1060,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-26",
       "line_end_date": "2023-07-25",
-      "line_type": "FIRST_LINE",
-      "treatment_intent": "ADJUVANT",
-      "best_response": "PR",
-      "progression_date": null
+      "treatment_intent": "ADJUVANT"
     }
   },
   {
@@ -1157,10 +1097,7 @@
       "line_number": 2,
       "line_start_date": "2023-08-18",
       "line_end_date": "2023-12-27",
-      "line_type": "THIRD_LINE",
-      "treatment_intent": "PALLIATIVE",
-      "best_response": "PR",
-      "progression_date": "2023-12-27"
+      "treatment_intent": "PALLIATIVE"
     }
   },
   {
@@ -1211,9 +1148,7 @@
       "person_id": 2007,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-12-29",
-      "condition_start_datetime": "2023-12-29T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -1225,7 +1160,6 @@
     "fields": {
       "person_id": 2007,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-01-31",
       "measurement_datetime": "2023-01-31T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1240,7 +1174,6 @@
     "fields": {
       "person_id": 2007,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-01-31",
       "measurement_datetime": "2023-01-31T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1255,7 +1188,6 @@
     "fields": {
       "person_id": 2007,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-01-31",
       "measurement_datetime": "2023-01-31T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1272,10 +1204,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-09",
       "line_end_date": "2023-09-18",
-      "line_type": "SECOND_LINE",
-      "treatment_intent": "CURATIVE",
-      "best_response": "SD",
-      "progression_date": null
+      "treatment_intent": "CURATIVE"
     }
   },
   {
@@ -1326,9 +1255,7 @@
       "person_id": 2008,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-12-02",
-      "condition_start_datetime": "2023-12-02T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -1340,7 +1267,6 @@
     "fields": {
       "person_id": 2008,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-01-23",
       "measurement_datetime": "2023-01-23T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -1355,7 +1281,6 @@
     "fields": {
       "person_id": 2008,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-01-23",
       "measurement_datetime": "2023-01-23T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1370,7 +1295,6 @@
     "fields": {
       "person_id": 2008,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-01-23",
       "measurement_datetime": "2023-01-23T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1387,10 +1311,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-28",
       "line_end_date": "2023-07-08",
-      "line_type": "FIRST_LINE",
-      "treatment_intent": "CURATIVE",
-      "best_response": "PR",
-      "progression_date": "2023-07-08"
+      "treatment_intent": "CURATIVE"
     }
   },
   {
@@ -1441,9 +1362,7 @@
       "person_id": 2009,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-02-08",
-      "condition_start_datetime": "2023-02-08T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -1455,7 +1374,6 @@
     "fields": {
       "person_id": 2009,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-01-30",
       "measurement_datetime": "2023-01-30T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1470,7 +1388,6 @@
     "fields": {
       "person_id": 2009,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-01-30",
       "measurement_datetime": "2023-01-30T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1485,7 +1402,6 @@
     "fields": {
       "person_id": 2009,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-01-30",
       "measurement_datetime": "2023-01-30T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1502,10 +1418,7 @@
       "line_number": 1,
       "line_start_date": "2023-03-03",
       "line_end_date": "2023-09-08",
-      "line_type": "FIRST_LINE",
-      "treatment_intent": "CURATIVE",
-      "best_response": "PR",
-      "progression_date": null
+      "treatment_intent": "CURATIVE"
     }
   },
   {
@@ -1542,10 +1455,7 @@
       "line_number": 2,
       "line_start_date": "2023-08-18",
       "line_end_date": "2024-01-02",
-      "line_type": "THIRD_LINE",
-      "treatment_intent": "CURATIVE",
-      "best_response": "PD",
-      "progression_date": null
+      "treatment_intent": "CURATIVE"
     }
   },
   {
@@ -1596,9 +1506,7 @@
       "person_id": 2010,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-11-09",
-      "condition_start_datetime": "2023-11-09T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -1610,7 +1518,6 @@
     "fields": {
       "person_id": 2010,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-02-09",
       "measurement_datetime": "2023-02-09T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1625,7 +1532,6 @@
     "fields": {
       "person_id": 2010,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-02-09",
       "measurement_datetime": "2023-02-09T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1640,7 +1546,6 @@
     "fields": {
       "person_id": 2010,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-02-09",
       "measurement_datetime": "2023-02-09T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -1657,10 +1562,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-11",
       "line_end_date": "2023-08-12",
-      "line_type": "FIRST_LINE",
-      "treatment_intent": "ADJUVANT",
-      "best_response": "SD",
-      "progression_date": null
+      "treatment_intent": "ADJUVANT"
     }
   },
   {
@@ -1697,10 +1599,7 @@
       "line_number": 2,
       "line_start_date": "2023-08-18",
       "line_end_date": "2023-12-23",
-      "line_type": "FIRST_LINE",
-      "treatment_intent": "ADJUVANT",
-      "best_response": "SD",
-      "progression_date": null
+      "treatment_intent": "ADJUVANT"
     }
   },
   {
@@ -1751,9 +1650,7 @@
       "person_id": 2011,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-07-31",
-      "condition_start_datetime": "2023-07-31T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -1765,7 +1662,6 @@
     "fields": {
       "person_id": 2011,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-01-20",
       "measurement_datetime": "2023-01-20T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1780,7 +1676,6 @@
     "fields": {
       "person_id": 2011,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-01-20",
       "measurement_datetime": "2023-01-20T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1795,7 +1690,6 @@
     "fields": {
       "person_id": 2011,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-01-20",
       "measurement_datetime": "2023-01-20T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1812,10 +1706,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-08",
       "line_end_date": "2023-11-07",
-      "line_type": "SECOND_LINE",
-      "treatment_intent": "PALLIATIVE",
-      "best_response": "PR",
-      "progression_date": null
+      "treatment_intent": "PALLIATIVE"
     }
   },
   {
@@ -1866,9 +1757,7 @@
       "person_id": 2012,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-11-10",
-      "condition_start_datetime": "2023-11-10T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -1880,7 +1769,6 @@
     "fields": {
       "person_id": 2012,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-02-11",
       "measurement_datetime": "2023-02-11T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -1895,7 +1783,6 @@
     "fields": {
       "person_id": 2012,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-02-11",
       "measurement_datetime": "2023-02-11T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -1910,7 +1797,6 @@
     "fields": {
       "person_id": 2012,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-02-11",
       "measurement_datetime": "2023-02-11T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -1927,10 +1813,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-07",
       "line_end_date": "2023-10-04",
-      "line_type": "THIRD_LINE",
-      "treatment_intent": "CURATIVE",
-      "best_response": "CR",
-      "progression_date": null
+      "treatment_intent": "CURATIVE"
     }
   },
   {
@@ -1967,10 +1850,7 @@
       "line_number": 2,
       "line_start_date": "2023-08-25",
       "line_end_date": "2024-03-07",
-      "line_type": "SECOND_LINE",
-      "treatment_intent": "PALLIATIVE",
-      "best_response": "CR",
-      "progression_date": null
+      "treatment_intent": "PALLIATIVE"
     }
   },
   {
@@ -2021,9 +1901,7 @@
       "person_id": 2013,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-10-14",
-      "condition_start_datetime": "2023-10-14T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -2035,7 +1913,6 @@
     "fields": {
       "person_id": 2013,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-02-01",
       "measurement_datetime": "2023-02-01T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -2050,7 +1927,6 @@
     "fields": {
       "person_id": 2013,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-02-01",
       "measurement_datetime": "2023-02-01T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -2065,7 +1941,6 @@
     "fields": {
       "person_id": 2013,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-02-01",
       "measurement_datetime": "2023-02-01T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -2082,10 +1957,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-13",
       "line_end_date": "2023-08-18",
-      "line_type": "THIRD_LINE",
-      "treatment_intent": "PALLIATIVE",
-      "best_response": "PR",
-      "progression_date": null
+      "treatment_intent": "PALLIATIVE"
     }
   },
   {
@@ -2136,9 +2008,7 @@
       "person_id": 2014,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-09-03",
-      "condition_start_datetime": "2023-09-03T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -2150,7 +2020,6 @@
     "fields": {
       "person_id": 2014,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-02-01",
       "measurement_datetime": "2023-02-01T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -2165,7 +2034,6 @@
     "fields": {
       "person_id": 2014,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-02-01",
       "measurement_datetime": "2023-02-01T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 4181412,
@@ -2180,7 +2048,6 @@
     "fields": {
       "person_id": 2014,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-02-01",
       "measurement_datetime": "2023-02-01T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -2197,10 +2064,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-05",
       "line_end_date": "2023-10-25",
-      "line_type": "SECOND_LINE",
-      "treatment_intent": "PALLIATIVE",
-      "best_response": "PR",
-      "progression_date": null
+      "treatment_intent": "PALLIATIVE"
     }
   },
   {
@@ -2237,10 +2101,7 @@
       "line_number": 2,
       "line_start_date": "2023-08-06",
       "line_end_date": null,
-      "line_type": "FIRST_LINE",
-      "treatment_intent": "NEOADJUVANT",
-      "best_response": "PD",
-      "progression_date": null
+      "treatment_intent": "NEOADJUVANT"
     }
   },
   {
@@ -2291,9 +2152,7 @@
       "person_id": 2015,
       "condition_concept_id": 4112853,
       "condition_start_date": "2023-11-11",
-      "condition_start_datetime": "2023-11-11T00:00:00Z",
       "condition_end_date": null,
-      "condition_end_datetime": null,
       "condition_type_concept_id": 32020,
       "condition_source_value": "C50.9",
       "condition_source_concept_id": 4112853
@@ -2305,7 +2164,6 @@
     "fields": {
       "person_id": 2015,
       "measurement_concept_id": 3000963,
-      "measurement_date": "2023-02-12",
       "measurement_datetime": "2023-02-12T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -2320,7 +2178,6 @@
     "fields": {
       "person_id": 2015,
       "measurement_concept_id": 3006256,
-      "measurement_date": "2023-02-12",
       "measurement_datetime": "2023-02-12T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -2335,7 +2192,6 @@
     "fields": {
       "person_id": 2015,
       "measurement_concept_id": 3013682,
-      "measurement_date": "2023-02-12",
       "measurement_datetime": "2023-02-12T00:00:00Z",
       "measurement_type_concept_id": 44818702,
       "value_as_concept_id": 9189,
@@ -2352,10 +2208,7 @@
       "line_number": 1,
       "line_start_date": "2023-02-09",
       "line_end_date": "2023-10-28",
-      "line_type": "FIRST_LINE",
-      "treatment_intent": "ADJUVANT",
-      "best_response": "SD",
-      "progression_date": null
+      "treatment_intent": "ADJUVANT"
     }
   },
   {
@@ -2392,10 +2245,7 @@
       "line_number": 2,
       "line_start_date": "2023-08-23",
       "line_end_date": "2024-04-27",
-      "line_type": "SECOND_LINE",
-      "treatment_intent": "ADJUVANT",
-      "best_response": "PR",
-      "progression_date": null
+      "treatment_intent": "ADJUVANT"
     }
   },
   {
@@ -2432,10 +2282,7 @@
       "line_number": 3,
       "line_start_date": "2024-01-29",
       "line_end_date": "2024-11-01",
-      "line_type": "SECOND_LINE",
-      "treatment_intent": "PALLIATIVE",
-      "best_response": "CR",
-      "progression_date": "2024-11-01"
+      "treatment_intent": "PALLIATIVE"
     }
   },
   {
