@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Choice classes for standardized values (complementing exactmodels.py)
 class MeasurementSourceChoices(models.TextChoices):
     LAB_RESULT = 'LAB', 'Laboratory Result'
@@ -7,11 +8,13 @@ class MeasurementSourceChoices(models.TextChoices):
     PATIENT_REPORTED = 'PATIENT', 'Patient Reported'
     CLINICAL_ASSESSMENT = 'CLINICAL', 'Clinical Assessment'
 
+
 class ObservationSourceChoices(models.TextChoices):
     CLINICAL_EXAM = 'EXAM', 'Clinical Examination'
     IMAGING = 'IMAGING', 'Medical Imaging'
     PATHOLOGY = 'PATH', 'Pathology Report'
     GENETIC_TEST = 'GENETIC', 'Genetic Testing'
+
 
 # Choice classes for PatientInfo support
 class GenderChoices(models.TextChoices):
@@ -20,37 +23,46 @@ class GenderChoices(models.TextChoices):
     UNKNOWN = 'UN', 'Unknown'
     EMPTY = '', 'Empty'
 
+
 class WeightUnits(models.TextChoices):
     KG = 'kg', 'Kilograms'
     LB = 'lb', 'Pounds'
+
 
 class HeightUnits(models.TextChoices):
     CM = 'cm', 'Centimeters'
     IN = 'in', 'Inches'
 
+
 class HemoglobinUnits(models.TextChoices):
     G_DL = 'G/DL', 'g/deciliter'
     G_L = 'G/L', 'g/Liter'
+
 
 class AlbuminUnits(models.TextChoices):
     G_DL = 'G/DL', 'g/deciliter'
     G_L = 'G/L', 'g/Liter'
 
+
 class PlateletCountUnits(models.TextChoices):
     CELLS_UL = 'CELLS/UL', 'cells/microliter'
     CELLS_L = 'CELLS/L', 'cells/Liter'
+
 
 class SerumCreatinineUnits(models.TextChoices):
     MG_DL = 'MG/DL', 'mg/dL'
     MICROMOLES_L = 'MICROMOLES/L', 'micromoles/L'
 
+
 class SerumBilirubinUnits(models.TextChoices):
     MG_DL = 'MG/DL', 'mg/dL'
     MICROMOLES_L = 'MICROMOLES/L', 'micromoles/L'
 
+
 class SerumCalciumUnits(models.TextChoices):
     MG_DL = 'MG/DL', 'mg/dL'
     MICROMOLES_L = 'MICROMOLES/L', 'micromoles/L'
+
 
 # Additional choice classes for enhanced OMOP models
 class TherapyLineChoices(models.TextChoices):
@@ -60,6 +72,7 @@ class TherapyLineChoices(models.TextChoices):
     FOURTH_LINE = '4', 'Fourth Line'
     LATER_LINE = '5+', 'Later Line (5+)'
 
+
 class TherapyIntentChoices(models.TextChoices):
     CURATIVE = 'CURATIVE', 'Curative'
     PALLIATIVE = 'PALLIATIVE', 'Palliative'
@@ -68,12 +81,14 @@ class TherapyIntentChoices(models.TextChoices):
     MAINTENANCE = 'MAINTENANCE', 'Maintenance'
     SUPPORTIVE = 'SUPPORTIVE', 'Supportive Care'
 
+
 class TreatmentResponseChoices(models.TextChoices):
     COMPLETE_RESPONSE = 'CR', 'Complete Response'
     PARTIAL_RESPONSE = 'PR', 'Partial Response'  
     STABLE_DISEASE = 'SD', 'Stable Disease'
     PROGRESSIVE_DISEASE = 'PD', 'Progressive Disease'
     NOT_EVALUABLE = 'NE', 'Not Evaluable'
+
 
 class TreatmentLineStatusChoices(models.TextChoices):
     """Treatment line progression status for therapeutic tracking"""
@@ -82,6 +97,7 @@ class TreatmentLineStatusChoices(models.TextChoices):
     REFRACTORY = 'REFRACTORY', 'Refractory'
     RELAPSED = 'RELAPSED', 'Relapsed'
     RELAPSED_REFRACTORY = 'REL_REF', 'Relapsed/Refractory'
+
 
 class DrugClassificationChoices(models.TextChoices):
     """Drug classifications for treatment line analysis"""
@@ -95,6 +111,7 @@ class DrugClassificationChoices(models.TextChoices):
     SURGERY = 'SURGERY', 'Surgical Intervention'
     CLINICAL_TRIAL_DRUG = 'TRIAL', 'Clinical Trial Drug'
 
+
 class RegimenTypeChoices(models.TextChoices):
     """Types of treatment regimens"""
     SINGLE_AGENT = 'SINGLE', 'Single Agent'
@@ -102,6 +119,7 @@ class RegimenTypeChoices(models.TextChoices):
     SEQUENTIAL = 'SEQ', 'Sequential Therapy'
     CONCURRENT = 'CONC', 'Concurrent Therapy'
     ALTERNATING = 'ALT', 'Alternating Therapy'
+
 
 class TreatmentOutcomeChoices(models.TextChoices):
     """Treatment line outcomes"""
@@ -113,6 +131,7 @@ class TreatmentOutcomeChoices(models.TextChoices):
     DEATH = 'DEATH', 'Death'
     TRANSPLANT = 'TRANSPLANT', 'Proceeded to Transplant'
     ONGOING = 'ONGOING', 'Treatment Ongoing'
+
 
 # ==========================================
 # BEHAVIORAL, SOCIAL DETERMINANTS & DEMOGRAPHICS
@@ -126,6 +145,7 @@ class SmokingStatusChoices(models.TextChoices):
     PASSIVE_SMOKER = 'passive_smoker', 'Passive Smoker (Environmental Exposure)'
     UNKNOWN = 'unknown', 'Unknown Smoking Status'
 
+
 # Tobacco Product Types
 class TobaccoProductChoices(models.TextChoices):
     CIGARETTES = 'cigarettes', 'Cigarettes'
@@ -136,6 +156,7 @@ class TobaccoProductChoices(models.TextChoices):
     E_CIGARETTES = 'e_cigarettes', 'Electronic Cigarettes/Vaping'
     HOOKAH = 'hookah', 'Hookah/Shisha'
     OTHER = 'other', 'Other Tobacco Product'
+
 
 # Substance Use Categories
 class SubstanceUseChoices(models.TextChoices):
@@ -149,6 +170,7 @@ class SubstanceUseChoices(models.TextChoices):
     NONE = 'none', 'No Substance Use'
     UNKNOWN = 'unknown', 'Unknown'
 
+
 # Alcohol Consumption Levels
 class AlcoholUseChoices(models.TextChoices):
     NEVER = 'never', 'Never'
@@ -159,6 +181,7 @@ class AlcoholUseChoices(models.TextChoices):
     BINGE = 'binge', 'Binge Drinking Pattern'
     FORMER_USER = 'former_user', 'Former Alcohol User'
     UNKNOWN = 'unknown', 'Unknown'
+
 
 # Contraceptive Methods
 class ContraceptiveMethodChoices(models.TextChoices):
@@ -177,6 +200,7 @@ class ContraceptiveMethodChoices(models.TextChoices):
     EMERGENCY = 'emergency', 'Emergency Contraception'
     UNKNOWN = 'unknown', 'Unknown Method'
 
+
 # Pregnancy Status for Patient Demographics
 class PregnancyStatusChoices(models.TextChoices):
     NOT_PREGNANT = 'not_pregnant', 'Not Pregnant (Confirmed)'
@@ -186,6 +210,7 @@ class PregnancyStatusChoices(models.TextChoices):
     LACTATING = 'lactating', 'Currently Lactating'
     NOT_APPLICABLE = 'not_applicable', 'Not Applicable (Male/Postmenopausal)'
     UNKNOWN = 'unknown', 'Unknown'
+
 
 # Menopausal Status
 class MenopausalStatusChoices(models.TextChoices):
@@ -197,6 +222,7 @@ class MenopausalStatusChoices(models.TextChoices):
     POSTMENOPAUSAL_TREATMENT = 'postmenopausal_treatment', 'Postmenopausal (Treatment-Induced)'
     UNKNOWN = 'unknown', 'Unknown Menopausal Status'
     NOT_APPLICABLE = 'not_applicable', 'Not Applicable (Male)'
+
 
 # Infectious Disease Status
 class InfectiousDiseaseStatusChoices(models.TextChoices):
@@ -210,6 +236,7 @@ class InfectiousDiseaseStatusChoices(models.TextChoices):
     IMMUNE = 'immune', 'Immune (Vaccinated/Natural)'
     UNKNOWN = 'unknown', 'Unknown Status'
 
+
 # Social Support and Caregiver Status
 class CaregiverStatusChoices(models.TextChoices):
     AVAILABLE_FAMILY = 'available_family', 'Family Caregiver Available'
@@ -220,6 +247,7 @@ class CaregiverStatusChoices(models.TextChoices):
     SELF_CARE = 'self_care', 'Independent/Self-Care'
     UNKNOWN = 'unknown', 'Unknown Caregiver Status'
 
+
 # Cognitive/Mental Health Status for Consent Capability
 class ConsentCapabilityChoices(models.TextChoices):
     CAPABLE = 'capable', 'Capable of Informed Consent'
@@ -229,6 +257,7 @@ class ConsentCapabilityChoices(models.TextChoices):
     ASSESSED_CAPABLE = 'assessed_capable', 'Formally Assessed as Capable'
     NOT_ASSESSED = 'not_assessed', 'Consent Capability Not Assessed'
     UNKNOWN = 'unknown', 'Unknown Consent Capability'
+
 
 # Mental Health Disorder Status
 class MentalHealthStatusChoices(models.TextChoices):
@@ -245,6 +274,7 @@ class MentalHealthStatusChoices(models.TextChoices):
     MULTIPLE = 'multiple', 'Multiple Mental Health Conditions'
     UNKNOWN = 'unknown', 'Unknown Mental Health Status'
 
+
 # Geographic Risk Exposure Categories
 class GeographicRiskChoices(models.TextChoices):
     NO_RISK = 'no_risk', 'No Geographic Risk Exposure'
@@ -259,6 +289,7 @@ class GeographicRiskChoices(models.TextChoices):
     EXTREME_CLIMATE = 'extreme_climate', 'Extreme Climate Exposure'
     OTHER = 'other', 'Other Geographic Risk'
     UNKNOWN = 'unknown', 'Unknown Geographic Risk Status'
+
 
 # Behavioral Observation Categories
 class BehavioralObservationChoices(models.TextChoices):
@@ -276,6 +307,7 @@ class BehavioralObservationChoices(models.TextChoices):
     SOCIAL_DETERMINANT = 'social_determinant', 'Social Determinant of Health'
     REPRODUCTIVE_HEALTH = 'reproductive_health', 'Reproductive Health Status'
 
+
 class PerformanceStatusChoices(models.TextChoices):
     ECOG_0 = 'ECOG_0', 'ECOG 0 - Fully active'
     ECOG_1 = 'ECOG_1', 'ECOG 1 - Restricted in strenuous activity'
@@ -286,6 +318,7 @@ class PerformanceStatusChoices(models.TextChoices):
     KARNOFSKY_90 = 'KPS_90', 'Karnofsky 90% - Minor signs/symptoms'
     KARNOFSKY_80 = 'KPS_80', 'Karnofsky 80% - Normal activity with effort'
 
+
 # OMOP Oncology Extension Choice Classes
 class TumorLateralityChoices(models.TextChoices):
     RIGHT = 'R', 'Right'
@@ -294,6 +327,7 @@ class TumorLateralityChoices(models.TextChoices):
     MIDLINE = 'M', 'Midline'
     UNKNOWN = 'U', 'Unknown'
     NOT_APPLICABLE = 'N', 'Not Applicable'
+
 
 class AJCCStageChoices(models.TextChoices):
     STAGE_0 = '0', 'Stage 0 (in situ)'
@@ -311,6 +345,7 @@ class AJCCStageChoices(models.TextChoices):
     STAGE_IVA = 'IVA', 'Stage IVA'
     STAGE_IVB = 'IVB', 'Stage IVB'
     UNKNOWN = 'UNK', 'Unknown'
+
 
 class TStageChoices(models.TextChoices):
     TX = 'TX', 'TX - Primary tumor cannot be assessed'
@@ -332,6 +367,7 @@ class TStageChoices(models.TextChoices):
     T4C = 'T4c', 'T4c'
     T4D = 'T4d', 'T4d'
 
+
 class NStageChoices(models.TextChoices):
     NX = 'NX', 'NX - Regional lymph nodes cannot be assessed'
     N0 = 'N0', 'N0 - No regional lymph node metastasis'
@@ -348,6 +384,7 @@ class NStageChoices(models.TextChoices):
     N3B = 'N3b', 'N3b'
     N3C = 'N3c', 'N3c'
 
+
 class MStageChoices(models.TextChoices):
     MX = 'MX', 'MX - Distant metastasis cannot be assessed'
     M0 = 'M0', 'M0 - No distant metastasis'
@@ -356,6 +393,7 @@ class MStageChoices(models.TextChoices):
     M1B = 'M1b', 'M1b'
     M1C = 'M1c', 'M1c'
 
+
 class TumorGradeChoices(models.TextChoices):
     GX = 'GX', 'GX - Grade cannot be assessed'
     G1 = 'G1', 'G1 - Well differentiated'
@@ -363,12 +401,14 @@ class TumorGradeChoices(models.TextChoices):
     G3 = 'G3', 'G3 - Poorly differentiated'
     G4 = 'G4', 'G4 - Undifferentiated'
 
+
 class BiomarkerStatusChoices(models.TextChoices):
     POSITIVE = 'POS', 'Positive'
     NEGATIVE = 'NEG', 'Negative'
     EQUIVOCAL = 'EQU', 'Equivocal'
     UNKNOWN = 'UNK', 'Unknown'
     NOT_TESTED = 'NT', 'Not Tested'
+
 
 class GenomicVariantTypeChoices(models.TextChoices):
     """Types of genomic variants for molecular profiling"""
@@ -381,6 +421,7 @@ class GenomicVariantTypeChoices(models.TextChoices):
     TMB = 'TMB', 'Tumor Mutational Burden'
     LOH = 'LOH', 'Loss of Heterozygosity'
 
+
 class ClinicalSignificanceChoices(models.TextChoices):
     """Clinical significance classifications"""
     PATHOGENIC = 'PATH', 'Pathogenic'
@@ -392,6 +433,7 @@ class ClinicalSignificanceChoices(models.TextChoices):
     RISK_FACTOR = 'RISK', 'Risk Factor'
     PROTECTIVE = 'PROT', 'Protective'
 
+
 class GenomicTestTypeChoices(models.TextChoices):
     """Types of genomic testing methods"""
     TARGETED_PANEL = 'PANEL', 'Targeted Gene Panel'
@@ -402,6 +444,7 @@ class GenomicTestTypeChoices(models.TextChoices):
     IHC = 'IHC', 'Immunohistochemistry'
     PCR = 'PCR', 'Polymerase Chain Reaction'
     LIQUID_BIOPSY = 'LIQUID', 'Liquid Biopsy/ctDNA'
+
 
 class MolecularAlterationChoices(models.TextChoices):
     """Common molecular alterations for therapeutic matching"""
@@ -418,6 +461,7 @@ class MolecularAlterationChoices(models.TextChoices):
     PDL1_HIGH = 'PDL1_H', 'PD-L1 High Expression'
     NTRK_FUSION = 'NTRK', 'NTRK Gene Fusion'
 
+
 class ImagingModalityChoices(models.TextChoices):
     """Imaging modalities for OMOP Imaging Extension"""
     CT = 'CT', 'Computed Tomography'
@@ -431,6 +475,7 @@ class ImagingModalityChoices(models.TextChoices):
     FLUOROSCOPY = 'FL', 'Fluoroscopy'
     ANGIOGRAPHY = 'AG', 'Angiography'
 
+
 class ImagingContrastChoices(models.TextChoices):
     """Contrast agent types for imaging"""
     NONE = 'NONE', 'No Contrast'
@@ -440,6 +485,7 @@ class ImagingContrastChoices(models.TextChoices):
     MICROBUBBLE = 'MB', 'Microbubble'
     RADIOISOTOPE = 'RI', 'Radioisotope'
 
+
 class TumorResponseChoices(models.TextChoices):
     """Tumor response assessment (RECIST, irRECIST)"""
     COMPLETE_RESPONSE = 'CR', 'Complete Response'
@@ -448,6 +494,7 @@ class TumorResponseChoices(models.TextChoices):
     PROGRESSIVE_DISEASE = 'PD', 'Progressive Disease'
     NOT_EVALUABLE = 'NE', 'Not Evaluable'
     MIXED_RESPONSE = 'MR', 'Mixed Response'
+
 
 class BiomarkerCategoryChoices(models.TextChoices):
     """Categories of biomarkers for molecular analysis"""
@@ -459,6 +506,7 @@ class BiomarkerCategoryChoices(models.TextChoices):
     HORMONE_RECEPTOR = 'HORMONE', 'Hormone Receptor'
     GROWTH_FACTOR = 'GROWTH', 'Growth Factor Receptor'
 
+
 class LabTestCategoryChoices(models.TextChoices):
     """Laboratory test categories for standard medical care"""
     HEMATOLOGY = 'HEME', 'Hematology'
@@ -469,6 +517,7 @@ class LabTestCategoryChoices(models.TextChoices):
     COAGULATION = 'COAG', 'Coagulation'
     ENDOCRINE = 'ENDO', 'Endocrine'
     CARDIOMARKER = 'CARDIO', 'Cardiac Markers'
+
 
 class Location(models.Model):
     location_id = models.BigAutoField(primary_key=True)
@@ -488,6 +537,7 @@ class Location(models.Model):
     def __str__(self):
         return f"{self.address_1} {self.city} {self.zip}".strip()
 
+
 class Concept(models.Model):
     """
     OMOP Concept model for standardized terminology
@@ -502,7 +552,7 @@ class Concept(models.Model):
     concept_code = models.CharField(max_length=50, help_text="Source code")
     valid_start_date = models.DateField(help_text="Date concept became valid")
     valid_end_date = models.DateField(help_text="Date concept became invalid")
-    invalid_reason = models.CharField(max_length=1, blank=True, help_text="Reason concept is invalid")
+    invalid_reason = models.CharField(max_length=1, null=True, blank=True, help_text="Reason concept is invalid")
     
     class Meta:
         db_table = "concept"
@@ -517,6 +567,7 @@ class Concept(models.Model):
     
     def __str__(self):
         return f"{self.concept_id}: {self.concept_name}"
+
 
 class ConceptRelationship(models.Model):
     """
@@ -541,6 +592,7 @@ class ConceptRelationship(models.Model):
     def __str__(self):
         return f"{self.concept_id_1} {self.relationship_id} {self.concept_id_2}"
 
+
 class Vocabulary(models.Model):
     """
     OMOP Vocabulary model for terminology systems
@@ -557,6 +609,7 @@ class Vocabulary(models.Model):
     def __str__(self):
         return f"{self.vocabulary_id}: {self.vocabulary_name}"
 
+
 class Person(models.Model):
     """
     OMOP CDM v6.0 Person table - Enhanced to full OMOP standard
@@ -571,23 +624,23 @@ class Person(models.Model):
     # Optional birth details
     month_of_birth = models.IntegerField(null=True, blank=True, help_text="Month of birth if available")
     day_of_birth = models.IntegerField(null=True, blank=True, help_text="Day of birth if available")
-    birth_datetime = models.DateTimeField(null=True, blank=True, 
-                                        help_text="Precise birth datetime - highly encouraged")
+    birth_datetime = models.DateTimeField(null=True, blank=True,
+                                          help_text="Precise birth datetime - highly encouraged")
     
     # Death information (CDM v6.0 moved from separate Death table)
     death_datetime = models.DateTimeField(null=True, blank=True,
-                                        help_text="Date and time of death")
+                                          help_text="Date and time of death")
     
     # Race and ethnicity
-    race_concept_id = models.IntegerField(null=True, blank=True, 
-                                        help_text="Standard concept for race")
+    race_concept_id = models.IntegerField(null=True, blank=True,
+                                          help_text="Standard concept for race")
     ethnicity_concept_id = models.IntegerField(null=True, blank=True,
-                                             help_text="Standard concept for ethnicity (Hispanic/Not Hispanic)")
+                                               help_text="Standard concept for ethnicity (Hispanic/Not Hispanic)")
     
     # Location and care information
     location_id = models.ForeignKey(Location, null=True, blank=True, on_delete=models.SET_NULL,
-                                   db_column='location_id', related_name='persons',
-                                   help_text="Most recent/current location")
+                                    db_column='location_id', related_name='persons',
+                                    help_text="Most recent/current location")
     provider_id = models.BigIntegerField(null=True, blank=True, 
                                         help_text="Primary care provider ID")
     care_site_id = models.BigIntegerField(null=True, blank=True, 
@@ -659,14 +712,14 @@ class ConditionOccurrence(models.Model):
                                               related_name='condition_types', help_text="Type/source of condition record")
     
     # OMOP CDM extensions for clinical context
-    stop_reason = models.CharField(max_length=20, blank=True, help_text="Reason condition ended")
+    stop_reason = models.CharField(max_length=20, null=True, blank=True, help_text="Reason condition ended")
     provider_id = models.IntegerField(null=True, blank=True, help_text="Provider who recorded condition")
     visit_occurrence_id = models.IntegerField(null=True, blank=True, help_text="Visit when condition was recorded")
     visit_detail_id = models.IntegerField(null=True, blank=True, help_text="Visit detail for condition")
     condition_source_value = models.CharField(max_length=50, blank=True, help_text="Source code for condition")
     condition_source_concept = models.ForeignKey(Concept, null=True, blank=True, on_delete=models.PROTECT,
                                                  related_name='condition_sources', help_text="Source concept")
-    condition_status_source_value = models.CharField(max_length=50, blank=True, help_text="Source status value")
+    condition_status_source_value = models.CharField(max_length=50, null=True, blank=True, help_text="Source status value")
     condition_status_concept = models.ForeignKey(Concept, null=True, blank=True, on_delete=models.PROTECT,
                                                  related_name='condition_statuses', help_text="Status concept")
     
@@ -802,6 +855,7 @@ class ConditionOccurrence(models.Model):
     def __str__(self):
         return f"Condition {self.condition_occurrence_id} for Person {self.person.person_id}"
 
+
 class Measurement(models.Model):
     measurement_id = models.BigAutoField(primary_key=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
@@ -829,7 +883,7 @@ class Measurement(models.Model):
     measurement_source_value = models.CharField(max_length=50, blank=True, help_text="Source value")
     measurement_source_concept = models.ForeignKey(Concept, null=True, blank=True, on_delete=models.PROTECT,
                                                   related_name='measurement_sources', help_text="Source concept")
-    unit_source_value = models.CharField(max_length=50, blank=True, help_text="Source unit value")
+    unit_source_value = models.CharField(max_length=50, null=True, blank=True, help_text="Source unit value")
     value_source_value = models.CharField(max_length=50, blank=True, help_text="Source result value")
     
     # Source classification to complement PatientInfo detailed measurements
@@ -906,6 +960,7 @@ class Measurement(models.Model):
             ('HIGH', 'High (>50%)'),
             ('OVEREXPRESSED', 'Overexpressed'),
         ],
+        null=True,
         blank=True,
         help_text="Biomarker expression level classification"
     )
@@ -919,6 +974,7 @@ class Measurement(models.Model):
             ('2+', 'Score 2+'),
             ('3+', 'Score 3+'),
         ],
+        null=True,
         blank=True,
         help_text="IHC intensity score"
     )
@@ -957,6 +1013,7 @@ class Measurement(models.Model):
             ('UNKNOWN', 'Unknown'),
             ('NOT_TESTED', 'Not Tested'),
         ],
+        null=True,
         blank=True,
         help_text="Mutation status"
     )
@@ -982,6 +1039,7 @@ class Measurement(models.Model):
             ('MSI_LOW', 'MSI-Low'),
             ('MSS', 'Microsatellite Stable'),
         ],
+        null=True,
         blank=True,
         help_text="Microsatellite instability status"
     )
@@ -1091,7 +1149,7 @@ class BiomarkerMeasurement(models.Model):
     
     # Biomarker identification
     biomarker_name = models.CharField(max_length=100, help_text="Biomarker name (e.g., PD-L1, TMB, MSI)")
-    biomarker_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+    biomarker_concept = models.ForeignKey(Concept, on_delete=models.PROTECT, null=True, blank=True,
                                          related_name='biomarker_measurements',
                                          help_text="OMOP concept for biomarker")
     biomarker_category = models.CharField(max_length=50, choices=[
@@ -1106,7 +1164,7 @@ class BiomarkerMeasurement(models.Model):
     ], help_text="Category of biomarker")
     
     # Measurement details
-    measurement_date = models.DateField(help_text="Date of biomarker measurement")
+    measurement_date = models.DateField(null=True, help_text="Date of biomarker measurement")
     numeric_value = models.FloatField(null=True, blank=True, help_text="Numeric biomarker value")
     categorical_value = models.CharField(max_length=50, blank=True, help_text="Categorical result")
     unit = models.CharField(max_length=50, blank=True, help_text="Unit of measurement")
@@ -1772,7 +1830,7 @@ class DrugExposure(models.Model):
     quantity = models.FloatField(null=True, blank=True, help_text="Quantity dispensed")
     days_supply = models.IntegerField(null=True, blank=True, help_text="Days supply")
     sig = models.TextField(blank=True, help_text="Sig/directions for use")
-    lot_number = models.CharField(max_length=50, blank=True, help_text="Lot number")
+    lot_number = models.CharField(max_length=50, null=True, blank=True, help_text="Lot number")
     provider_id = models.IntegerField(null=True, blank=True, help_text="Prescribing provider")
     visit_occurrence_id = models.IntegerField(null=True, blank=True, help_text="Visit when prescribed")
     visit_detail_id = models.IntegerField(null=True, blank=True, help_text="Visit detail for prescription")
@@ -2658,7 +2716,7 @@ class TreatmentLine(models.Model):
     """
     treatment_line_id = models.BigAutoField(primary_key=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE, related_name='treatment_lines')
-    condition_occurrence = models.ForeignKey('ConditionOccurrence', on_delete=models.CASCADE,
+    condition_occurrence = models.ForeignKey('ConditionOccurrence', on_delete=models.CASCADE, null=True, blank=True,
                                            related_name='treatment_lines', 
                                            help_text="Primary condition being treated")
     
@@ -2702,7 +2760,7 @@ class TreatmentLine(models.Model):
     
     # Clinical trial context
     received_in_trial = models.BooleanField(default=False, help_text="Received as part of clinical trial")
-    trial_identifier = models.CharField(max_length=100, blank=True, help_text="Clinical trial identifier")
+    trial_identifier = models.CharField(max_length=100, null=True, blank=True, help_text="Clinical trial identifier")
     
     # OHDSI Artemis methodology fields
     line_calculation_method = models.CharField(max_length=100, blank=True,
@@ -2724,7 +2782,6 @@ class TreatmentLine(models.Model):
         db_table = "treatment_line"
         indexes = [
             models.Index(fields=["person"]),
-            models.Index(fields=["condition_occurrence"]),
             models.Index(fields=["line_number"]),
             models.Index(fields=["line_start_date"]),
             models.Index(fields=["treatment_intent"]),
@@ -3358,12 +3415,12 @@ class RadiationOccurrence(models.Model):
     """
     radiation_occurrence_id = models.BigAutoField(primary_key=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    radiation_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+    radiation_concept = models.ForeignKey(Concept, on_delete=models.PROTECT, null=True, blank=True,
                                         related_name='radiation_occurrences',
                                         help_text="Concept for radiation therapy type")
-    radiation_occurrence_start_date = models.DateField()
+    radiation_occurrence_start_date = models.DateField(null=True)
     radiation_occurrence_end_date = models.DateField(null=True, blank=True)
-    radiation_type_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+    radiation_type_concept = models.ForeignKey(Concept, on_delete=models.PROTECT, null=True, blank=True,
                                              related_name='radiation_types',
                                              help_text="Type of radiation therapy")
     
@@ -3562,11 +3619,11 @@ class TumorAssessment(models.Model):
     """
     tumor_assessment_id = models.BigAutoField(primary_key=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    assessment_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+    assessment_concept = models.ForeignKey(Concept, on_delete=models.PROTECT, null=True, blank=True,
                                          related_name='tumor_assessments',
                                          help_text="Concept for assessment type")
     assessment_date = models.DateField()
-    assessment_type_concept = models.ForeignKey(Concept, on_delete=models.PROTECT,
+    assessment_type_concept = models.ForeignKey(Concept, on_delete=models.PROTECT, null=True, blank=True,
                                               related_name='assessment_types',
                                               help_text="Type of tumor assessment")
     
@@ -4325,7 +4382,7 @@ class OncologyEpisodeDetail(models.Model):
     person = models.ForeignKey(Person, on_delete=models.CASCADE)
     
     # Episode timing
-    detail_date = models.DateField(help_text="Date of this episode detail")
+    detail_date = models.DateField(null=True, blank=True, help_text="Date of this episode detail")
     days_from_diagnosis = models.IntegerField(null=True, blank=True, help_text="Days from initial cancer diagnosis")
     days_from_treatment_start = models.IntegerField(null=True, blank=True, help_text="Days from current treatment start")
     
