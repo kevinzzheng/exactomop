@@ -34,6 +34,15 @@ Comprehensive social and behavioral health factor integration:
 - **Psychosocial Assessment**: Mental health, social support networks
 - **Health Equity Metrics**: Disparities tracking and intervention monitoring
 
+### 🛡️ **Safety Scoring & Adverse Events Extensions**
+Advanced clinical trial safety monitoring and risk assessment:
+- **Trial Arm Model**: Clinical trial arm management with enrollment tracking
+- **Adverse Event Model**: Comprehensive AE tracking with CTCAE grading
+- **Safety Metrics Model**: Computed safety scores using WEB and EAIR algorithms
+- **Risk Categorization**: Automated HIGH_RISK, ELEVATED_RISK, LOW_RISK classification
+- **API Integration**: RESTful endpoints for safety data access and filtering
+- **Frontend Components**: React and Vue components for safety score visualization
+
 ---
 
 ## 🧪 Labs & Biomarkers Extensions
@@ -734,6 +743,192 @@ class HealthEquityMetric(models.Model):
 
 ---
 
+## 🛡️ Safety Scoring & Adverse Events Extensions
+
+### Trial Arm Safety Monitoring
+Comprehensive clinical trial safety assessment with automated risk scoring:
+
+#### **Trial Arm Model**
+```python
+class TrialArm(models.Model):
+    # Trial identification
+    nct_number = models.CharField(max_length=20)
+    arm_name = models.CharField(max_length=200)
+    arm_code = models.CharField(max_length=50)
+    arm_type = models.CharField(max_length=30, choices=[
+        ('EXPERIMENTAL', 'Experimental'),
+        ('ACTIVE_COMPARATOR', 'Active Comparator'),
+        ('PLACEBO_COMPARATOR', 'Placebo Comparator'),
+        ('NO_INTERVENTION', 'No Intervention')
+    ])
+    
+    # Enrollment and status
+    status = models.CharField(max_length=20, choices=[
+        ('ACTIVE', 'Active'),
+        ('COMPLETED', 'Completed'),
+        ('SUSPENDED', 'Suspended'),
+        ('TERMINATED', 'Terminated')
+    ])
+    
+    # Patient tracking
+    n_patients = models.IntegerField(default=0)
+    follow_up_months = models.DecimalField(max_digits=8, decimal_places=2)
+    
+    # Safety analysis
+    enrollment_start_date = models.DateField()
+    last_data_cut = models.DateField()
+```
+
+#### **Adverse Event Model**
+```python
+class AdverseEvent(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    trial_arm = models.ForeignKey(TrialArm, on_delete=models.SET_NULL)
+    
+    # Event identification
+    event_name = models.CharField(max_length=200)
+    event_description = models.TextField(blank=True)
+    event_concept = models.ForeignKey(Concept, on_delete=models.PROTECT)
+    
+    # CTCAE grading
+    grade = models.IntegerField(choices=[
+        (1, 'Grade 1 - Mild'),
+        (2, 'Grade 2 - Moderate'),
+        (3, 'Grade 3 - Severe'),
+        (4, 'Grade 4 - Life-threatening'),
+        (5, 'Grade 5 - Death')
+    ])
+    
+    # Classification
+    serious = models.BooleanField(default=False)
+    expected = models.BooleanField(default=True)
+    
+    # Causality and outcomes
+    relationship_to_treatment = models.CharField(max_length=30, choices=[
+        ('DEFINITE', 'Definitely Related'),
+        ('PROBABLE', 'Probably Related'),
+        ('POSSIBLE', 'Possibly Related'),
+        ('UNLIKELY', 'Unlikely Related'),
+        ('UNRELATED', 'Unrelated')
+    ])
+    
+    outcome = models.CharField(max_length=30, choices=[
+        ('RECOVERED', 'Recovered/Resolved'),
+        ('RECOVERING', 'Recovering/Resolving'),
+        ('NOT_RECOVERED', 'Not Recovered'),
+        ('SEQUELAE', 'Recovered with Sequelae'),
+        ('FATAL', 'Fatal'),
+        ('UNKNOWN', 'Unknown')
+    ])
+    
+    # Regulatory reporting
+    reported_to_sponsor = models.BooleanField(default=False)
+    reported_to_irb = models.BooleanField(default=False)
+    reported_to_fda = models.BooleanField(default=False)
+```
+
+#### **Safety Metrics Model**
+```python
+class TrialArmSafetyMetrics(models.Model):
+    trial_arm = models.ForeignKey(TrialArm, on_delete=models.CASCADE)
+    
+    # Computation period
+    computation_date = models.DateField(auto_now=True)
+    data_cut_date = models.DateField()
+    person_years = models.DecimalField(max_digits=12, decimal_places=2)
+    
+    # Adverse event counts by grade
+    e1_2_count = models.IntegerField(default=0)  # Grade 1-2 events
+    e3_4_count = models.IntegerField(default=0)  # Grade 3-4 events
+    e5_count = models.IntegerField(default=0)      # Grade 5 events
+    
+    # Computed safety metrics
+    eair = models.DecimalField(max_digits=10, decimal_places=4)  # Event-Adjusted Incidence Rate
+    web = models.DecimalField(max_digits=12, decimal_places=2)   # Weighted Event Burden
+    safety_score = models.DecimalField(max_digits=6, decimal_places=2)  # Overall safety score
+    
+    @property
+    def safety_category(self):
+        """Determine safety category based on safety score."""
+        if self.safety_score >= 70:
+            return 'LOW_RISK'
+        elif self.safety_score >= 50:
+            return 'ELEVATED_RISK'
+        else:
+            return 'HIGH_RISK'
+```
+
+### Safety Scoring Algorithm
+
+The system uses three key metrics for comprehensive safety assessment:
+
+#### **WEB (Weighted Event Burden)**
+```python
+# WEB = 1 × (Grade 1-2 events) + 10 × (Grade 3-4 events) + 100 × (Grade 5 events)
+web = (1 * e1_2_count) + (10 * e3_4_count) + (100 * e5_count)
+```
+
+#### **EAIR (Event-Adjusted Incidence Rate)**
+```python
+# EAIR = (Patients with events) / (Person-years of follow-up)
+eair = patients_with_any_ae / person_years
+```
+
+#### **Safety Score**
+```python
+# Safety Score = 100 / (1 + WEB/H)
+# Where H = WEB threshold (default: 15.0)
+safety_score = 100 / (1 + web / web_threshold_h)
+```
+
+### Risk Categories
+- **LOW_RISK**: Safety Score ≥ 70
+- **ELEVATED_RISK**: Safety Score 50-69
+- **HIGH_RISK**: Safety Score < 50
+
+### API Endpoints
+```python
+# Safety scoring API endpoints
+GET /api/trial-arms/                           # All trial arms with safety scores
+GET /api/trial-arms/?max_safety_score=50       # High-risk trial arms
+GET /api/trial-arms/?min_grade=3               # Arms with Grade 3+ events
+GET /api/adverse-events/                       # All adverse events
+GET /api/adverse-events/?serious=true          # Serious adverse events only
+```
+
+### Management Commands
+```bash
+# Load synthetic adverse events data
+python manage.py load_synthetic_adverse_events --clear --compute-scores
+
+# Compute safety scores for all trial arms
+python manage.py compute_safety_scores --force
+
+# Run comprehensive safety scoring demo
+python demo_adverse_events_scoring.py
+```
+
+### Frontend Components
+React and Vue components for safety score visualization:
+- **SafetyScoreBadge**: Color-coded safety score display
+- **TrialArmSafetyCard**: Comprehensive safety information card
+
+### Synthetic Safety Dataset
+Comprehensive test dataset for safety scoring validation:
+- **5 Trial Arms** across 3 clinical trials
+- **30 Adverse Events** with CTCAE grading (G1-G4)
+- **10 AE-specific OMOP concepts** for common toxicities
+- **Realistic safety profiles** demonstrating risk differentiation
+
+**Example Safety Scores:**
+- **AC-T Chemotherapy**: 25.00 (HIGH_RISK) - Multiple Grade 3-4 events
+- **FEC-T Chemotherapy**: 30.61 (HIGH_RISK) - Severe adverse events
+- **TCHP + Pertuzumab**: 40.54 (HIGH_RISK) - Cardiotoxicity events
+- **Standard of Care**: 88.24 (LOW_RISK) - Only mild events
+- **TCH Standard**: 100.00 (LOW_RISK) - No adverse events
+
+---
+
 ## 🔬 Synthetic Test Data
 
 ### Breast Cancer Dataset
@@ -834,8 +1029,13 @@ The system includes comprehensive Django management commands for data operations
 
 ### **Data Loading Commands**
 - `load_synthetic_breast_cancer_data` - Load comprehensive synthetic test dataset
+- `load_synthetic_adverse_events` - Load adverse events with automatic safety score computation
 - `load_breast_cancer_data` - Load original breast cancer fixtures
 - `populate_patient_info` - Generate additional patient demographics
+
+### **Safety Scoring Commands**
+- `compute_safety_scores` - Compute WEB, EAIR, and safety scores for all trial arms
+- `load_synthetic_adverse_events --compute-scores` - Load data and compute safety scores
 
 ### **Data Maintenance Commands**  
 - `cleanup_patient_info` - Remove incomplete or invalid records
@@ -846,6 +1046,12 @@ The system includes comprehensive Django management commands for data operations
 ```bash
 # Load synthetic data with progress reporting
 python manage.py load_synthetic_breast_cancer_data --verbosity=2
+
+# Load adverse events and compute safety scores
+python manage.py load_synthetic_adverse_events --clear --compute-scores
+
+# Compute safety scores for all trial arms
+python manage.py compute_safety_scores --force --verbosity=2
 
 # Validate all patient data
 python manage.py validate_patient_info --output-format=json
@@ -869,6 +1075,13 @@ GET /api/persons/{id}/genomic-variants/     # Patient's genomic profile
 GET /api/persons/{id}/biomarkers/           # Patient's biomarker measurements
 GET /api/clinical-trials/                   # Available clinical trials
 POST /api/trial-matching/                   # Automated trial matching
+
+# Safety scoring API endpoints
+GET /api/trial-arms/                        # All trial arms with safety scores
+GET /api/trial-arms/?max_safety_score=50    # High-risk trial arms
+GET /api/trial-arms/?min_grade=3            # Arms with Grade 3+ events
+GET /api/adverse-events/                    # All adverse events
+GET /api/adverse-events/?serious=true       # Serious adverse events only
 ```
 
 ### **Clinical Trial Matching**
