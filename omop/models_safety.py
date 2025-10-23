@@ -231,7 +231,22 @@ class AdverseEvent(models.Model):
     def __str__(self):
         return f"{self.event_name} (Grade {self.grade}) - Person {self.person.person_id}"
 
-
+class TrialArmSafetyMetrics(models.Model):
+    # ... existing fields ...
+    
+    @property
+    def safety_category(self):
+        """Determine safety category based on safety score."""
+        if self.safety_score >= 70:
+            return 'LOW_RISK'
+        elif self.safety_score >= 50:
+            return 'ELEVATED_RISK'
+        else:
+            return 'HIGH_RISK'
+    
+    def __str__(self):
+        return f"Safety Metrics for {self.trial_arm.arm_name} - Score: {self.safety_score}"
+        
 class TrialArmSafetyMetrics(models.Model):
     """
     Trial Arm Safety Metrics Model - stores computed safety scores for trial arms
@@ -339,6 +354,16 @@ class TrialArmSafetyMetrics(models.Model):
             models.Index(fields=["data_cut_date"]),
         ]
         unique_together = [['trial_arm', 'data_cut_date']]
+    
+    @property
+    def safety_category(self):
+        """Determine safety category based on safety score."""
+        if self.safety_score >= 70:
+            return 'LOW_RISK'
+        elif self.safety_score >= 50:
+            return 'ELEVATED_RISK'
+        else:
+            return 'HIGH_RISK'
     
     def __str__(self):
         return f"Safety Metrics for {self.trial_arm.arm_name} - Score: {self.safety_score}"
