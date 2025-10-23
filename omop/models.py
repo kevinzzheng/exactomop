@@ -4448,3 +4448,6 @@ class OncologyEpisodeDetail(models.Model):
 
     def __str__(self):
         return f"Episode Detail {self.episode_detail_id} - {self.disease_status}"
+
+# Safety Scoring Models
+from .models_safety import TrialArm, AdverseEvent, TrialArmSafetyMetrics

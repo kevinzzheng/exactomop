@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     "omop",
 ]
 
@@ -87,3 +88,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+
+# Safety Scoring Configuration
+SAFETY_WEB_THRESHOLD = float(os.environ.get("SAFETY_WEB_THRESHOLD", "15.0"))

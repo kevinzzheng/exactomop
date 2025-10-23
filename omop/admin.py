@@ -15,6 +15,8 @@ from .models import (
     ICDOMorphologyConcept, Modifier, OncologyModifier, RadiationOccurrence,
     StemCellTransplant, ClinicalTrial, BiospecimenCollection, OncologyEpisodeDetail
 )
+# Safety Scoring Models
+from .models_safety import TrialArm, AdverseEvent, TrialArmSafetyMetrics
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
@@ -291,3 +293,90 @@ class OncologyEpisodeDetailAdmin(admin.ModelAdmin):
                    "days_from_diagnosis", "ecog_performance_status")
     search_fields = ("disease_status", "progression_type")
     list_filter = ("disease_status", "progression_type", "detail_date", "ecog_performance_status")
+
+# Safety Scoring Models Admin
+
+@admin.register(TrialArm)
+class TrialArmAdmin(admin.ModelAdmin):
+    list_display = ("trial_arm_id", "nct_number", "arm_name", "arm_code", "arm_type", "status", 
+                   "n_patients", "enrollment_start_date", "last_data_cut")
+    search_fields = ("nct_number", "arm_name", "arm_code")
+    list_filter = ("status", "arm_type", "enrollment_start_date")
+    readonly_fields = ("created_at", "updated_at")
+
+@admin.register(AdverseEvent)
+class AdverseEventAdmin(admin.ModelAdmin):
+    list_display = ("adverse_event_id", "person", "trial_arm", "event_name", "grade", 
+                   "event_date", "serious", "relationship_to_treatment", "outcome")
+    search_fields = ("event_name", "person__person_id")
+    list_filter = ("grade", "serious", "relationship_to_treatment", "outcome", "event_date")
+    readonly_fields = ("created_at", "updated_at")
+    
+    fieldsets = (
+        ("Event Identification", {
+            "fields": ("person", "trial_arm", "event_concept", "event_name", "event_description")
+        }),
+        ("Timing", {
+            "fields": ("event_date", "onset_date", "resolution_date")
+        }),
+        ("Severity & Classification", {
+            "fields": ("grade", "serious", "expected")
+        }),
+        ("Causality & Outcomes", {
+            "fields": ("relationship_to_treatment", "outcome", "action_taken")
+        }),
+        ("Reporting", {
+            "fields": ("reported_to_sponsor", "reported_to_irb", "reported_to_fda")
+        }),
+        ("Metadata", {
+            "fields": ("created_at", "updated_at"),
+            "classes": ("collapse",)
+        }),
+    )
+
+@admin.register(TrialArmSafetyMetrics)
+class TrialArmSafetyMetricsAdmin(admin.ModelAdmin):
+    list_display = ("safety_metrics_id", "trial_arm", "data_cut_date", "safety_score", 
+                   "person_years", "n_patients", "e1_2_count", "e3_4_count", "e5_count", 
+                   "web", "eair")
+    search_fields = ("trial_arm__arm_name", "trial_arm__arm_code", "trial_arm__nct_number")
+    list_filter = ("data_cut_date", "computation_date")
+    readonly_fields = ("computation_date", "created_at", "updated_at")
+    
+    fieldsets = (
+        ("Trial Arm & Period", {
+            "fields": ("trial_arm", "data_cut_date", "analysis_period_start", "analysis_period_end")
+        }),
+        ("Patient Metrics", {
+            "fields": ("n_patients", "person_years")
+        }),
+        ("Adverse Event Counts", {
+            "fields": ("e1_2_count", "e3_4_count", "e5_count", "total_ae_count", "patients_with_any_ae")
+        }),
+        ("Computed Safety Metrics", {
+            "fields": ("eair", "web", "safety_score", "web_threshold_h")
+        }),
+        ("Metadata", {
+            "fields": ("computation_date", "created_at", "updated_at"),
+            "classes": ("collapse",)
+        }),
+    )
+    
+    # Add custom actions for recomputing safety scores
+    actions = ['recompute_safety_scores']
+    
+    def recompute_safety_scores(self, request, queryset):
+        """Admin action to recompute safety scores for selected metrics."""
+        from django.core.management import call_command
+        from io import StringIO
+        
+        trial_arm_ids = list(queryset.values_list('trial_arm_id', flat=True).distinct())
+        
+        for trial_arm_id in trial_arm_ids:
+            out = StringIO()
+            call_command('compute_safety_scores', trial_arm_id=trial_arm_id, force=True, 
+                        stdout=out, verbosity=1)
+        
+        self.message_user(request, f"Recomputed safety scores for {len(trial_arm_ids)} trial arm(s).")
+    
+    recompute_safety_scores.short_description = "Recompute safety scores for selected trial arms"

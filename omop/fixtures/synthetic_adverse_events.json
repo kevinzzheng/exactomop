@@ -1,0 +1,928 @@
+[
+  {
+    "model": "omop.concept",
+    "pk": 4103703,
+    "fields": {
+      "concept_name": "Nausea",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "422587007",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 437663,
+    "fields": {
+      "concept_name": "Neutropenia",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "165517008",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 4223659,
+    "fields": {
+      "concept_name": "Fatigue",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "84229001",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 4165112,
+    "fields": {
+      "concept_name": "Peripheral neuropathy",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "42658009",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 315286,
+    "fields": {
+      "concept_name": "Cardiotoxicity",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "49584005",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 4230254,
+    "fields": {
+      "concept_name": "Anemia",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "271737000",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 4141062,
+    "fields": {
+      "concept_name": "Diarrhea",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "62315008",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 4084139,
+    "fields": {
+      "concept_name": "Mucositis",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "277274006",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 4229881,
+    "fields": {
+      "concept_name": "Thrombocytopenia",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "415116008",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.concept",
+    "pk": 437082,
+    "fields": {
+      "concept_name": "Febrile neutropenia",
+      "domain_id": "Condition",
+      "vocabulary_id": "SNOMED",
+      "concept_class_id": "Clinical Finding",
+      "standard_concept": "S",
+      "concept_code": "409822003",
+      "valid_start_date": "1970-01-01",
+      "valid_end_date": "2099-12-31",
+      "invalid_reason": null
+    }
+  },
+  {
+    "model": "omop.trialarm",
+    "pk": 1001,
+    "fields": {
+      "nct_number": "NCT05234567",
+      "arm_name": "Arm A: AC-T Chemotherapy",
+      "arm_code": "ARM_A",
+      "arm_type": "EXPERIMENTAL",
+      "intervention_description": "Doxorubicin + Cyclophosphamide followed by Paclitaxel (dose-dense regimen)",
+      "status": "ACTIVE",
+      "enrollment_start_date": "2023-01-01",
+      "enrollment_end_date": null,
+      "last_data_cut": "2024-10-15",
+      "n_patients": 50,
+      "follow_up_months": "18.50"
+    }
+  },
+  {
+    "model": "omop.trialarm",
+    "pk": 1002,
+    "fields": {
+      "nct_number": "NCT05234567",
+      "arm_name": "Arm B: FEC-T Chemotherapy",
+      "arm_code": "ARM_B",
+      "arm_type": "ACTIVE_COMPARATOR",
+      "intervention_description": "5-Fluorouracil + Epirubicin + Cyclophosphamide followed by Paclitaxel",
+      "status": "ACTIVE",
+      "enrollment_start_date": "2023-01-01",
+      "enrollment_end_date": null,
+      "last_data_cut": "2024-10-15",
+      "n_patients": 48,
+      "follow_up_months": "17.80"
+    }
+  },
+  {
+    "model": "omop.trialarm",
+    "pk": 1003,
+    "fields": {
+      "nct_number": "NCT05234568",
+      "arm_name": "Arm A: TCHP + Pertuzumab",
+      "arm_code": "ARM_A",
+      "arm_type": "EXPERIMENTAL",
+      "intervention_description": "Docetaxel + Carboplatin + Trastuzumab + Pertuzumab for HER2-positive breast cancer",
+      "status": "ACTIVE",
+      "enrollment_start_date": "2023-02-15",
+      "enrollment_end_date": null,
+      "last_data_cut": "2024-10-15",
+      "n_patients": 35,
+      "follow_up_months": "16.25"
+    }
+  },
+  {
+    "model": "omop.trialarm",
+    "pk": 1004,
+    "fields": {
+      "nct_number": "NCT05234568",
+      "arm_name": "Arm B: TCH Standard",
+      "arm_code": "ARM_B",
+      "arm_type": "ACTIVE_COMPARATOR",
+      "intervention_description": "Docetaxel + Carboplatin + Trastuzumab (standard regimen)",
+      "status": "COMPLETED",
+      "enrollment_start_date": "2023-02-15",
+      "enrollment_end_date": "2024-06-30",
+      "last_data_cut": "2024-09-30",
+      "n_patients": 40,
+      "follow_up_months": "20.00"
+    }
+  },
+  {
+    "model": "omop.trialarm",
+    "pk": 1005,
+    "fields": {
+      "nct_number": "NCT05234569",
+      "arm_name": "Control Arm: Standard of Care",
+      "arm_code": "CONTROL",
+      "arm_type": "ACTIVE_COMPARATOR",
+      "intervention_description": "Physician's choice of standard chemotherapy",
+      "status": "ACTIVE",
+      "enrollment_start_date": "2022-11-01",
+      "enrollment_end_date": null,
+      "last_data_cut": "2024-10-15",
+      "n_patients": 60,
+      "follow_up_months": "24.30"
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10001,
+    "fields": {
+      "person_id": 2001,
+      "trial_arm_id": 1001,
+      "event_concept_id": 4103703,
+      "event_name": "Nausea",
+      "event_description": "Mild nausea following first cycle of chemotherapy, managed with ondansetron",
+      "event_date": "2023-03-05",
+      "onset_date": "2023-03-05",
+      "resolution_date": "2023-03-08",
+      "grade": 1,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "CONCOMITANT_TREATMENT",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10002,
+    "fields": {
+      "person_id": 2001,
+      "trial_arm_id": 1001,
+      "event_concept_id": 4223659,
+      "event_name": "Fatigue",
+      "event_description": "Moderate fatigue requiring reduction in daily activities",
+      "event_date": "2023-03-10",
+      "onset_date": "2023-03-08",
+      "resolution_date": "2023-03-25",
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "NONE",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10003,
+    "fields": {
+      "person_id": 2002,
+      "trial_arm_id": 1002,
+      "event_concept_id": 437663,
+      "event_name": "Neutropenia",
+      "event_description": "Grade 3 neutropenia (ANC 0.7 x 10^9/L), dose delay implemented",
+      "event_date": "2023-03-18",
+      "onset_date": "2023-03-16",
+      "resolution_date": "2023-03-28",
+      "grade": 3,
+      "serious": true,
+      "expected": true,
+      "relationship_to_treatment": "DEFINITE",
+      "outcome": "RECOVERED",
+      "action_taken": "DOSE_INTERRUPTED",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10004,
+    "fields": {
+      "person_id": 2002,
+      "trial_arm_id": 1002,
+      "event_concept_id": 4141062,
+      "event_name": "Diarrhea",
+      "event_description": "Grade 2 diarrhea, 4-6 stools per day",
+      "event_date": "2023-03-22",
+      "onset_date": "2023-03-20",
+      "resolution_date": "2023-03-26",
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "CONCOMITANT_TREATMENT",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10005,
+    "fields": {
+      "person_id": 2003,
+      "trial_arm_id": 1003,
+      "event_concept_id": 315286,
+      "event_name": "Cardiotoxicity",
+      "event_description": "Decreased LVEF from 62% to 48%, trastuzumab temporarily held",
+      "event_date": "2023-04-15",
+      "onset_date": "2023-04-10",
+      "resolution_date": "2023-05-30",
+      "grade": 3,
+      "serious": true,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "DRUG_WITHDRAWN",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": true
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10006,
+    "fields": {
+      "person_id": 2003,
+      "trial_arm_id": 1003,
+      "event_concept_id": 4103703,
+      "event_name": "Nausea",
+      "event_description": "Mild intermittent nausea",
+      "event_date": "2023-02-20",
+      "onset_date": "2023-02-20",
+      "resolution_date": "2023-02-23",
+      "grade": 1,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "CONCOMITANT_TREATMENT",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10007,
+    "fields": {
+      "person_id": 2004,
+      "trial_arm_id": 1002,
+      "event_concept_id": 4165112,
+      "event_name": "Peripheral neuropathy",
+      "event_description": "Grade 2 sensory peripheral neuropathy in fingers and toes",
+      "event_date": "2023-04-05",
+      "onset_date": "2023-03-28",
+      "resolution_date": null,
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "NOT_RECOVERED",
+      "action_taken": "DOSE_REDUCED",
+      "reported_to_sponsor": true,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10008,
+    "fields": {
+      "person_id": 2004,
+      "trial_arm_id": 1002,
+      "event_concept_id": 4230254,
+      "event_name": "Anemia",
+      "event_description": "Grade 2 anemia (Hgb 9.2 g/dL), no transfusion required",
+      "event_date": "2023-04-12",
+      "onset_date": "2023-04-10",
+      "resolution_date": "2023-05-15",
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "CONCOMITANT_TREATMENT",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10009,
+    "fields": {
+      "person_id": 2005,
+      "trial_arm_id": 1001,
+      "event_concept_id": 437082,
+      "event_name": "Febrile neutropenia",
+      "event_description": "Grade 4 febrile neutropenia requiring hospitalization and IV antibiotics",
+      "event_date": "2023-04-08",
+      "onset_date": "2023-04-07",
+      "resolution_date": "2023-04-18",
+      "grade": 4,
+      "serious": true,
+      "expected": true,
+      "relationship_to_treatment": "DEFINITE",
+      "outcome": "RECOVERED",
+      "action_taken": "DOSE_REDUCED",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": true
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10010,
+    "fields": {
+      "person_id": 2005,
+      "trial_arm_id": 1001,
+      "event_concept_id": 4084139,
+      "event_name": "Mucositis",
+      "event_description": "Severe mucositis limiting oral intake",
+      "event_date": "2023-04-20",
+      "onset_date": "2023-04-18",
+      "resolution_date": "2023-05-05",
+      "grade": 3,
+      "serious": true,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "DOSE_INTERRUPTED",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10011,
+    "fields": {
+      "person_id": 2006,
+      "trial_arm_id": 1005,
+      "event_concept_id": 4229881,
+      "event_name": "Thrombocytopenia",
+      "event_description": "Grade 2 thrombocytopenia (platelet count 68 x 10^9/L)",
+      "event_date": "2023-05-10",
+      "onset_date": "2023-05-08",
+      "resolution_date": "2023-05-22",
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "NONE",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10012,
+    "fields": {
+      "person_id": 2006,
+      "trial_arm_id": 1005,
+      "event_concept_id": 4223659,
+      "event_name": "Fatigue",
+      "event_description": "Mild fatigue not interfering with activities of daily living",
+      "event_date": "2023-05-15",
+      "onset_date": "2023-05-15",
+      "resolution_date": "2023-05-28",
+      "grade": 1,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "POSSIBLE",
+      "outcome": "RECOVERED",
+      "action_taken": "NONE",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10013,
+    "fields": {
+      "person_id": 2007,
+      "trial_arm_id": 1001,
+      "event_concept_id": 437663,
+      "event_name": "Neutropenia",
+      "event_description": "Grade 2 neutropenia (ANC 1.2 x 10^9/L)",
+      "event_date": "2023-04-22",
+      "onset_date": "2023-04-20",
+      "resolution_date": "2023-05-02",
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "NONE",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10014,
+    "fields": {
+      "person_id": 2007,
+      "trial_arm_id": 1001,
+      "event_concept_id": 4103703,
+      "event_name": "Nausea",
+      "event_description": "Moderate nausea requiring oral antiemetics",
+      "event_date": "2023-04-25",
+      "onset_date": "2023-04-24",
+      "resolution_date": "2023-04-28",
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "CONCOMITANT_TREATMENT",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10015,
+    "fields": {
+      "person_id": 2008,
+      "trial_arm_id": 1001,
+      "event_concept_id": 4165112,
+      "event_name": "Peripheral neuropathy",
+      "event_description": "Grade 3 peripheral neuropathy with motor dysfunction",
+      "event_date": "2023-06-10",
+      "onset_date": "2023-05-28",
+      "resolution_date": null,
+      "grade": 3,
+      "serious": true,
+      "expected": true,
+      "relationship_to_treatment": "DEFINITE",
+      "outcome": "SEQUELAE",
+      "action_taken": "DRUG_WITHDRAWN",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10016,
+    "fields": {
+      "person_id": 2009,
+      "trial_arm_id": 1001,
+      "event_concept_id": 4223659,
+      "event_name": "Fatigue",
+      "event_description": "Moderate fatigue limiting instrumental ADL",
+      "event_date": "2023-05-05",
+      "onset_date": "2023-05-03",
+      "resolution_date": "2023-05-20",
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "NONE",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10017,
+    "fields": {
+      "person_id": 2009,
+      "trial_arm_id": 1001,
+      "event_concept_id": 4230254,
+      "event_name": "Anemia",
+      "event_description": "Grade 1 anemia (Hgb 10.5 g/dL)",
+      "event_date": "2023-05-15",
+      "onset_date": "2023-05-12",
+      "resolution_date": "2023-06-10",
+      "grade": 1,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "POSSIBLE",
+      "outcome": "RECOVERED",
+      "action_taken": "NONE",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10018,
+    "fields": {
+      "person_id": 2010,
+      "trial_arm_id": 1003,
+      "event_concept_id": 4141062,
+      "event_name": "Diarrhea",
+      "event_description": "Grade 3 diarrhea (>7 stools per day), hospitalization required",
+      "event_date": "2023-04-18",
+      "onset_date": "2023-04-16",
+      "resolution_date": "2023-04-28",
+      "grade": 3,
+      "serious": true,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "DOSE_INTERRUPTED",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10019,
+    "fields": {
+      "person_id": 2010,
+      "trial_arm_id": 1003,
+      "event_concept_id": 315286,
+      "event_name": "Cardiotoxicity",
+      "event_description": "Mild decrease in LVEF from 64% to 56%",
+      "event_date": "2023-05-22",
+      "onset_date": "2023-05-15",
+      "resolution_date": "2023-07-10",
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "NONE",
+      "reported_to_sponsor": true,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10020,
+    "fields": {
+      "person_id": 2011,
+      "trial_arm_id": 1005,
+      "event_concept_id": 437663,
+      "event_name": "Neutropenia",
+      "event_description": "Grade 1 neutropenia (ANC 1.8 x 10^9/L)",
+      "event_date": "2023-03-28",
+      "onset_date": "2023-03-25",
+      "resolution_date": "2023-04-05",
+      "grade": 1,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "NONE",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10021,
+    "fields": {
+      "person_id": 2011,
+      "trial_arm_id": 1005,
+      "event_concept_id": 4103703,
+      "event_name": "Nausea",
+      "event_description": "Mild nausea, well controlled with medication",
+      "event_date": "2023-04-02",
+      "onset_date": "2023-04-02",
+      "resolution_date": "2023-04-05",
+      "grade": 1,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "CONCOMITANT_TREATMENT",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10022,
+    "fields": {
+      "person_id": 2012,
+      "trial_arm_id": 1002,
+      "event_concept_id": 4084139,
+      "event_name": "Mucositis",
+      "event_description": "Grade 2 oral mucositis, painful but able to eat soft foods",
+      "event_date": "2023-03-15",
+      "onset_date": "2023-03-12",
+      "resolution_date": "2023-03-28",
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "CONCOMITANT_TREATMENT",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10023,
+    "fields": {
+      "person_id": 2012,
+      "trial_arm_id": 1002,
+      "event_concept_id": 4223659,
+      "event_name": "Fatigue",
+      "event_description": "Severe fatigue requiring bed rest for most of the day",
+      "event_date": "2023-03-20",
+      "onset_date": "2023-03-18",
+      "resolution_date": "2023-04-10",
+      "grade": 3,
+      "serious": true,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "DOSE_REDUCED",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10024,
+    "fields": {
+      "person_id": 2013,
+      "trial_arm_id": 1001,
+      "event_concept_id": 4229881,
+      "event_name": "Thrombocytopenia",
+      "event_description": "Grade 3 thrombocytopenia (platelet count 22 x 10^9/L), platelet transfusion given",
+      "event_date": "2023-04-28",
+      "onset_date": "2023-04-25",
+      "resolution_date": "2023-05-08",
+      "grade": 3,
+      "serious": true,
+      "expected": true,
+      "relationship_to_treatment": "DEFINITE",
+      "outcome": "RECOVERED",
+      "action_taken": "DOSE_INTERRUPTED",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10025,
+    "fields": {
+      "person_id": 2013,
+      "trial_arm_id": 1001,
+      "event_concept_id": 4103703,
+      "event_name": "Nausea",
+      "event_description": "Moderate nausea with occasional vomiting",
+      "event_date": "2023-05-02",
+      "onset_date": "2023-05-01",
+      "resolution_date": "2023-05-06",
+      "grade": 2,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "CONCOMITANT_TREATMENT",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10026,
+    "fields": {
+      "person_id": 2014,
+      "trial_arm_id": 1001,
+      "event_concept_id": 437663,
+      "event_name": "Neutropenia",
+      "event_description": "Grade 3 neutropenia (ANC 0.6 x 10^9/L)",
+      "event_date": "2023-03-28",
+      "onset_date": "2023-03-26",
+      "resolution_date": "2023-04-08",
+      "grade": 3,
+      "serious": true,
+      "expected": true,
+      "relationship_to_treatment": "DEFINITE",
+      "outcome": "RECOVERED",
+      "action_taken": "CONCOMITANT_TREATMENT",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10027,
+    "fields": {
+      "person_id": 2014,
+      "trial_arm_id": 1001,
+      "event_concept_id": 4165112,
+      "event_name": "Peripheral neuropathy",
+      "event_description": "Mild tingling in fingertips",
+      "event_date": "2023-04-15",
+      "onset_date": "2023-04-12",
+      "resolution_date": "2023-05-20",
+      "grade": 1,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "POSSIBLE",
+      "outcome": "RECOVERED",
+      "action_taken": "NONE",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10028,
+    "fields": {
+      "person_id": 2015,
+      "trial_arm_id": 1002,
+      "event_concept_id": 4230254,
+      "event_name": "Anemia",
+      "event_description": "Grade 3 anemia (Hgb 7.8 g/dL), blood transfusion required",
+      "event_date": "2023-03-25",
+      "onset_date": "2023-03-20",
+      "resolution_date": "2023-04-10",
+      "grade": 3,
+      "serious": true,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "CONCOMITANT_TREATMENT",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10029,
+    "fields": {
+      "person_id": 2015,
+      "trial_arm_id": 1002,
+      "event_concept_id": 4141062,
+      "event_name": "Diarrhea",
+      "event_description": "Mild diarrhea, 3-4 stools per day",
+      "event_date": "2023-03-30",
+      "onset_date": "2023-03-28",
+      "resolution_date": "2023-04-03",
+      "grade": 1,
+      "serious": false,
+      "expected": true,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "RECOVERED",
+      "action_taken": "NONE",
+      "reported_to_sponsor": false,
+      "reported_to_irb": false,
+      "reported_to_fda": false
+    }
+  },
+  {
+    "model": "omop.adverseevent",
+    "pk": 10030,
+    "fields": {
+      "person_id": 2015,
+      "trial_arm_id": 1002,
+      "event_concept_id": 4223659,
+      "event_name": "Fatigue",
+      "event_description": "Life-threatening fatigue requiring hospitalization for supportive care",
+      "event_date": "2023-04-08",
+      "onset_date": "2023-04-05",
+      "resolution_date": "2023-04-22",
+      "grade": 4,
+      "serious": true,
+      "expected": false,
+      "relationship_to_treatment": "PROBABLE",
+      "outcome": "SEQUELAE",
+      "action_taken": "DRUG_WITHDRAWN",
+      "reported_to_sponsor": true,
+      "reported_to_irb": true,
+      "reported_to_fda": true
+    }
+  }
+]
+

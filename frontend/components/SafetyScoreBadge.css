@@ -1,0 +1,50 @@
+/* SafetyScoreBadge Component Styles */
+
+.safety-score-badge {
+  transition: all 0.2s ease;
+}
+
+.safety-score-badge:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.safety-score-badge.low {
+  background-color: #28a745 !important;
+}
+
+.safety-score-badge.moderate {
+  background-color: #ffc107 !important;
+}
+
+.safety-score-badge.elevated {
+  background-color: #fd7e14 !important;
+}
+
+.safety-score-badge.high {
+  background-color: #dc3545 !important;
+}
+
+.safety-score-tooltip {
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .safety-score-tooltip {
+    font-size: 11px !important;
+    padding: 10px !important;
+  }
+}
+
