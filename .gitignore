@@ -2,6 +2,17 @@ setenv.sh
 .venv 
 .vscode
 data
+
+# SSH Keys and Security Files
+*.pem
+*.key
+*.pub
+id_rsa*
+id_ed25519*
+id_ecdsa*
+known_hosts
+authorized_keys
+eval "$(ssh-agent -s)"*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
